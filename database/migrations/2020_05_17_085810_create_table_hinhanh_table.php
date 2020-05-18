@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTableHinhanhTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('hinhanh', function (Blueprint $table) {
+            $table->Increments('ha_id');
+            $table->string('ha_ten');
+            $table->string('ha_duongdan');
+
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('Ngày tạo');
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->comment('Ngày cập nhật');
+            $table->timestamp('deleted_at')->nullable()->comment('Ngày xóa');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('hinhanh');
+    }
+}
