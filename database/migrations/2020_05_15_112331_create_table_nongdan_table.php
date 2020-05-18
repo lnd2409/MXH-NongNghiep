@@ -22,8 +22,6 @@ class CreateTableNongdanTable extends Migration
             $table->string('nd_hoten');
             $table->string('nd_diachi');
             $table->string('nd_sdt');
-            $table->bigInteger('n_manhom')->unsigned();
-            $table->foreign('n_manhom')->references('n_manhom')->on('nhom');
             
         });
     }

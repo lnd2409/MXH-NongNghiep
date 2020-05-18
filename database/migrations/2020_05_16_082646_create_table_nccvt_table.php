@@ -14,7 +14,7 @@ class CreateTableNccvtTable extends Migration
     public function up()
     {
         Schema::create('nccvt', function (Blueprint $table) {
-            $table->bigIncrements('nccvt_id');
+            $table->bigIncrements('nccvt_id')->unsigned();
             $table->string('nccvt_ten');
             $table->string('nccvt_tendangnhap');
             $table->string('nccvt_matkhau');

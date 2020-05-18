@@ -18,7 +18,7 @@ class CreateTableSanphamTable extends Migration
             $table->string('sp_ten');
             $table->string('sp_chitiet');
             $table->string('sp_gia');
-            $table->string('sp_soluongcungcap');
+            $table->integer('sp_soluongcungcap');
 
             $table->bigInteger('lsp_id')->unsigned();
             $table->foreign('lsp_id')->reference('lsp_id')->on('loaisanpham')->onDelete('CASCADE')->onUpdate('CASCADE');
