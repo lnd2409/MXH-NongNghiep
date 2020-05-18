@@ -18,10 +18,10 @@ class CreateTableChuyengiaTable extends Migration
             $table->string('cg_hoten');
             $table->string('cg_diachi');
             $table->integer('cg_sdt');
-            $table->string('cg_linhvuc');
-            $table->foreign('cg_linhvuc')->references('cg_linhvuc')->on('linhvucquantam');
-            $table->bigInteger('cg_trinhdohocvan');
-            $table->foreign('cg_trinhdohocvan')->references('cg_trinhdohocvan')->on('trinhdohocvan');
+            $table->bigInteger('lv_id')->unsigned();
+            $table->foreign('lv_id')->references('lv_id')->on('linhvucquantam');
+            $table->bigInteger('td_id')->unsigned();
+            $table->foreign('td_id')->references('td_id')->on('trinhdo');
             $table->timestamps();
         });
     }

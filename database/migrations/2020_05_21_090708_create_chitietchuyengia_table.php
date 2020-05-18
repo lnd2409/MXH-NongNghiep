@@ -14,8 +14,9 @@ class CreateChitietchuyengiaTable extends Migration
     public function up()
     {
         Schema::create('chitietchuyengia', function (Blueprint $table) {
-            $table->integer('n_id');
-            $table->integer('cg_id');
+            $table->bigIncrements('ctcg_id');
+            $table->bigInteger('n_id')->unsigned();
+            $table->bigInteger('cg_id')->unsigned();
 
             $table->foreign('n_id')->references('n_id')->on('nhom');
             $table->foreign('cg_id')->references('cg_id')->on('chuyengia');

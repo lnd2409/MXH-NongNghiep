@@ -14,8 +14,9 @@ class CreateChitietnhomTable extends Migration
     public function up()
     {
         Schema::create('chitietnhom', function (Blueprint $table) {
-            $table->integer('n_id');
-            $table->integer('nd_id');
+            $table->bigIncrements('ctn_id');
+            $table->bigInteger('n_id')->unsigned();
+            $table->bigInteger('nd_id')->unsigned();
 
             $table->foreign('n_id')->references('n_id')->on('nhom');
             $table->foreign('nd_id')->references('nd_id')->on('nongdan');

@@ -14,7 +14,7 @@ class CreateTableHinhanhTable extends Migration
     public function up()
     {
         Schema::create('hinhanh', function (Blueprint $table) {
-            $table->Increments('ha_id');
+            $table->bigIncrements('ha_id');
             $table->string('ha_ten');
             $table->string('ha_duongdan');
 

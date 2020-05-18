@@ -15,7 +15,7 @@ class CreateQuantamnonghoTable extends Migration
     {
         Schema::create('quantamnongho', function (Blueprint $table) {
 
-            $table->bigIteger('nd_id')->unsigned();
+            $table->bigInteger('nd_id')->unsigned();
             $table->foreign('nd_id')->references('nd_id')->on('nongdan')->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->bigInteger('tl_id')->unsigned();

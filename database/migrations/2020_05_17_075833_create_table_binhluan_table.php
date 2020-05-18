@@ -17,16 +17,16 @@ class CreateTableBinhluanTable extends Migration
             $table->bigIncrements('bl_id');
             $table->string('bl_noidung');
             $table->dateTime('bl_thoigian');
-            $table->bigInteger('bv_tieude');
-            $table->foreign('bv_tieude')->references('bv_tieude')->on('baiviet');
-            $table->bigInteger('nd_id');
+            $table->bigInteger('bv_id')->unsigned();
+            $table->foreign('bv_id')->references('bv_id')->on('baiviet');
+            $table->bigInteger('nd_id')->unsigned();
             $table->foreign('nd_id')->references('nd_id')->on('nongdan');
-            $table->bigInteger('nccvt_id');
+            $table->bigInteger('nccvt_id')->unsigned();
             $table->foreign('nccvt_id')->references('nccvt_id')->on('nccvt');
-            $table->bigInteger('tl_id');
+            $table->bigInteger('tl_id')->unsigned();
             $table->foreign('tl_id')->references('tl_id')->on('thuonglai');
-            $table->bigInteger('cg_id');
-            $table->foreign('cg_id')->references('nccvt_id')->on('chuyengia');
+            $table->bigInteger('cg_id')->unsigned();
+            $table->foreign('cg_id')->references('cg_id')->on('chuyengia');
             $table->timestamps();
         });
     }

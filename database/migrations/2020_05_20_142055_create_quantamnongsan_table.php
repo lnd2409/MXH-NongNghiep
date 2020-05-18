@@ -16,7 +16,7 @@ class CreateQuantamnongsanTable extends Migration
         Schema::create('quantamnongsan', function (Blueprint $table) {
 
             $table->bigInteger('spnt_id')->unsigned();
-            $table->foreign('spnt_id')->references('spnt_id')->on('spnuoitrong')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('spnt_id')->references('spnt_id')->on('sanphamnuoitrong')->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->bigInteger('tl_id')->unsigned();
             $table->foreign('tl_id')->references('tl_id')->on('thuonglai')->onDelete('CASCADE')->onUpdate('CASCADE');

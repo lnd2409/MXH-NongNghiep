@@ -14,7 +14,7 @@ class CreateTableLoaisanhamnuoitrongTable extends Migration
     public function up()
     {
         Schema::create('loaisanphamnuoitrong', function (Blueprint $table) {
-            $table->increments('lns_id');
+            $table->bigIncrements('lns_id');
             $table->string('lns_ten');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('Ngày tạo');
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->comment('Ngày cập nhật');

@@ -14,11 +14,12 @@ class CreateChitietlinhvucbaivietTable extends Migration
     public function up()
     {
         Schema::create('chitietlinhvucbaiviet', function (Blueprint $table) {
-            $table->integer('lns_id');
-            $table->integer('bv_tieude');
+            $table->bigIncrements('ctlvbv_id');
+            $table->bigInteger('lns_id')->unsigned();
+            $table->bigInteger('bv_id')->unsigned();
 
-            $table->foreign('lns_id')->references('lns_id')->on('loaispnuoitrong');
-            $table->foreign('bv_tieude')->references('cg_bv_tieudeid')->on('baiviet');
+            $table->foreign('lns_id')->references('lns_id')->on('loaisanphamnuoitrong');
+            $table->foreign('bv_id')->references('bv_id')->on('baiviet');
         });
     }
 

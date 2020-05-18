@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDonvitinhTable extends Migration
+class CreateTableLinhvucquantamTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateDonvitinhTable extends Migration
      */
     public function up()
     {
-        Schema::create('donvitinh', function (Blueprint $table) {
-            $table->bigIncrements('dvt_id');
-            $table->string('dvt_ten');
+        Schema::create('linhvucquantam', function (Blueprint $table) {
+            $table->bigIncrements('lv_id');
+            $table->string('lv_ten');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateDonvitinhTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donvitinh');
+        Schema::dropIfExists('linhvucquantam');
     }
 }

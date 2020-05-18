@@ -18,7 +18,7 @@ class CreateTableBachkhoaTable extends Migration
             $table->string('bk_tieude');
             $table->text('bk_noidung');
             $table->dateTime('bk_ngaydang');
-            $table->bigInteger('cg_id');
+            $table->bigInteger('cg_id')->unsigned();
             //Tao khoa ngoai
             $table->foreign('cg_id')->references('cg_id')->on('chuyengia');
             $table->timestamps();

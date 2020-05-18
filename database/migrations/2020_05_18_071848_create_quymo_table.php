@@ -14,10 +14,10 @@ class CreateQuymoTable extends Migration
     public function up()
     {
         Schema::create('quymo', function (Blueprint $table) {
-           $table->string('qm_soluongnongsan');
+           $table->integer('qm_soluongnongsan');
 
            $table->bigInteger('spnt_id')->unsigned();
-           $table->foreign('spnt_id')->references('spnt_id')->on('spnuoitrong')->onDelete('CASCADE')->onUpdate('CASCADE');
+           $table->foreign('spnt_id')->references('spnt_id')->on('sanphamnuoitrong')->onDelete('CASCADE')->onUpdate('CASCADE');
 
            $table->bigInteger('dvt_id')->unsigned();
            $table->foreign('dvt_id')->references('dvt_id')->on('donvitinh')->onDelete('CASCADE')->onUpdate('CASCADE');
@@ -27,11 +27,7 @@ class CreateQuymoTable extends Migration
 
 
             $table->primary(['spnt_id','dvt_id','nd_id']);
-           
-
-            $table->timestamps('create_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('Ngày tạo');
-            $table->timestamps('update_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('Ngày cập nhật');
-            $table->timestamps('delete_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('Ngày xóa');
+            $table->timestamps();
         });
     }
 
