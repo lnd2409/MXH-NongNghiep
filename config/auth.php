@@ -46,6 +46,25 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        //Xác thực dành cho nông dân
+        'nongdan' => [
+            'driver' => 'session',
+            'provider' => 'nongdan',
+        ],
+        'nongdan-api' => [
+            'driver' => 'token',
+            'provider' => 'nongdan',
+        ],
+        //Xác thực dành cho thương lái
+        'thuonglai' => [
+            'driver' => 'session',
+            'provider' => 'thuonglai',
+        ],
+        'thuonglai-api' => [
+            'driver' => 'token',
+            'provider' => 'thuonglai',
+        ],
     ],
 
     /*
@@ -75,6 +94,14 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'nongdan' => [
+            'driver' => 'eloquent',
+            'model' => App\NongDan::class,
+        ],
+        'thuonglai' => [
+            'driver' => 'eloquent',
+            'model' => App\ThuongLai::class,
+        ],
     ],
 
     /*
@@ -95,6 +122,16 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'nongdan' => [
+            'provider' => 'nongdan',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'thuonglai' => [
+            'provider' => 'thuonglai',
             'table' => 'password_resets',
             'expire' => 60,
         ],

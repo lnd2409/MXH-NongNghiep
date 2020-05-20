@@ -2,9 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class ThuongLai extends Model
+class ThuongLai extends Authenticatable
 {
     protected $table ='thuonglai';
 
@@ -16,12 +18,20 @@ class ThuongLai extends Model
         'tl_hoten',
         'tl_diachi',
         'tl_sdt',
-        'tl_tendangnhap',
-        'tl_matkhau'
+        'username',
+        'password'
         
     ];
 
     public $timestamps = true;
     protected $dates = ['deleted_at'];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password','remember_token'
+    ];
 }
 

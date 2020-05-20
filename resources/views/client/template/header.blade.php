@@ -214,7 +214,7 @@
                         <li><a href="#" title="">Faqs</a></li>
                         <li><a href="#" title="">Terms & Conditions</a></li>
                     </ul>
-                    <h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+                    <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Logout</a></h3>
                 </div>
                 <!--user-account-settingss end-->
             </div>

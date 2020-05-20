@@ -18,9 +18,9 @@ class CreateThuonglaiTable extends Migration
             $table->string('tl_hoten');
             $table->string('tl_diachi');
             $table->string('tl_sdt');
-            $table->string('tl_tendangnhap');
-            $table->string('tl_matkhau');
-
+            $table->string('username');
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamp('created_at')
             ->default(DB::raw('CURRENT_TIMESTAMP'))
             ->comment('ngày tạo');

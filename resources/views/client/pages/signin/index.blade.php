@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>WorkWise Html Template</title>
+    <title>Đăng nhập</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -35,8 +35,6 @@
                             <div class="cmp-info">
                                 <div class="cm-logo">
                                     <img src="{{asset('client/images/cm-logo.png')}}" alt="">
-                                    <p>Workwise, is a global freelancing platform and social networking where businesses
-                                        and independent professionals connect and collaborate remotely</p>
                                 </div>
                                 <!--cm-logo end-->
                                 <img src="{{asset('client/images/cm-main-img.png')}}" alt="">
@@ -45,169 +43,182 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="login-sec">
+                                @if (Session::has('msg'))
+                                    <div class="alert alert-danger">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{Session::get('msg')}}</strong>
+                                    </div>
+                                    {{Session::put('msg',null)}}
+                                @endif
                                 <ul class="sign-control">
-                                    <li data-tab="tab-1" class="current"><a href="#" title="">Sign in</a></li>
-                                    <li data-tab="tab-2"><a href="#" title="">Sign up</a></li>
+                                    <li data-tab="tab-1" class="current"><a href="#" title="">Đăng nhập</a></li>
+                                    <li data-tab="tab-2"><a href="#" title="">Đăng ký</a></li>
                                 </ul>
                                 <div class="sign_in_sec current" id="tab-1">
-
-                                    <h3>Sign in</h3>
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-lg-12 no-pdd">
-                                                <div class="sn-field">
-                                                    <input type="text" name="username" placeholder="Username">
-                                                    <i class="la la-user"></i>
-                                                </div>
-                                                <!--sn-field end-->
-                                            </div>
-                                            <div class="col-lg-12 no-pdd">
-                                                <div class="sn-field">
-                                                    <input type="password" name="password" placeholder="Password">
-                                                    <i class="la la-lock"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 no-pdd">
-                                                <div class="checky-sec">
-                                                    <div class="fgt-sec">
-                                                        <input type="checkbox" name="cc" id="c1">
-                                                        <label for="c1">
-                                                            <span></span>
-                                                        </label>
-                                                        <small>Remember me</small>
-                                                    </div>
-                                                    <!--fgt-sec end-->
-                                                    <a href="#" title="">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 no-pdd">
-                                                <button type="submit" value="submit">Sign in</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <div class="login-resources">
-                                        <h4>Login Via Social Account</h4>
-                                        <ul>
-                                            <li><a href="#" title="" class="fb"><i class="fa fa-facebook"></i>Login Via
-                                                    Facebook</a></li>
-                                            <li><a href="#" title="" class="tw"><i class="fa fa-twitter"></i>Login Via
-                                                    Twitter</a></li>
-                                        </ul>
-                                    </div>
-                                    <!--login-resources end-->
-                                </div>
-                                <!--sign_in_sec end-->
-                                <div class="sign_in_sec" id="tab-2">
                                     <div class="signup-tab">
                                         <i class="fa fa-long-arrow-left"></i>
-                                        <h2>johndoe@example.com</h2>
+                                        <h2>Chọn nhóm người dùng</h2>
                                         <ul>
-                                            <li data-tab="tab-3" class="current"><a href="#" title="">User</a></li>
-                                            <li data-tab="tab-4"><a href="#" title="">Company</a></li>
+                                            <li data-tab="tab-3" class="current"><a href="#" title="">Nông dân</a></li>
+                                            <li data-tab="tab-4"><a href="#" title="">Thương lái</a></li>
                                         </ul>
                                     </div>
-                                    <!--signup-tab end-->
+                                    <!--Phần này của nông dân-->
                                     <div class="dff-tab current" id="tab-3">
-                                        <form>
+                                        {{-- xử lý nông dân nè --}}
+                                        <form action="{{ route('login-nong-dan') }}" method="post">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="name" placeholder="Full Name">
+                                                        <input type="text" name="username" placeholder="Tên đăng nhập">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="country" placeholder="Country">
-                                                        <i class="la la-globe"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <select>
-                                                            <option>Category</option>
-                                                        </select>
-                                                        <i class="la la-dropbox"></i>
-                                                        <span><i class="fa fa-ellipsis-h"></i></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="password" name="password" placeholder="Password">
+                                                        <input type="password" name="password" placeholder="Mật khẩu">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
+                                                    <button type="submit" value="submit">Đăng nhập</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!--Phần này của thương lái-->
+                                    <div class="dff-tab" id="tab-4">
+                                        {{-- xử lý đăng nhập thương lái --}}
+                                        <form method="post" action="{{ route('login-thuong-lai') }}">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="password" name="repeat-password"
-                                                            placeholder="Repeat Password">
+                                                        <input type="text" name="username" placeholder="Tên đăng nhập">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="password" name="password" placeholder="Mật khẩu">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
-                                                    <div class="checky-sec st2">
-                                                        <div class="fgt-sec">
-                                                            <input type="checkbox" name="cc" id="c2">
-                                                            <label for="c2">
-                                                                <span></span>
-                                                            </label>
-                                                            <small>Yes, I understand and agree to the workwise Terms &
-                                                                Conditions.</small>
-                                                        </div>
-                                                        <!--fgt-sec end-->
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <button type="submit" value="submit">Get Started</button>
+                                                    <button type="submit" value="submit">Đăng nhập</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                     <!--dff-tab end-->
-                                    <div class="dff-tab" id="tab-4">
-                                        <form>
+                                </div>
+                                <!--sign_in_sec end-->
+                                <div class="sign_in_sec" id="tab-2">
+                                    <div class="signup-tab">
+                                        <i class="fa fa-long-arrow-left"></i>
+                                        <h2>Chọn nhóm người dùng</h2>
+                                        <ul>
+                                            <li data-tab="tab-5" class="current"><a href="#" title="">Nông dân</a></li>
+                                            <li data-tab="tab-6"><a href="#" title="">Thương lái</a></li>
+                                        </ul>
+                                    </div>
+                                    <!--Phần này của nông dân-->
+                                    <div class="dff-tab current" id="tab-5">
+                                        {{-- FORM NÀY DÀNH CHO ĐĂNG KÝ NÔNG DÂN --}}
+                                        <form method="post" action="{{ route('register-nong-dan') }}">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="company-name"
-                                                            placeholder="Company Name">
-                                                        <i class="la la-building"></i>
+                                                        <input type="text" name="username" placeholder="Tên đăng nhập">
+                                                        <i class="la la-user"></i>
                                                     </div>
                                                 </div>
+                                               
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="country" placeholder="Country">
-                                                        <i class="la la-globe"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="password" name="password" placeholder="Password">
+                                                        <input type="password" name="password" placeholder="Mật khẩu">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="password" name="repeat-password"
-                                                            placeholder="Repeat Password">
+                                                            placeholder="Nhập lại mật khẩu">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
-                                                    <div class="checky-sec st2">
-                                                        <div class="fgt-sec">
-                                                            <input type="checkbox" name="cc" id="c3">
-                                                            <label for="c3">
-                                                                <span></span>
-                                                            </label>
-                                                            <small>Yes, I understand and agree to the workwise Terms &
-                                                                Conditions.</small>
-                                                        </div>
-                                                        <!--fgt-sec end-->
+                                                    <div class="sn-field">
+                                                        <input type="text" name="nd_hoten" placeholder="Họ tên">
+                                                        <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
-                                                    <button type="submit" value="submit">Get Started</button>
+                                                    <div class="sn-field">
+                                                        <input type="text" name="nd_sdt" placeholder="Số điện thoại">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>  
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="text" name="nd_diachi" placeholder="Địa chỉ">
+                                                        <i class="la la-globe"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <button type="submit" value="submit">Đăng ký</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!--Phần này của thương lái-->
+                                    <div class="dff-tab" id="tab-6">
+                                        {{-- FORM NÀY DÀNH CHO ĐĂNG KÝ THƯƠNG LÁI --}}
+                                        <form action="{{ route('register-thuong-lai') }}" method="post">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="text" name="username" placeholder="Tên đăng nhập">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                               
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="password" name="password" placeholder="Mật khẩu">
+                                                        <i class="la la-lock"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="password" name="repeat-password"
+                                                            placeholder="Nhập lại mật khẩu">
+                                                        <i class="la la-lock"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="text" name="tl_hoten" placeholder="Họ tên">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="text" name="tl_sdt" placeholder="Số điện thoại">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>  
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="text" name="tl_diachi" placeholder="Địa chỉ">
+                                                        <i class="la la-globe"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <button type="submit" value="submit">Đăng ký</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -225,14 +236,7 @@
             <div class="footy-sec">
                 <div class="container">
                     <ul>
-                        <li><a href="#" title="">Help Center</a></li>
-                        <li><a href="#" title="">Privacy Policy</a></li>
-                        <li><a href="#" title="">Community Guidelines</a></li>
-                        <li><a href="#" title="">Cookies Policy</a></li>
-                        <li><a href="#" title="">Career</a></li>
-                        <li><a href="#" title="">Forum</a></li>
-                        <li><a href="#" title="">Language</a></li>
-                        <li><a href="#" title="">Copyright Policy</a></li>
+                        
                     </ul>
                     <p><img src="{{asset('client/images/copy-icon.png')}}" alt="">Copyright 2018</p>
                 </div>

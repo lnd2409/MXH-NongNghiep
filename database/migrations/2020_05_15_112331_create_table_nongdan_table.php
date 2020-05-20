@@ -15,14 +15,13 @@ class CreateTableNongdanTable extends Migration
     {
         Schema::create('nongdan', function (Blueprint $table) {
             $table->bigIncrements('nd_id')->unsigned();
-            $table->timestamps();
-
-            $table->string('nd_taikhoan');
-            $table->string('nd_matkhau');
+            $table->string('username');
+            $table->string('password');
             $table->string('nd_hoten');
             $table->string('nd_diachi');
             $table->string('nd_sdt');
-            
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

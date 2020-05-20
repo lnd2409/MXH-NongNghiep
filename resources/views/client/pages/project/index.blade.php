@@ -1,4 +1,7 @@
 @extends('client.client')
+@section('title')
+    Project
+@endsection
 @section('content')
 <div class="search-sec">
     <div class="container">
