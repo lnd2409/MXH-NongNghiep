@@ -30,7 +30,7 @@ Route::get('/admin/', function () {
     return view('admin.index');
 });
 //Đăng nhập
-Route::get('/dang-nhap', 'AuthController@getLogin')->name('login-user');
+Route::get('/', 'AuthController@getLogin')->name('login-user');
 //Đăng nhập và đăng ký nông dân
 Route::post('dang-nhap/nong-dan','AuthController@LoginNongDan')->name('login-nong-dan');
 Route::post('dang-ky/nong-dan','AuthController@RegisterNongDan')->name('register-nong-dan');
@@ -49,8 +49,8 @@ Route::post('dang-ky/thuong-lai','AuthController@RegisterThuongLai')->name('regi
 Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], function () {
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutNongDan')->name('dang-xuat-nong-dan');
-    // Trang chủ
-    Route::view('/', 'client.pages.index.index')->name('trang-chu-nong-dan');
+    // Trang chủ->name('trang-chu-nong-dan')
+    Route::get('/', 'NgocDuc\NongdanController@index')->name('trang-chu-nong-dan');
 });
 
 

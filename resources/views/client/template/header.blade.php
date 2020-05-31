@@ -17,34 +17,30 @@
                     <li>
                         <a href="index.html" title="">
                             <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
-                            Home
+                            Trang chủ
                         </a>
                     </li>
                     <li>
                         <a href="companies.html" title="">
                             <span><img src="{{asset('client/images/icon2.png')}}" alt=""></span>
-                            Companies
+                            Mua bán
                         </a>
                         <ul>
-                            <li><a href="companies.html" title="">Companies</a></li>
-                            <li><a href="company-profile.html" title="">Company Profile</a></li>
+                            <li><a href="companies.html" title="">Bán nông sản</a></li>
+                            <li><a href="company-profile.html" title="">Vật tư nông nghiệp</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="projects.html" title="">
                             <span><img src="{{asset('client/images/icon3.png')}}" alt=""></span>
-                            Projects
+                            Nhật ký nông hộ
                         </a>
                     </li>
                     <li>
                         <a href="profiles.html" title="">
                             <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
-                            Profiles
+                            Trang cá nhân
                         </a>
-                        <ul>
-                            <li><a href="user-profile.html" title="">User Profile</a></li>
-                            <li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
-                        </ul>
                     </li>
                     <li>
                         <a href="jobs.html" title="">
@@ -178,43 +174,20 @@
                     <i class="la la-sort-down"></i>
                 </div>
                 <div class="user-account-settingss">
-                    <h3>Online Status</h3>
-                    <ul class="on-off-status">
-                        <li>
-                            <div class="fgt-sec">
-                                <input type="radio" name="cc" id="c5">
-                                <label for="c5">
-                                    <span></span>
-                                </label>
-                                <small>Online</small>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="fgt-sec">
-                                <input type="radio" name="cc" id="c6">
-                                <label for="c6">
-                                    <span></span>
-                                </label>
-                                <small>Offline</small>
-                            </div>
-                        </li>
-                    </ul>
-                    <h3>Custom Status</h3>
-                    <div class="search_form">
-                        <form>
-                            <input type="text" name="search">
-                            <button type="submit">Ok</button>
-                        </form>
-                    </div>
-                    <!--search_form end-->
-                    <h3>Setting</h3>
+                    <h3>Cài đặt</h3>
                     <ul class="us-links">
                         <li><a href="profile-account-setting.html" title="">Account Setting</a></li>
                         <li><a href="#" title="">Privacy</a></li>
                         <li><a href="#" title="">Faqs</a></li>
                         <li><a href="#" title="">Terms & Conditions</a></li>
                     </ul>
-                    <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Logout</a></h3>
+                    @if (Auth::guard('nongdan')->check())
+                        <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Đăng xuất</a></h3>
+                    @endif
+                    @if (Auth::guard('thuonglai')->check())
+                        <h3 class="tc"><a href="{{ route('dang-xuat-thuong-lai') }}" title="">Đăng xuất</a></h3>
+                    @endif
+                    
                 </div>
                 <!--user-account-settingss end-->
             </div>
