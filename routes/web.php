@@ -52,6 +52,10 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     // Trang chủ
     Route::view('/', 'client.pages.index.index')->name('trang-chu-nong-dan');
 });
+Route::get('/ban-hang', 'SellController@index')->name('sell');
+Route::get('/ban-hang/{id}', 'SellController@show')->name('sell.single');
+Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
+Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
 
 
 //Giao diện của thương lái ném vào đây

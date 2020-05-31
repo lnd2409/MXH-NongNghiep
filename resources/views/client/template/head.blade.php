@@ -17,4 +17,5 @@
     <link rel="stylesheet" type="text/css" href="{{asset('client/lib/slick/slick-theme.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/responsive.css')}}">
+    @yield('css')
 </head>
