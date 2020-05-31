@@ -47,18 +47,50 @@ Route::post('dang-ky/thuong-lai','AuthController@RegisterThuongLai')->name('regi
 
 //Giao diện của nông dân ném vào đây
 Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], function () {
-    //Đăng xuất
-    Route::get('dang-xuat','AuthController@LogoutNongDan')->name('dang-xuat-nong-dan');
+
     // Trang chủ->name('trang-chu-nong-dan')
     Route::get('/', 'NgocDuc\NongdanController@index')->name('trang-chu-nong-dan');
+
+    // infor nông dân
+    Route::get('/trang-ca-nhan','NgocDuc\NongdanController@mypages')->name('canhan.nongdan');
+
+    //thay đổi hình nền
+    Route::post('/hinh-nen','NgocDuc\NongdanController@background_store')->name('hinhen.submit.nongdan');
+
+    //thay đổi hình đại diện
+    Route::post('/hinh-dai-dien','NgocDuc\NongdanController@avatar_store')->name('daidien.submit.nongdan');
+
+    //Cập nhât thông tin thương lái
+    Route::get('/cai-dat','NgocDuc\NongdanController@setting')->name('caidat.nongdan');
+    
+    Route::post('/cai-dat/thong-tin','NgocDuc\NongdanController@changeinfor')->name('caidat.submit.nongdan');
+
+    //Thay đổi mật khẩu của thương láy
+    Route::post('/cai-dat/check-mk','NgocDuc\NongdanController@checkpasword')->name('caidat.kiemtra.nongdan');
+
+    //check 2 mật khẩu
+    Route::post('/cai-dat/doi-mk','NgocDuc\NongdanController@update')->name('caidat.submit.matkhau.nongdan');
+
+
+
+
+
+
+
+    //Đăng xuất
+    Route::get('dang-xuat','AuthController@LogoutNongDan')->name('dang-xuat-nong-dan');
+   
 });
 
 
 //Giao diện của thương lái ném vào đây
 Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], function () {
 
-    //CRUD infor thương lái
-    Route::get('/trang-ca-nhan','ThuongLaiController@index')->name('trangcanhan');
+    //Trang chủ thương lái
+    Route::get('/','ThuongLaiController@index')->name('trangchu');
+
+    //infor thương lái
+    Route::get('/trang-ca-nhan','ThuongLaiController@mypages')->name('trangcanhan');
 
     //thay đổi hình nền
     Route::post('/hinh-nen','ThuongLaiController@background_store')->name('hinhen.submit');
@@ -77,12 +109,9 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
     //check 2 mật khẩu
     Route::post('/cai-dat/doi-mk','ThuongLaiController@update')->name('caidat.submit.matkhau');
 
-
-
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutThuongLai')->name('dang-xuat-thuong-lai');
-    // Trang chủ
-    Route::view('/', 'client.pages.index.index')->name('trang-chu-thuong-lai');
+
 });
 
 
