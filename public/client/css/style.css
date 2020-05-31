@@ -5402,3 +5402,15 @@ a:hover {
     transform: scale(1.0);
   }
 }
+
+th.tl_infor {
+    font-size: 16px;
+    text-align: left;
+    line-height: 34px;
+    font-weight: 700;
+}
+
+.changePassword {
+    width: 511px;
+    margin: auto;
+}

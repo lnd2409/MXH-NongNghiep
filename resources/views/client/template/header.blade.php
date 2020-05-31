@@ -207,12 +207,12 @@
                         </form>
                     </div>
                     <!--search_form end-->
-                    <h3>Setting</h3>
+                    <h3>Cài đặt</h3>
                     <ul class="us-links">
-                        <li><a href="profile-account-setting.html" title="">Account Setting</a></li>
-                        <li><a href="#" title="">Privacy</a></li>
+                        <li><a href="{{ route('caidat') }}" title="">Cài đặt tài khoản</a></li>
+                        {{-- <li><a href="#" title="">Privacy</a></li>
                         <li><a href="#" title="">Faqs</a></li>
-                        <li><a href="#" title="">Terms & Conditions</a></li>
+                        <li><a href="#" title="">Terms & Conditions</a></li> --}}
                     </ul>
                     <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Logout</a></h3>
                 </div>

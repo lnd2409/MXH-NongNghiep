@@ -49,7 +49,7 @@ class AuthController extends Controller
         if (Auth::guard('thuonglai')->attempt($arr, true))
         {
             $taikhoan = ThuongLai::where('username', '=' , $request->username)->where('password', '=', $request->password)->first();
-            dd('Đăng nhập thành công, muốn chỉnh giao diện gì dô code sửa');
+           return redirect()->route('trangcanhan');
         } else {
             $thongbao = Session::put('msg','Sai tên tài khoản hoặc mật khẩu');
             return redirect()->back();
