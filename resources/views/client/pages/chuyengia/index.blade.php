@@ -67,23 +67,21 @@
                         {{-- Danh sách nhóm --}}
                         <div class="col-lg-4">
                             <div class="widget widget-user">
-                                <h3 class="title-wd">Các nhóm đã tham gia</h3>
+                                <h3 class="title-wd">Các nhóm quản lý</h3>
                                 <ul>
-                                    @foreach ($nhom_nong_dan as $item)
                                         <li>
                                             <div class="usr-msg-details">
                                                 <div class="usr-ms-img">
                                                     <img src="http://via.placeholder.com/50x50" alt="">
                                                 </div>
                                                 <div class="usr-mg-info">
-                                                    <h3><a href="#">{{ $item->n_tennhom }}</a></h3>
+                                                    <h3><a href="#">1</a></h3>
                                                     <p>Graphic Designer </p>
                                                 </div>
                                                 <!--usr-mg-info end-->
                                             </div>
                                             <span><img src="images/price1.png" alt="">1185</span>
                                         </li>
-                                    @endforeach
                                 </ul>
                             </div>
                             <!--widget-user end-->

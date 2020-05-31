@@ -26,12 +26,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {   
-            $nongdan_id = Auth::guard('nongdan')->id();
-            $nhom_nong_dan = DB::table('chitietnhom')
-                        ->where('nd_id','=',$nongdan_id)
-                        ->join('nhom','nhom.n_id','=','chitietnhom.n_id')
-                        ->get();
-            View::share('nhom_nong_dan', ); 
+            // $nongdan_id = Auth::guard('nongdan')->user()->username;
+            // $nhom_nong_dan = DB::table('chitietnhom')
+            //             ->where('nd_id','=',1)
+            //             ->join('nhom','nhom.n_id','=','chitietnhom.n_id')
+            //             ->get();
+            // View::share('nhom_nong_dan', $nongdan_id); 
         
     }
 }

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\NgocDuc;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
+use DB;
 class NongdanController extends Controller
 {
     /**
@@ -14,8 +15,12 @@ class NongdanController extends Controller
      */
     public function index()
     {
-        
-        return view('client.pages.nongdan.index');
+        $nongdan_id = Auth::guard('nongdan')->id();
+        $nhom_nong_dan = DB::table('chitietnhom')
+                    ->where('nd_id','=',$nongdan_id)
+                    ->join('nhom','nhom.n_id','=','chitietnhom.n_id')
+                    ->get();
+        return view('client.pages.nongdan.index',compact('nhom_nong_dan'));
     }
 
     /**
