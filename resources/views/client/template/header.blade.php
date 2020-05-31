@@ -47,7 +47,7 @@
                             <span><img src="{{asset('client/images/icon5.png')}}" alt=""></span>
                             Nhóm
                         </a>
-                    </li>
+                        </li>
                 </ul>
             </nav>
             <!--nav end-->
@@ -64,10 +64,10 @@
                 <div class="user-account-settingss">
                     <h3>Cài đặt</h3>
                     <ul class="us-links">
-                        <li><a href="profile-account-setting.html" title="">Account Setting</a></li>
-                        <li><a href="#" title="">Privacy</a></li>
+                        <li><a href="{{ route('caidat') }}" title="">Cài đặt tài khoản</a></li>
+                        {{-- <li><a href="#" title="">Privacy</a></li>
                         <li><a href="#" title="">Faqs</a></li>
-                        <li><a href="#" title="">Terms & Conditions</a></li>
+                        <li><a href="#" title="">Terms & Conditions</a></li> --}}
                     </ul>
                     @if (Auth::guard('nongdan')->check())
                         <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Đăng xuất</a></h3>

@@ -26,7 +26,7 @@
 
 
 
-Route::get('/admin/', function () {
+Route::get('/admin', function () {
     return view('admin.index');
 });
 //Đăng nhập
@@ -56,12 +56,34 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
 //Giao diện của thương lái ném vào đây
 Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], function () {
+
+    //CRUD infor thương lái
+    Route::get('/trang-ca-nhan','ThuongLaiController@index')->name('trangcanhan');
+
+    //thay đổi hình nền
+    Route::post('/hinh-nen','ThuongLaiController@background_store')->name('hinhen.submit');
+
+    //thay đổi hình đại diện
+    Route::post('/hinh-dai-dien','ThuongLaiController@avatar_store')->name('daidien.submit');
+
+    //Cập nhât thông tin thương lái
+    Route::get('/cai-dat','ThuongLaiController@setting')->name('caidat');
+    
+    Route::post('/cai-dat/thong-tin','ThuongLaiController@changeinfor')->name('caidat.submit');
+
+    //Thay đổi mật khẩu của thương láy
+    Route::post('/cai-dat/check-mk','ThuongLaiController@checkpasword')->name('caidat.submit.kiemtra');
+
+    //check 2 mật khẩu
+    Route::post('/cai-dat/doi-mk','ThuongLaiController@update')->name('caidat.submit.matkhau');
+
+
+
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutThuongLai')->name('dang-xuat-thuong-lai');
     // Trang chủ
     Route::view('/', 'client.pages.index.index')->name('trang-chu-thuong-lai');
 });
-
 
 
 //TỰ LẤY GIAO DIỆN DƯỚI ĐÂY ĐEM LÊN PHÍA TRÊN CHỈ LÀ MẪU

@@ -14,6 +14,7 @@
                         <li><a href="#" title="">Chủ đề quan tâm</a></li>
                         <li><a href="#" title="">Bài viết cá nhân</a></li>
                         <li><a href="#" title="">Bài viết khoa học</a></li>
+                        <li><a href="" class="btn btn-success">Đăng bài</a></li>
                     </ul>
                 </div>
                 <!--forum-links end-->
@@ -195,19 +196,26 @@
                             <div class="widget widget-user">
                                 <h3 class="title-wd">Các nhóm đã tham gia</h3>
                                 <ul>
-                                    <li>
-                                        <div class="usr-msg-details">
-                                            <div class="usr-ms-img">
-                                                <img src="http://via.placeholder.com/50x50" alt="">
+                                    <span>id = </span>
+                                    {{ Auth::guard('nongdan')->id() }}
+                                    {{ dd($nhom_nong_dan) }}
+                                    {{-- @foreach ($nhom_nong_dan as $item)
+                                        <li>
+                                            <div class="usr-msg-details">
+                                                <div class="usr-ms-img">
+                                                    <img src="http://via.placeholder.com/50x50" alt="">
+                                                </div>
+                                                <div class="usr-mg-info">
+                                                    <h3>{{ $item->n_tennhom123 }}</h3>
+                                                    <p>Graphic Designer </p>
+                                                </div>
+                                                <!--usr-mg-info end-->
                                             </div>
-                                            <div class="usr-mg-info">
-                                                <h3>Jessica William</h3>
-                                                <p>Graphic Designer </p>
-                                            </div>
-                                            <!--usr-mg-info end-->
-                                        </div>
-                                        <span><img src="images/price1.png" alt="">1185</span>
-                                    </li>
+                                            <span><img src="images/price1.png" alt="">1185</span>
+                                        </li>
+                                    @endforeach --}}
+                                        
+                                    
                                 </ul>
                             </div>
                             <!--widget-user end-->
