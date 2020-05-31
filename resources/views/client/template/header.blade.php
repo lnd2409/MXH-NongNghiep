@@ -15,10 +15,19 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="index.html" title="">
+                        @if (Auth::guard('nongdan')->check())
+                        <a href="{{ route('trang-chu-nong-dan') }}" title="">
                             <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
                             Trang chủ
                         </a>
+                        @endif
+                        @if (Auth::guard('thuonglai')->check())
+                        <a href="{{ route('trangchu') }}" title="">
+                            <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
+                            Trang chủ
+                        </a>
+                        @endif
+                       
                     </li>
                     <li>
                         <a href="companies.html" title="">
@@ -37,10 +46,19 @@
                         </a>
                     </li>
                     <li>
-                        <a href="profiles.html" title="">
+                        @if (Auth::guard('nongdan')->check())
+                        <a href="{{ route('canhan.nongdan') }}" title="">
                             <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
                             Trang cá nhân
                         </a>
+                        @endif
+                        @if (Auth::guard('thuonglai')->check())
+                        <a href="{{ route('trangcanhan') }}" title="">
+                            <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
+                            Trang cá nhân
+                        </a>
+                        @endif
+                        
                     </li>
                     <li>
                         <a href="jobs.html" title="">
@@ -57,17 +75,32 @@
             <!--menu-btn end-->
             <div class="user-account">
                 <div class="user-info">
-                    <img src="http://via.placeholder.com/30x30" alt="">
-                    <a href="#" title="">John</a>
+                    @if (Auth::guard('nongdan')->check())
+                    <img src="{{asset('hinhanh/nguoidung/nongdan/'.Auth::guard('nongdan')->user()->nd_background)}}" alt="" style="width:30px; height:30px;">
+                        <a href="#" title="">{{ Auth::guard('nongdan')->user()->nd_hoten}}</a>
+                        <i class="la la-sort-down"></i>
+                    @endif
+                    @if (Auth::guard('thuonglai')->check())
+                    <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_background)}}" alt="" style="width:30px; height:30px;">
+                    <a href="#" title="">{{Auth::guard('thuonglai')->user()->tl_hoten}}</a>
                     <i class="la la-sort-down"></i>
+                    @endif
                 </div>
                 <div class="user-account-settingss">
                     <h3>Cài đặt</h3>
                     <ul class="us-links">
+                        @if (Auth::guard('nongdan')->check())
+                        <li><a href="{{ route('caidat.nongdan') }}" title="">Cài đặt tài khoản</a></li>
+                        {{-- <li><a href="#" title="">Privacy</a></li>
+                        <li><a href="#" title="">Faqs</a></li>
+                        <li><a href="#" title="">Terms & Conditions</a></li> --}}
+                        @endif
+                        @if (Auth::guard('thuonglai')->check())
                         <li><a href="{{ route('caidat') }}" title="">Cài đặt tài khoản</a></li>
                         {{-- <li><a href="#" title="">Privacy</a></li>
                         <li><a href="#" title="">Faqs</a></li>
                         <li><a href="#" title="">Terms & Conditions</a></li> --}}
+                        @endif
                     </ul>
                     @if (Auth::guard('nongdan')->check())
                         <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Đăng xuất</a></h3>

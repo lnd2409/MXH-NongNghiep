@@ -15,6 +15,10 @@ class ThuongLaiController extends Controller
      */
     public function index()
     {
+        return view ('client.pages.thuonglai.index');
+    }
+    public function mypages()
+    {
         $id=\Auth::guard('thuonglai')->id();
         
         $data = DB::table('thuonglai')->where('tl_id',$id)->first();
