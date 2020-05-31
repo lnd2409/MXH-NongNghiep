@@ -17,10 +17,12 @@ class CreateTableHinhanhTable extends Migration
             $table->bigIncrements('ha_id');
             $table->string('ha_ten');
             $table->string('ha_duongdan');
-
+            $table->bigInteger('sp_id')->unsigned();
+            
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('Ngày tạo');
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->comment('Ngày cập nhật');
             $table->timestamp('deleted_at')->nullable()->comment('Ngày xóa');
+            $table->foreign('sp_id')->references('sp_id')->on('sanpham')->onDelete('cascade');
         });
     }
 
