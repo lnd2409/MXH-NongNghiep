@@ -10,7 +10,7 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc"
                                 role="tab" aria-controls="nav-acc" aria-selected="true"><i
-                                    class="la la-cogs"></i>Account Setting</a>
+                                    class="la la-cogs"></i>Cài đặt tài khoản</a>
                             <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status"
                                 role="tab" aria-controls="nav-status" aria-selected="false"><i
                                     class="fa fa-line-chart"></i>Status</a>

@@ -23,7 +23,7 @@ class AuthController extends Controller
         if (Auth::guard('nongdan')->attempt($arr, true))
         {
             $taikhoan = NongDan::where('username', '=' , $request->username)->where('password', '=', $request->password)->first();
-            dd('Đăng nhập thành công, muốn chỉnh giao diện gì dô code sửa');
+            return redirect()->route('trang-chu-nong-dan');
         } else {
             $thongbao = Session::put('msg','Sai tên tài khoản hoặc mật khẩu');
             return redirect()->back();
@@ -49,7 +49,7 @@ class AuthController extends Controller
         if (Auth::guard('thuonglai')->attempt($arr, true))
         {
             $taikhoan = ThuongLai::where('username', '=' , $request->username)->where('password', '=', $request->password)->first();
-            dd('Đăng nhập thành công, muốn chỉnh giao diện gì dô code sửa');
+           return redirect()->route('trangchu');
         } else {
             $thongbao = Session::put('msg','Sai tên tài khoản hoặc mật khẩu');
             return redirect()->back();
