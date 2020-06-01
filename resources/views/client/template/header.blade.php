@@ -1,3 +1,4 @@
+
 <header>
     <div class="container">
         <div class="header-data">
@@ -77,12 +78,12 @@
                 <div class="user-info">
                     @if (Auth::guard('nongdan')->check())
                     <img src="{{asset('hinhanh/nguoidung/nongdan/'.Auth::guard('nongdan')->user()->nd_background)}}" alt="" style="width:30px; height:30px;">
-                        <a href="#" title="">{{ Auth::guard('nongdan')->user()->nd_hoten}}</a>
+                        <a href="#" title="">{{ substr(Auth::guard('nongdan')->user()->nd_hoten,-(strpos(strrev(Auth::guard('nongdan')->user()->nd_hoten),' ')),strlen(Auth::guard('nongdan')->user()->nd_hoten))}}</a>
                         <i class="la la-sort-down"></i>
                     @endif
                     @if (Auth::guard('thuonglai')->check())
                     <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_background)}}" alt="" style="width:30px; height:30px;">
-                    <a href="#" title="">{{Auth::guard('thuonglai')->user()->tl_hoten}}</a>
+                    <a href="#" title="">{{ substr(Auth::guard('thuonglai')->user()->tl_hoten,-(strpos(strrev(Auth::guard('thuonglai')->user()->tl_hoten),' ')),strlen(Auth::guard('thuonglai')->user()->tl_hoten))}}</a>
                     <i class="la la-sort-down"></i>
                     @endif
                 </div>
