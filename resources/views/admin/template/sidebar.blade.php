@@ -23,6 +23,12 @@
           <span class="menu-title">Bảng điều khiển</span>
         </a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ route('danh-sach-loai-san-pham-nuoi-trong') }}">
+          <i class="icon-rocket menu-icon"></i>
+          <span class="menu-title">Loại sản phẩm nuôi trồng</span>
+        </a>
+      </li>
     </ul>
   </nav>
   <!-- partial -->

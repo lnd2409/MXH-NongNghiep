@@ -76,3 +76,18 @@ Route::view('/message', 'client.pages.message.index');
 Route::view('/profile-account-setting', 'client.pages.account.profile-account-setting');
 Route::view('/forum', 'client.pages.forum.index');
 Route::view('/forum-post-view', 'client.pages.forum.forum-post-view');
+
+//Trang admin
+//Loại sản phẩm nuôi trồng
+Route::get('loai-san-pham-nuoi-trong', 'LoaisanphamnuoitrongController@index')->name('danh-sach-loai-san-pham-nuoi-trong');
+Route::post('loai-san-pham-nuoi-trong','LoaisanphamnuoitrongController@store')->name('them-loai-san-pham-nuoi-trong');
+Route::get('loai-san-pham-nuoi-trong/{id}/chinh-sua','LoaisanphamnuoitrongController@edit')->name('sua-loai-san-pham-nuoi-trong');
+Route::post('loai-san-pham-nuoi-trong/{id}/chinh-sua', 'LoaisanphamnuoitrongController@update')->name('cap-nhat-loai-san-pham-nuoi-trong');
+Route::get('loai-san-pham-nuoi-trong/{id}/xoa','LoaisanphamnuoitrongController@destroy')->name('xoa-loai-san-pham-nuoi-trong');
+
+//Sản phẩm nuôi trồng
+Route::get('loai-san-pham-nuoi-trong', 'LoaisanphamnuoitrongController@index')->name('danh-sach-loai-san-pham-nuoi-trong');
+Route::post('loai-san-pham-nuoi-trong','LoaisanphamnuoitrongController@store')->name('them-loai-san-pham-nuoi-trong');
+Route::get('loai-san-pham-nuoi-trong/{id}/chinh-sua','LoaisanphamnuoitrongController@edit')->name('sua-loai-san-pham-nuoi-trong');
+Route::post('loai-san-pham-nuoi-trong/{id}/chinh-sua', 'LoaisanphamnuoitrongController@update')->name('cap-nhat-loai-san-pham-nuoi-trong');
+Route::get('loai-san-pham-nuoi-trong/{id}/xoa','LoaisanphamnuoitrongController@destroy')->name('xoa-loai-san-pham-nuoi-trong');
