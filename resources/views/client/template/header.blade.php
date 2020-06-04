@@ -21,8 +21,7 @@
                             <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
                             Trang chủ
                         </a>
-                        @endif
-                        @if (Auth::guard('thuonglai')->check())
+                        @elseif(Auth::guard('thuonglai')->check())
                         <a href="{{ route('trangchu') }}" title="">
                             <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
                             Trang chủ
@@ -52,8 +51,7 @@
                             <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
                             Trang cá nhân
                         </a>
-                        @endif
-                        @if (Auth::guard('thuonglai')->check())
+                        @elseif(Auth::guard('thuonglai')->check())
                         <a href="{{ route('trangcanhan') }}" title="">
                             <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
                             Trang cá nhân
@@ -77,14 +75,13 @@
             <div class="user-account">
                 <div class="user-info">
                     @if (Auth::guard('nongdan')->check())
-                    <img src="{{asset('hinhanh/nguoidung/nongdan/'.Auth::guard('nongdan')->user()->nd_background)}}" alt="" style="width:30px; height:30px;">
+                        <img src="{{asset('hinhanh/nguoidung/nongdan/'.Auth::guard('nongdan')->user()->nd_background)}}" alt="" style="width:30px; height:30px;">
                         <a href="#" title="">{{ substr(Auth::guard('nongdan')->user()->nd_hoten,-(strpos(strrev(Auth::guard('nongdan')->user()->nd_hoten),' ')),strlen(Auth::guard('nongdan')->user()->nd_hoten))}}</a>
                         <i class="la la-sort-down"></i>
-                    @endif
-                    @if (Auth::guard('thuonglai')->check())
-                    <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_background)}}" alt="" style="width:30px; height:30px;">
-                    <a href="#" title="">{{ substr(Auth::guard('thuonglai')->user()->tl_hoten,-(strpos(strrev(Auth::guard('thuonglai')->user()->tl_hoten),' ')),strlen(Auth::guard('thuonglai')->user()->tl_hoten))}}</a>
-                    <i class="la la-sort-down"></i>
+                    @elseif (Auth::guard('thuonglai')->check())
+                        <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_background)}}" alt="" style="width:30px; height:30px;">
+                        <a href="#" title="">{{ substr(Auth::guard('thuonglai')->user()->tl_hoten,-(strpos(strrev(Auth::guard('thuonglai')->user()->tl_hoten),' ')),strlen(Auth::guard('thuonglai')->user()->tl_hoten))}}</a>
+                        <i class="la la-sort-down"></i>
                     @endif
                 </div>
                 <div class="user-account-settingss">
@@ -95,8 +92,7 @@
                         {{-- <li><a href="#" title="">Privacy</a></li>
                         <li><a href="#" title="">Faqs</a></li>
                         <li><a href="#" title="">Terms & Conditions</a></li> --}}
-                        @endif
-                        @if (Auth::guard('thuonglai')->check())
+                        @elseif (Auth::guard('thuonglai')->check())
                         <li><a href="{{ route('caidat') }}" title="">Cài đặt tài khoản</a></li>
                         {{-- <li><a href="#" title="">Privacy</a></li>
                         <li><a href="#" title="">Faqs</a></li>
@@ -105,8 +101,7 @@
                     </ul>
                     @if (Auth::guard('nongdan')->check())
                         <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Đăng xuất</a></h3>
-                    @endif
-                    @if (Auth::guard('thuonglai')->check())
+                    @elseif(Auth::guard('thuonglai')->check())
                         <h3 class="tc"><a href="{{ route('dang-xuat-thuong-lai') }}" title="">Đăng xuất</a></h3>
                     @endif
                     
