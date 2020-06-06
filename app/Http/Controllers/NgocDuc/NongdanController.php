@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Hash;
+use Illuminate\Support\Facades\Auth;
+
 class NongdanController extends Controller
 {
     /**
