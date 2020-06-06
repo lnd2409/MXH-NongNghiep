@@ -5,3 +5,7 @@
 <script type="text/javascript" src="{{asset('client/slick/slick.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('client/js/scrollbar.js')}}"></script>
 <script type="text/javascript" src="{{asset('client/js/script.js')}}"></script>
+<<<<<<< HEAD
+=======
+@yield('script')
+>>>>>>> nghia.le

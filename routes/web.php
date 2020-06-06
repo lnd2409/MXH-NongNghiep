@@ -81,6 +81,10 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     Route::get('dang-xuat','AuthController@LogoutNongDan')->name('dang-xuat-nong-dan');
    
 });
+Route::get('/ban-hang', 'SellController@index')->name('sell');
+Route::get('/ban-hang/{id}', 'SellController@show')->name('sell.single');
+Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
+Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
 
 
 //Giao diện của thương lái ném vào đây
