@@ -17,5 +17,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('client/slick/slick-theme.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/responsive.css')}}">
+<<<<<<< HEAD
     @yield('css')
+=======
+    
+>>>>>>> tran.phung
 </head>
