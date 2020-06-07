@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use App\Sanphamnuoitrong;
 use Illuminate\Http\Request;
-
+use DB;
+use Auth;
 class SanphamnuoitrongController extends Controller
 {
     /**
@@ -13,8 +14,18 @@ class SanphamnuoitrongController extends Controller
      */
     public function index()
     {
-        $spnt = Sanphamnuoitrong::all();
-        return view('admin-template.sanphamnuoitrong.index',compact('spnt'));
+        $id=Auth::guard('nongdan')->id();
+        $spnt = DB::table('sanphamnuoitrong')->get();
+        $mv = DB::table('muavu')->get();
+        $data = DB::table('nongdan')->where('nd_id',$id)->first();
+
+        $nuoitrong = DB::table('nuoitrong')
+        ->join('muavu','muavu.mv_id','=','nuoitrong.mv_id')
+        ->join('sanphamnuoitrong','sanphamnuoitrong.spnt_id','=','nuoitrong.spnt_id')
+        ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','=','sanphamnuoitrong.lns_id')
+        ->get();
+
+        return view ('client.pages.nongdan.san-pham-nuoi-trong',compact(['data','spnt','mv','nuoitrong']));
     }
 
     /**

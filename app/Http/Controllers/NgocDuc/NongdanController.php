@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Hash;
+use Auth;
 class NongdanController extends Controller
 {
     /**
@@ -26,11 +27,12 @@ class NongdanController extends Controller
 
     public function mypages()
     {
-        $id=\Auth::guard('nongdan')->id();
+        $id=Auth::guard('nongdan')->id();
         
         $data = DB::table('nongdan')->where('nd_id',$id)->first();
         return view ('client.pages.nongdan.trang-ca-nhan',compact('data'));
     }
+
 
 
 

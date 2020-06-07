@@ -22,7 +22,8 @@
                                 <div class="user_pro_status">
                                     <ul class="flw-hr">
                                         <li><a href="#" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
-                                        <li><a href="#" title="" class="hre">Hire</a></li>
+                                        
+                                    <li style="margin-top:20px;"><a href="{{route('san-pham-nuoi-trong.nongdan')}}" title="" class="hre">Sản phẩm nuôi trồng</a></li>
                                     </ul>
                                     <ul class="flw-status">
                                         <li>
