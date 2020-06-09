@@ -13,8 +13,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/line-awesome-font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/jquery.mCustomScrollbar.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('client/lib/slick/slick.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('client/lib/slick/slick-theme.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('client/slick/slick.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('client/slick/slick-theme.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/responsive.css')}}">
     @yield('css')

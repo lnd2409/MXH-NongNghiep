@@ -20,6 +20,8 @@ class CreateThuonglaiTable extends Migration
             $table->string('tl_sdt');
             $table->string('username');
             $table->string('password');
+            $table->string('tl_hinhanh')->nullable();
+            $table->string('tl_background')->nullable();
             $table->rememberToken();
             $table->timestamp('created_at')
             ->default(DB::raw('CURRENT_TIMESTAMP'))

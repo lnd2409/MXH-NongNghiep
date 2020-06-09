@@ -20,6 +20,8 @@ class CreateTableNongdanTable extends Migration
             $table->string('nd_hoten');
             $table->string('nd_diachi');
             $table->string('nd_sdt');
+            $table->string('nd_hinhanh')->nullable();
+            $table->string('nd_background')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
