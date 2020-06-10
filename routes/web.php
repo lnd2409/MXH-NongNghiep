@@ -73,7 +73,8 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
 
 
-
+    //Đăng bài dành cho NÔNG DÂN
+    Route::post('/dang-bai-nong-dan','NgocDuc\NongdanController@writePosts')->name('nong-dan-dang-bai');
 
 
 

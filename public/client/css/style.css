@@ -5044,18 +5044,17 @@ a:hover {
 }
 .quest-tags li {
 	display: inline-block;
-	margin-right: 10px;
 }
 .quest-tags li a {
 	display: inline-block;
 	color: #ffffff;
-	background-color: #53d690;
+	background-color: #ffffff;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
 	-ms-border-radius: 30px;
 	-o-border-radius: 30px;
 	border-radius: 30px;
-	padding: 7px 25px;
+	/* padding: 7px 25px; */
 }
 .quest-posted-time {
 	position: absolute;
