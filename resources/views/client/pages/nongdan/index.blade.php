@@ -53,7 +53,7 @@
                                         <ul class="quest-tags">
                                             @if(!empty($hinhanh[$item->bv_id]))
                                                 @foreach ($hinhanh[$item->bv_id] as $item2)
-                                                    <li><a href="#" title=""><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70"></a></li>
+                                                    <li><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70"></li>
                                                 @endforeach
                                             @endif
                                         </ul>
@@ -232,6 +232,27 @@
             overwriteInitial: false,
             maxFileSize: 2000,
             maxFileNum: 5,
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.popup-gallery').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                tLoading: 'Loading image #%curr%...',
+                mainClass: 'mfp-img-mobile',
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                },
+                image: {
+                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    titleSrc: function(item) {
+                        return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
+                    }
+                }
+            });
         });
     </script>
 </body>
