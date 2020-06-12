@@ -26,14 +26,20 @@ class NongdanController extends Controller
         
         $baiviet = DB::table('baiviet')->join('nongdan','nongdan.nd_id','=','baiviet.nd_id')->get();
         $hinhanh=array();
+        $binhluan=array();
         
         foreach ($baiviet as $value) {
         
             # code...
             $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
+            $binhluan[$value->bv_id] = DB::table('binhluan')
+            ->join('baiviet','baiviet.bv_id','binhluan.bv_id')
+            ->join('nongdan','nongdan.nd_id','binhluan.nd_id')
+            ->where('baiviet.bv_id','=',$value->bv_id)
+            ->get();
         }
-       
-        return view('client.pages.nongdan.index',compact('nhom_nong_dan','baiviet','hinhanh'));
+     
+        return view('client.pages.nongdan.index',compact('nhom_nong_dan','baiviet','hinhanh','binhluan'));
     }
 
 
@@ -43,6 +49,24 @@ class NongdanController extends Controller
         
         $data = DB::table('nongdan')->where('nd_id',$id)->first();
         return view ('client.pages.nongdan.trang-ca-nhan',compact('data'));
+    }
+
+
+    //bình luận
+    public function Ajaxcomment(Request $request)
+    {
+        $data['bl_noidung'] = $request->noidung;
+        $data['bv_id'] = $request->bv_id;
+        $data['nd_id'] = $request->nd_id;
+
+        $result = DB::table('binhluan')->insert($data);
+
+        $data1 =  DB::table('binhluan')
+        ->join('nongdan','nongdan.nd_id','binhluan.nd_id')
+        ->orderBy('binhluan.bl_id','DESC')->first();
+        return response()->json(['data'=>$data1],200);
+        
+      
     }
 
 

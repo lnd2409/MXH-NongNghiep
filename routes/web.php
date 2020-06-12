@@ -76,6 +76,9 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     //Đăng bài dành cho NÔNG DÂN
     Route::post('/dang-bai-nong-dan','NgocDuc\NongdanController@writePosts')->name('nong-dan-dang-bai');
 
+    //Bình luận 
+    Route::post('/binhluan','NgocDuc\NongdanController@Ajaxcomment')->name('nongdan.binhluan');
+
 
 
     //Đăng xuất
@@ -113,6 +116,14 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
 
     //check 2 mật khẩu
     Route::post('/cai-dat/doi-mk','ThuongLaiController@update')->name('caidat.submit.matkhau');
+
+
+
+    //Đăng bài dành cho Thương lái
+    Route::post('/dang-bai-thuong-lai','ThuongLaiController@writePosts')->name('thuong-lai-dang-bai');
+
+    //Bình luận 
+    Route::post('/binhluan','ThuongLaiController@Ajaxcomment')->name('thuonglai.binhluan');
 
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutThuongLai')->name('dang-xuat-thuong-lai');
