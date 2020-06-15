@@ -127,3 +127,11 @@ Route::view('/message', 'client.pages.message.index');
 Route::view('/profile-account-setting', 'client.pages.account.profile-account-setting');
 Route::view('/forum', 'client.pages.forum.index');
 Route::view('/forum-post-view', 'client.pages.forum.forum-post-view');
+
+//bách khoa nông nghiệp
+Route::get('bach-khoa','BachkhoaController@index')->name('trang-chu-bach-khoa');
+Route::get('hien-thi-them','BachkhoaController@create')->name('hien-thi-them');
+Route::post('them-bach-khoa','BachkhoaController@store')->name('them-bach-khoa');
+Route::get('hien-thi-sua{id}','BachkhoaController@edit')->name('hien-thi-sua');
+Route::post('sua-bach-khoa{id}','BachkhoaController@update')->name('sua-bach-khoa');
+Route::get('xoa-bach-khoa{id}','BachkhoaController@destroy')->name('xoa-bach-khoa');
