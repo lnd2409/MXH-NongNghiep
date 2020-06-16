@@ -17,6 +17,25 @@ class ChuyengiaController extends Controller
         return view('client.pages.chuyengia.index');
     }
 
+    //Lấy thông tin của chuyên gia
+    public function getInfo($id) 
+    {
+        return view('');
+    }
+
+
+    //Qua trang bách khoa nông nghiệp
+    public function BachKhoa()
+    {
+        return view('client.pages.chuyengia.bach-khoa-nong-nghiep');
+    }
+
+
+    //Đăng bào bách khoa
+    public function DangBai()
+    {
+        return view('client.pages.chuyengia/viet-bai-bach-khoa');
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -144,6 +144,10 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
 //Trang của chuyên gia
 Route::group(['prefix' => 'chuyen-gia', 'middleware' => 'CheckUserChuyenGia'], function () {
     Route::get('trang-chu', 'NgocDuc\ChuyengiaController@index')->name('trang-chu-chuyen-gia');
+    Route::get('trang-ca-nhan/{id}','NgocDuc\ChuyengiaController@getInfo')->name('ca-nhan-chuyen-gia');
+    Route::get('dang-xuat','AuthController@LogoutChuyenGia')->name('dang-xuat-chuyen-gia');
+    Route::get('bach-khoa-nong-nghiep','NgocDuc\ChuyengiaController@BachKhoa')->name('bach-khoa-nong-nghiep');
+    Route::get('viet-bai','NgocDuc\ChuyengiaController@DangBai')->name('trang-viet-bai-bach-khoa');
 });
 
 

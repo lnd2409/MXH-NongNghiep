@@ -57,9 +57,12 @@ class AuthController extends Controller
             'username' => $request->username,
             'password' => $request->password,
         ];
+        // dd($arr);
         if (Auth::guard('chuyengia')->attempt($arr, true))
         {
+            // dd(Auth::guard('chuyengia')->attempt($arr, true));
             $taikhoan = ChuyenGia::where('username', '=' , $request->username)->first();
+            // dd($taikhoan);
             return redirect()->route('trang-chu-chuyen-gia');
         } else {
             // $thongbao = Session::put('msg','Sai tên tài khoản hoặc mật khẩu');
@@ -67,6 +70,13 @@ class AuthController extends Controller
             dd('Tài khoản hoặc mật khẩu không chính xác');
         }
     }
+
+    public function LogoutChuyenGia ()
+    {
+        Auth::guard('chuyengia')->logout();
+        return redirect()->back();
+    }
+
 
     public function RegisterChuyengia (Request $request) {
         $chuyengia = new ChuyenGia();

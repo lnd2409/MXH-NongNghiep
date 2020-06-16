@@ -10,9 +10,9 @@
             <div class="container">
                 <div class="forum-links">
                     <ul>
-                        <li class="active"><a href="{{ route('trang-chu-chuyen-gia') }}" title="">Bài viết quan tâm</a></li>
+                        <li><a href="{{ route('trang-chu-chuyen-gia') }}" title="">Bài viết quan tâm</a></li>
                         <li><a href="#" title="">Bài viết trong nhóm</a></li>
-                        <li><a href="{{ route('bach-khoa-nong-nghiep') }}" title="">Bách khoa nông nghiệp</a></li>
+                        <li  class="active"><a href="{{ route('bach-khoa-nong-nghiep') }}" title="">Bách khoa nông nghiệp</a></li>
                     </ul>
                 </div>
                 <!--forum-links end-->
@@ -21,8 +21,18 @@
                 </div>
             </div>
         </section>
-
-        <section class="forum-page">
+        <section class="forum-page pt-2 pb-2">
+            <div class="container">
+                <div class="forum-questions-sec">
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="{{ route('trang-viet-bai-bach-khoa') }}" class="btn btn-primary">Đăng bài viết mới</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="forum-page pt-1 pb-2">
             <div class="container">
                 <div class="forum-questions-sec">
                     <div class="row">
@@ -33,7 +43,7 @@
                                         <img src="http://via.placeholder.com/60x60" alt="">
                                     </div>
                                     <div class="usr_quest">
-                                        <h3 style="margin-bottom: 0px;">Hiển thị tất cả bài viết</h3>
+                                        <h3 style="margin-bottom: 0px;"><a href="">Hiển thị tất cả bài viết</a></h3>
                                         <p>Nội dung rút gọn</p>
                                         <ul class="react-links">
                                             <li><a href="#" title="">Xem chi tiết</a></li>
