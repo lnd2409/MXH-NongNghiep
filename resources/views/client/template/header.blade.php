@@ -39,12 +39,15 @@
                             <li><a href="company-profile.html" title="">Vật tư nông nghiệp</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="projects.html" title="">
-                            <span><img src="{{asset('client/images/icon3.png')}}" alt=""></span>
-                            Nhật ký nông hộ
-                        </a>
-                    </li>
+                    @if(Auth::guard('nongdan')->check())
+                        <li>
+                            <a href="{{ route('nhat-ky-nong-ho',[ 'id' => \Auth::guard('nongdan')->user()->nd_id ]) }}" title="">
+                                <span><img src="{{asset('client/images/icon3.png')}}" alt=""></span>
+                                Nhật ký nông hộ
+                            </a>
+                        </li>
+                    @endif
+                    
                     <li>
                         @if (Auth::guard('nongdan')->check())
                         <a href="{{ route('canhan.nongdan') }}" title="">
@@ -56,11 +59,15 @@
                             <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
                             Trang cá nhân
                         </a>
+                        @elseif(Auth::guard('chuyengia')->check())
+                            <a href="" title="">
+                                <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
+                                Trang cá nhân
+                            </a>
                         @endif
-                        
                     </li>
                     <li>
-                        <a href="jobs.html" title="">
+                        <a href="{{ route('all-group') }}" title="">
                             <span><img src="{{asset('client/images/icon5.png')}}" alt=""></span>
                             Nhóm
                         </a>
@@ -75,7 +82,7 @@
             <div class="user-account">
                 <div class="user-info">
                     @if (Auth::guard('nongdan')->check())
-                        <img src="{{asset('hinhanh/nguoidung/nongdan/'.Auth::guard('nongdan')->user()->nd_background)}}" alt="" style="width:30px; height:30px;">
+                        <img src="{{asset('hinhanh/nguoidung/nongdan/'.Auth::guard('nongdan')->user()->nd_hinhanh)}}" alt="" style="width:30px; height:30px;">
                         <a href="#" title="">{{ substr(Auth::guard('nongdan')->user()->nd_hoten,-(strpos(strrev(Auth::guard('nongdan')->user()->nd_hoten),' ')),strlen(Auth::guard('nongdan')->user()->nd_hoten))}}</a>
                         <i class="la la-sort-down"></i>
                     @elseif (Auth::guard('thuonglai')->check())

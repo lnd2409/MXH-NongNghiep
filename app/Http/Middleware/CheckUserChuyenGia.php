@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Illuminate\Support\Facades\Auth;
 class CheckUserChuyenGia
 {
     /**
@@ -15,6 +15,13 @@ class CheckUserChuyenGia
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (Auth::guard('chuyengia')->check()) {
+            # code...
+            return $next($request);
+        }
+        else
+        {
+            return redirect()->route('login-chuyen-gia');
+        }
     }
 }

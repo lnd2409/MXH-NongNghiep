@@ -100,5 +100,26 @@ class DatabaseSeeder extends Seeder
             ],
         ];
         DB::table('loaisanphamnuoitrong')->insert($loaisanphamnuoitrong);
+
+
+        $trinhdochuyengia = [
+            [
+                'td_ten' => 'Kỹ sư'
+            ],
+            [
+                'td_ten' => 'Thạc sĩ'
+            ],
+            [
+                'td_ten' => 'Tiến sĩ'
+            ],
+            [
+                'td_ten' => 'Phó giáo sư - Tiến sĩ'
+            ],
+            [
+                'td_ten' => 'Giáo sư'
+            ],
+        ];
+
+        DB::table('trinhdo')->insert($trinhdochuyengia);
     }
 }

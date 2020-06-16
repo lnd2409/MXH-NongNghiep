@@ -24,16 +24,16 @@ class NongdanController extends Controller
                     ->join('nhom','nhom.n_id','=','chitietnhom.n_id')
                     ->get();
         
-        $baiviet = DB::table('baiviet')->join('nongdan','nongdan.nd_id','=','baiviet.nd_id')->get();
+        $baiviet = DB::table('baiviet')->join('nongdan','nongdan.nd_id','=','baiviet.nd_id')->orderBy('bv_id','desc')->get();
         $hinhanh=array();
-        
+        $lns = DB::table('loaisanphamnuoitrong')->get();
         foreach ($baiviet as $value) {
         
             # code...
             $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
         }
        
-        return view('client.pages.nongdan.index',compact('nhom_nong_dan','baiviet','hinhanh'));
+        return view('client.pages.nongdan.index',compact('nhom_nong_dan','baiviet','hinhanh','lns'));
     }
 
 
@@ -42,7 +42,16 @@ class NongdanController extends Controller
         $id=\Auth::guard('nongdan')->id();
         
         $data = DB::table('nongdan')->where('nd_id',$id)->first();
-        return view ('client.pages.nongdan.trang-ca-nhan',compact('data'));
+        $baiviet = DB::table('baiviet')->where('nd_id',$id)->get();
+        $slbv = count($baiviet);
+        $hinhanh=array();
+        
+        foreach ($baiviet as $value) {
+        
+            # code...
+            $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
+        }
+        return view ('client.pages.nongdan.trang-ca-nhan',compact(['data','baiviet','hinhanh','slbv']));
     }
 
 
@@ -236,4 +245,6 @@ class NongdanController extends Controller
         // dd($imageName);
         return redirect()->back();
     }
+
+    
 }

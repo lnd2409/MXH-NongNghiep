@@ -82,7 +82,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
-                                                    <button type="submit" value="submit">Đăng nhập</button>
+                                                    <button type="submit" value="submit" >Đăng nhập</button>
+                                                    <br>
+                                                    <br>
+                                                    <a href="{{ route('login-chuyen-gia') }}" class="text-center">Đăng nhập với chuyên gia</a>
                                                 </div>
                                             </div>
                                         </form>
@@ -107,6 +110,9 @@
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <button type="submit" value="submit">Đăng nhập</button>
+                                                    <br>
+                                                    <br>
+                                                    <a href="{{ route('login-chuyen-gia') }}">Đăng nhập với chuyên gia</a>
                                                 </div>
                                             </div>
                                         </form>

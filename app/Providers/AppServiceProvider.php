@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {   
-            $lns = DB::table('loaisanphamnuoitrong')->get();
-            View::share('lns',$lns);
+            // $lns = DB::table('loaisanphamnuoitrong')->get();
+            // View::share('lns',$lns);
         
     }
 }

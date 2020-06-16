@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\ChuyenGia;
 use App\NongDan;
 use App\ThuongLai;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Session;
+use DB;
 class AuthController extends Controller
 {
     //Đăng nhập cho cả 3 user
     public function getLogin(){
+        if(Auth::guard('nongdan')->check())
+        {
+            return redirect()->route('trang-chu-nong-dan');
+        }
+        if(Auth::guard('thuonglai')->check())
+        {
+            return redirect()->route('trangchu');
+        }
         return view('client.pages.signin.index');
     }
 
@@ -36,8 +46,61 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
-
+    //Đăng nhập của chuyên gia
+    public function getLoginChuyenGia() {
+        $trinhdo = DB::table('trinhdo')->get();
+        return view('client.pages.signin.chuyen-gia', compact(['trinhdo']));
+    }
     
+    public function LoginChuyenGia(Request $request) {
+        $arr = [
+            'username' => $request->username,
+            'password' => $request->password,
+        ];
+        if (Auth::guard('chuyengia')->attempt($arr, true))
+        {
+            $taikhoan = ChuyenGia::where('username', '=' , $request->username)->first();
+            return redirect()->route('trang-chu-chuyen-gia');
+        } else {
+            // $thongbao = Session::put('msg','Sai tên tài khoản hoặc mật khẩu');
+            // return redirect()->back();
+            dd('Tài khoản hoặc mật khẩu không chính xác');
+        }
+    }
+
+    public function RegisterChuyengia (Request $request) {
+        $chuyengia = new ChuyenGia();
+        $chuyengia->username = $request->tendangnhap;
+        $chuyengia->password =  bcrypt($request->matkhau);
+        $chuyengia->cg_hoten = $request->hoten;
+        $chuyengia->cg_diachi = $request->diachi;
+        $chuyengia->cg_sdt = $request->sdt;
+        $chuyengia->td_id = $request->trinhdo;
+        $chuyengia->save();
+
+        if($chuyengia) {
+            $thongbao = Session::put('msg1','Đăng ký thành công');
+            return redirect()->back();
+        }else{
+            $thongbao = Session::put('msg1','Đăng ký không thành công');
+            return redirect()->back();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function LoginThuongLai (Request $request) {
         $arr = [
             'username' => $request->username,
@@ -97,4 +160,6 @@ class AuthController extends Controller
             return redirect()->back();
         }
     }
+
+    
 }

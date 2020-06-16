@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="forum-links">
                     <ul>
-                        <li class="active"><a href="#" title="">Bài viết mới nhất</a></li>
+                        <li class="active"><a href="#" title="">Bài viết quan tâm</a></li>
                         <li><a href="#" title="">Bài viết trong nhóm</a></li>
                         <li><a href="#" title="">Bách khoa nông nghiệp</a></li>
                     </ul>
@@ -41,7 +41,7 @@
                                 @foreach ($baiviet as $item)
                                 <div class="usr-question">
                                     <div class="usr_img">
-                                        <img src="http://via.placeholder.com/60x60" alt="">
+                                        <img src="{{asset('hinhanh/nguoidung/nongdan/'.$item->nd_hinhanh)}}" alt="">
                                         <p>{{ $item->nd_hoten }}</p>
                                     </div>
                                     <div class="usr_quest">

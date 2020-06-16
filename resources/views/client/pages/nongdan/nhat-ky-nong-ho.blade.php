@@ -44,98 +44,22 @@
                         </div>
                         <!--main-left-sidebar end-->
                     </div>
-                    <div class="col-lg-6">
-                        <div class="main-ws-sec">
-                            <div class="user-tab-sec">
-                                <h3>{{$data->nd_hoten}}</h3>
-                                {{-- <div class="star-descp">
-                                    <span>Graphic Designer at Self Employed</span>
-                                    <ul>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                    </ul>
-                                    <a href="#" title="">Status</a>
-                                </div> --}}
-                                <!--star-descp end-->
-                                <div class="tab-feed st2">
-                                   {{-- Để v cho đừng trống --}}
-                                </div><!-- tab-feed end-->
-                            </div>
-                            <!--user-tab-sec end-->
-                            <div class="product-feed-tab current" id="feed-dd">
-                                <div class="posts-section">
-                                    @foreach ($baiviet as $item)
-                                        
-                                        <div class="post-bar">
-                                            <div class="post_topbar">
-                                                <div class="usy-dt">
-                                                    <img src="{{asset('hinhanh/nguoidung/nongdan/'.$data->nd_hinhanh)}}" height="50px" width="50px" alt="">
-                                                    <div class="usy-name">
-                                                        <h3>{{ $data->nd_hoten }}</h3>
-                                                        <span><img src="images/clock.png" alt="">3 min ago</span>
-                                                    </div>
-                                                </div>
-                                                <div class="ed-opts">
-                                                    <a href="#" title="" class="ed-opts-open"><i
-                                                            class="la la-ellipsis-v"></i></a>
-                                                    <ul class="ed-options">
-                                                        <li><a href="#" title="">Edit Post</a></li>
-                                                        <li><a href="#" title="">Unsaved</a></li>
-                                                        <li><a href="#" title="">Unbid</a></li>
-                                                        <li><a href="#" title="">Close</a></li>
-                                                        <li><a href="#" title="">Hide</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="epi-sec">
-                                                
-                                                
-                                            </div>
-                                            <div class="job_descp">
-                                                <h3>{{ $item->bv_tieude }}</h3>
-                                                
-                                                <p>
-                                                    {{ $item->bv_noidung }}
-                                                </p>
-                                                <p><a href="#" style="color: greenyellow;">Xem chi tiết</a></p>
-                                                <ul class="skill-tags">
-                                                    @if(!empty($hinhanh[$item->bv_id]))
-                                                        @foreach ($hinhanh[$item->bv_id] as $item2)
-                                                            <li><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70"></li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul>
-                                            </div>
-                                            <div class="job-status-bar">
-                                                <ul class="like-com">
-                                                    <li>
-                                                        <a href="#"><i class="la la-heart"></i> Like</a>
-                                                        <img src="images/liked-img.png" alt="">
-                                                    </li>
-                                                    <li><a href="#"><i class="la la-comment"></i> Comment 15</a>
-                                                        <img src="images/com.png" alt="">
-                                                    </li>
-                                                </ul>
-                                                <a><i class="la la-eye"></i>Views 50</a>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-                                    <!--post-bar end-->
-                                </div>
-                                <!--posts-section end-->
-                            </div>
-                            <!--product-feed-tab end-->
-                        </div>
-                        <!--main-ws-sec end-->
+                    <div class="col-md-6 offset-md-3">
+                        <h5>Nhật ký nông hộ</h5>
+                        <ul class="timeline">
+                            @foreach ($nhatky as $item)
+                                <li>
+                                    <a style="color: blueviolet; font-size: 15px;">{{ $item->nknh_ngayviet }}</a>
+                                    {{-- <p class="float-right" style="color: blueviolet; font-size: 15px;">{{ $item->nknh_ngayviet }}</p> --}}
+                                    <p>{{ $item->nknh_noidung }}</p>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                     <div class="col-lg-3">
                         <div class="right-sidebar">
                             <div class="message-btn">
-                                <a href="#" title=""><i class="fa fa-envelope"></i> Message</a>
+                                <a href="#" data-toggle="modal" data-target="#NhatKyModal"><i class="fa fa-envelope"></i> Thêm nhật ký</a>
                             </div>
                             <div class="widget widget-portfolio">
                                 <div class="wd-heady">
@@ -231,6 +155,35 @@
         </div>
        
       </div>
+    </div>
+  </div>
+
+  {{-- Nhật ký nông hộ --}}
+  <!-- Modal -->
+<div class="modal fade" id="NhatKyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('viet-nhat-ky') }}" method="POST">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Thêm nhật ký mới</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                @csrf
+                <input type="text" hidden value="{{ Auth::guard('nongdan')->user()->nd_id }}" name="nd_id">
+                <div class="form-group">
+                    <label for="">Nội dung</label>
+                    <textarea class="form-control" name="noidung" cols="30" rows="10" placeholder="Nội dung"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+        </form>
     </div>
   </div>
 @endsection
