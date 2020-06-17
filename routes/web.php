@@ -82,9 +82,9 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
    
 });
 Route::get('/ban-hang', 'SellController@index')->name('sell');
-Route::get('/ban-hang/{id}', 'SellController@show')->name('sell.single');
-Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
+Route::get('/tao-ban-hang', 'SellController@create')->name('sell.create');
 Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
+Route::get('/san-pham/{id}', 'SellController@show')->name('sell.show');
 
 
 //Giao diện của thương lái ném vào đây
@@ -120,11 +120,7 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
 
 
 
-//Nghĩa lấy code chổ này nhé!
 
-Route::get('/nccvt-nn', function () {
-    return view('client.pages.nccvtnn.index');
-});
 
 
 

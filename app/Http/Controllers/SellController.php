@@ -72,10 +72,13 @@ class SellController extends Controller
      */
     public function show($id)
     {
-        $product=\DB::table('sanpham')->where('sp_id',$id)->first();
+        $product=\DB::table('sanpham')->where('sp_id',$id)
+        ->join('nccvt','nccvt.nccvt_id','sanpham.nccvt_id')
+        ->first();
         $img=\DB::table('hinhanh')->where('sp_id',$product->sp_id)->get();
         // dd($product);
-        return view('client.pages.sell.single',compact('product','img'));
+        // dd($img);
+        return view('client.pages.sell.show',compact('product','img'));
     }
 
     /**
