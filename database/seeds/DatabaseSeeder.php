@@ -84,5 +84,22 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('trinhdo')->insert($trinhdochuyengia);
+
+        $loaisanpham = [
+            [
+                'lsp_ten' => 'Vật tư'
+            ],
+            [
+                'lsp_ten' => 'Thuốc bảo vệ thực vật'
+            ],
+            [
+                'lsp_ten' => 'Phân bón'
+            ],
+            [
+                'lsp_ten' => 'Xẻng, cuốc'
+            ],
+        ];
+
+        DB::table('loaisanpham')->insert($loaisanpham);
     }
 }
