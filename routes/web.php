@@ -119,6 +119,31 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
 });
 
 
+
+//Nghĩa lấy code chổ này nhé!
+
+Route::get('/nccvt-nn', function () {
+    return view('client.pages.nccvtnn.index');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //TỰ LẤY GIAO DIỆN DƯỚI ĐÂY ĐEM LÊN PHÍA TRÊN CHỈ LÀ MẪU
 
 Route::view('/companies', 'client.pages.companies.index');
