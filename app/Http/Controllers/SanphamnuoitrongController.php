@@ -63,7 +63,10 @@ class SanphamnuoitrongController extends Controller
         $nongdan = \Auth::guard('nongdan')->user()->nd_id;
         $now = Carbon::now();
         
-
+        if($request->ten=='' || $request->thongtin=='' || $request->thangbatdau=='' || $request->thangketthuc=='' || $request->sanluongdutinh=='' || $request->donvitinh=='' || $request->soluongnongsan=='' ){
+            $success = Session::put('alert-del', 'Tên sản phẩm nuôi trống không được trống');
+            return redirect()->back();
+        }
        
         $hinhanh = $request->file('hinhanh');
         if ($request->file('hinhanh')->isValid()) {
@@ -113,7 +116,18 @@ class SanphamnuoitrongController extends Controller
                     'updated_at' => $now,
                 ]
             );
-            if($hinhanh && $sanluong)
+            $quymo = DB::table('quymo')
+            ->insert(
+                [
+                    'spnt_id' => $nongsan,
+                    'nd_id' => $nongdan,
+                    'dvt_id' => $request->donvitinh,
+                    'qm_soluongnongsan' => $request->soluongnongsan,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ]
+            );
+            if($hinhanh && $sanluong && $quymo)
             {
                 $success = Session::put('alert-info', 'Thêm dữ liệu thành công');
                 return redirect()->route('danh-sach-san-pham-nuoi-trong');
@@ -171,9 +185,27 @@ class SanphamnuoitrongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idspnt, $idmv)
     {
-        //
+        
+
+        $nongdan = \Auth::guard('nongdan')->user()->nd_id;
+        
+        
+        $id=Auth::guard('nongdan')->id();
+        
+        $data = DB::table('nongdan')->where('nd_id',$id)->first();
+        $nuoitrong = DB::table('nuoitrong')
+        ->join('muavu','muavu.mv_id','=','nuoitrong.mv_id')->where('nuoitrong.mv_id',$idmv)
+        ->join('sanphamnuoitrong','sanphamnuoitrong.spnt_id','=','nuoitrong.spnt_id')->where('nuoitrong.spnt_id',$idspnt)
+        ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','=','sanphamnuoitrong.lns_id')
+        ->first();
+        $quymo = DB::table('quymo')
+        ->join('sanphamnuoitrong','sanphamnuoitrong.spnt_id','=','quymo.spnt_id')->where('quymo.spnt_id',$idspnt)
+        ->join('nongdan','nongdan.nd_id','=','quymo.nd_id')->where('quymo.nd_id',$nongdan)
+        ->join('donvitinh','donvitinh.dvt_id','=','quymo.dvt_id')
+        ->first();
+        return view ('client.pages.nongdan.nongsan.chinh-sua-san-pham-nuoi-trong',compact(['quymo','nuoitrong','data']));
     }
 
     /**
@@ -183,9 +215,51 @@ class SanphamnuoitrongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idspnt, $idmv)
     {
-        //
+
+        $now = Carbon::now();
+        $nongdan = \Auth::guard('nongdan')->user()->nd_id;
+        $idnd=Auth::guard('nongdan')->id();
+        if($request->ten=='' || $request->thongtin=='' || $request->thangbatdau=='' || $request->thangketthuc=='' || $request->sanluongdutinh=='' || $request->donvitinh=='' || $request->soluongnongsan=='' ){
+            $success = Session::put('alert-del', 'Tên sản phẩm nuôi trống không được trống');
+            return redirect()->back();
+        }
+        
+        
+        
+        $nuoitrong = DB::table('nuoitrong')
+            ->join('muavu','muavu.mv_id','=','nuoitrong.mv_id')->where('nuoitrong.mv_id',$idmv)
+            ->join('sanphamnuoitrong','sanphamnuoitrong.spnt_id','=','nuoitrong.spnt_id')->where('nuoitrong.spnt_id',$idspnt)
+            ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','=','sanphamnuoitrong.lns_id')
+            ->update(
+                [
+                    'spnt_ten' => $request->ten,
+                    'spnt_thongtin' => $request->thongtin,
+                    'mv_thangbatdau' => $request->thangbatdau,
+                    'mv_thangketthuc' => $request->thangketthuc,
+                    'nt_sanluongdutinh' => $request->sanluongdutinh,
+                    'nt_sanluongthucte' => $request->sanluongthucte,
+                    'nuoitrong.updated_at' => $now,
+                    
+                ]
+            );
+        $quymo = DB::table('quymo')
+            ->join('sanphamnuoitrong','sanphamnuoitrong.spnt_id','=','quymo.spnt_id')->where('quymo.spnt_id',$idspnt)
+            ->join('nongdan','nongdan.nd_id','=','quymo.nd_id')->where('quymo.nd_id',$nongdan)
+            ->join('donvitinh','donvitinh.dvt_id','=','quymo.dvt_id')
+            ->update(
+                [
+                    
+                    'qm_soluongnongsan' => $request->soluongnongsan,
+                    'quymo.dvt_id' => $request->donvitinh,
+                    'quymo.updated_at' => $now,
+                    
+                ]
+            );
+        //Cập nhật xong cập nhật lại loại để show ra kèm theo thông báo
+        $success = Session::put('alert-info', 'Cập nhật dữ liệu thành công');
+        return redirect()->route('danh-sach-san-pham-nuoi-trong');
     }
 
     /**
@@ -285,61 +359,5 @@ class SanphamnuoitrongController extends Controller
         $success = Session::put('alert-info', 'Cập nhật thành công');
         return redirect()->back();
     }
-    public function hienthithemquymo($id,  Request $request)
-    {
-        $nongdan = \Auth::guard('nongdan')->user()->nd_id;
-
-        $idnd=Auth::guard('nongdan')->id();
-        
-        $data = DB::table('nongdan')->where('nd_id',$idnd)->first();
-        $quymo = DB::table('quymo')
-        ->join('sanphamnuoitrong','sanphamnuoitrong.spnt_id','=','quymo.spnt_id')->where('quymo.spnt_id',$id)
-        ->join('nongdan','nongdan.nd_id','=','quymo.nd_id')->where('quymo.nd_id',$nongdan)
-        ->join('donvitinh','donvitinh.dvt_id','=','quymo.dvt_id')
-        ->first();
-        $nuoitrong = DB::table('nuoitrong')
-       
-        ->join('sanphamnuoitrong','sanphamnuoitrong.spnt_id','=','nuoitrong.spnt_id')->where('nuoitrong.spnt_id',$id)
-        ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','=','sanphamnuoitrong.lns_id')
-        ->first();
-        //dd($quymo);
-        return view('client.pages.nongdan.nongsan.them-quy-mo',compact(['quymo','data','nuoitrong']));
-    }
-    public function themquymo(Request $request)
-    {
-        $now = Carbon::now();
-        $nongdan = \Auth::guard('nongdan')->user()->nd_id;
-        $idnd=Auth::guard('nongdan')->id();
-        $data = DB::table('nongdan')->where('nd_id',$idnd)->first();
-        $slns = $request->soluongnongsan;
-
-        if ($slns) {
-            # code...
-           
-            $quymo = DB::table('quymo')
-            ->insert(
-                [
-                    'spnt_id' => $request->spnt_id,
-                    'nd_id' => $nongdan,
-                    'dvt_id' => $request->donvitinh,
-                    'qm_soluongnongsan' => $slns,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ]
-            );
-            if($quymo)
-            {
-                $success = Session::put('alert-info', 'Thêm dữ liệu thành công');
-                return redirect()->back();
-            }
-            else
-            {
-                $success = Session::put('alert-del', 'Thêm dữ liệu không thành công');
-                return redirect()->back();
-            }
-        }
-        else {
-            echo "Lỗi";
-        }
-    }
+    
 }

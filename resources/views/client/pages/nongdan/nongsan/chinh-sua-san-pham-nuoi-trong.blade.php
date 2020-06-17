@@ -1,3 +1,4 @@
+
 @extends('client.client')
 @section('content')
 <section class="cover-sec">
@@ -5,6 +6,7 @@
     <a title="" data-toggle="modal" data-target="#changeBG"><i class="fa fa-camera"></i>Thay đổi hình nền</a>
 </section>
 
+{{-- {{dd($data)}} --}}
 <main>
     <div class="main-section">
         <div class="container">
@@ -122,68 +124,116 @@
                     </div>
                     <div class="col-9">
                         @if (Session::has('alert-info'))
-                        <div class="alert alert-success">
+                          <div class="alert alert-success">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong>{{Session::get('alert-info')}}</strong>
-                        </div>
-                        {{Session::put('alert-info',null)}}
+                          </div>
+                          {{Session::put('alert-info',null)}}
                         @endif
                         @if (Session::has('alert-del'))
-                        <div class="alert alert-danger">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>{{Session::get('alert-del')}}</strong>
-                        </div>
-                        {{Session::put('alert-del',null)}}
+                          <div class="alert alert-danger">
+                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                              <strong>{{Session::get('alert-del')}}</strong>
+                          </div>
+                          {{Session::put('alert-del',null)}}
                         @endif
+                        
                         <div class="card">
-                        <div class="row justify-content-center">
-                            <div class="col-md-10">
-                                <form action="{{ route('them-quy-mo') }}"  method="POST">
-                                    @csrf
-                                   
-                                    <div class="form-group">
-                                        <label for="sp">Thêm quy mô nông sản</label>
-                                        <input type="text" value="{{ $nuoitrong->spnt_id }}" name="spnt_id" hidden/>
-                                        <div class="show-progress">
-                                              
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="sp">Tên nông sản</label>
-                                        <input type="text" value="{{ $nuoitrong->spnt_ten }}" name="sp_id" readonly/>
-                                        <div class="show-progress">
-                                              
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="sp">Số lượng nông sản</label>
-                                        <input type="text" value="" name="soluongnongsan"/>
-                                    </div>
-                        
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Đơn vị tính</label>
-                                            <select class="form-control" name="donvitinh">
-                                                <option value="1">Kg</option>
-                                                <option value="2">Gam</option>
-                                                <option value="3">Tấn</option>
-                                            </select>
-                                                              
-                                        
-                                        </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary" >Upload</button>
-                                    </div> 
-                                </form>
+                            <div class="card-header">
+                              <h3 class="card-title">
+                                Thêm nông sản
+                              </h3>
+                      
+                              <div class="card-title float-right">
+                                {{-- Refesh lại trang để về dạng mặc định --}}
+                                {{-- <a href="{{ route('danhsachsanpham', ['sort'=> 'danh-sach']) }}" class="btn btn-success"><i class="fas fa-sync"></i></a> --}}
+                              </div>
                             </div>
-                        </div>
-                        {{-- //Image show ở đây --}}
-                        
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive">
+                            
+
+                            <form method="POST" action="{{ route('cap-nhat-san-pham-nuoi-trong', ['idspnt'=>$nuoitrong->spnt_id, 'idmv'=>$nuoitrong->mv_id]) }}">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Mã sản phẩm nuôi trồng</label>
+                                    <input name="" readonly type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$nuoitrong->spnt_id}}">
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Tên sản phẩm nuôi trồng</label>
+                                  <input name="ten" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$nuoitrong->spnt_ten}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Thông tin sản phẩm nuôi trồng</label>
+                                    <input name="thongtin" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$nuoitrong->spnt_thongtin}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tháng bắt đầu</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="thangbatdau">
+                                        <?php
+                                            for ($i=1; $i<=12; $i++)
+                                            {
+                                                ?>
+                                                    <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                                <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tháng kết thúc</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="thangketthuc">
+                                        <?php
+                                            for ($i=1; $i<=12; $i++)
+                                            {
+                                                ?>
+                                                    <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                                <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Sản lượng dự tính</label>
+                                    <input name="sanluongdutinh" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$nuoitrong->nt_sanluongdutinh}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Sản lượng thực tế</label>
+                                    <input name="sanluongthucte" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$nuoitrong->nt_sanluongdutinh}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sp">Số lượng nông sản</label>
+                                    <input type="text" value="{{$quymo->qm_soluongnongsan}}" name="soluongnongsan"/>
+                                </div>
                     
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Đơn vị tính</label>
+                                        <select class="form-control" name="donvitinh">
+                                            <option value="1">Kg</option>
+                                            <option value="2">Gam</option>
+                                            <option value="3">Tấn</option>
+                                        </select>
+                                                          
+                                    
+                                </div>
+                                <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                <a href="{{ route('danh-sach-san-pham-nuoi-trong') }}" class="btn btn-default">Quay về</a>
+                              </form>
+
+                          </div>
+                            <!-- /.card-body -->
+                          </div>
+                          <!-- /.card -->
+                        </div>
+                        
+                        <!-- /.card -->
                       </div>
+                    </div>
+                    
                 </div>
+                
             </div><!-- main-section-data end-->
         </div>
-    </div>
     </div>
 </main>
 
@@ -354,7 +404,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel1">Nhập quy mô nông sản</h5>
+          <h5 class="modal-title" id="exampleModalLabel1">Chọn hình nền</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -396,25 +446,12 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      function fetch_category_data(query = '')
-      {
-        $.ajax({
-          type: "GET",
-          url: "{{ route('tim-kiem') }}",
-          data: {query : query},
-          dataType: "json",
-          success: function (data) {
-            $('tbody').html(data.table_data);
-          }
-        });
-      }
 
-      $(document).on('keyup','#search', function () {
-        var query = $(this).val();
-        fetch_category_data(query);
-      });
-    });
+<script>
+    $(document).ready(function() {
+  $('.textarea').summernote();
+  });
+
 </script>
+
 @endsection

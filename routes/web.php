@@ -76,8 +76,8 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     //Sản phẩm nuôi trồng
     Route::get('san-pham-nuoi-trong', 'SanphamnuoitrongController@index')->name('danh-sach-san-pham-nuoi-trong');
     Route::post('san-pham-nuoi-trong','SanphamnuoitrongController@store')->name('them-san-pham-nuoi-trong');
-    Route::get('san-pham-nuoi-trong/{id}/chinh-sua','SanphamnuoitrongController@edit')->name('sua-san-pham-nuoi-trong');
-    Route::post('san-pham-nuoi-trong/{id}/chinh-sua', 'SanphamnuoitrongController@update')->name('cap-nhat-san-pham-nuoi-trong');
+    Route::get('san-pham-nuoi-trong/{idspnt}/{idmv}/hien-thi-chinh-sua','SanphamnuoitrongController@edit')->name('sua-san-pham-nuoi-trong');
+    Route::post('san-pham-nuoi-trong/{idspnt}/{idmv}/chinh-sua', 'SanphamnuoitrongController@update')->name('cap-nhat-san-pham-nuoi-trong');
     Route::get('san-pham-nuoi-trong/{idspnt}/{idmv}/xoa','SanphamnuoitrongController@destroy')->name('xoa-san-pham-nuoi-trong');
     Route::get('them-san-pham-nuoi-trong', 'SanphamnuoitrongController@create')->name('hien-thi-them-san-pham-nuoi-trong');
     Route::get('san-pham-nuoi-trong/tim-kiem', 'SanphamnuoitrongController@search')->name('tim-kiem');
@@ -87,9 +87,8 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     Route::get('san-pham-nuoi-trong/{id}/hinhanh','HinhanhController@create')->name('giao-dien-them-hinh-anh');
     Route::post('san-pham-nuoi-trong/hinhanh', 'HinhanhController@store')->name('them-hinh-anh');
     Route::get('san-pham-nuoi-trong/{idHA}/{idSP}/ha-delete','HinhanhController@destroy')->name('xoa-hinh-anh');
-    //Thêm quy mô
-    Route::get('san-pham-nuoi-trong/{id}/quy-mo','SanphamnuoitrongController@hienthithemquymo')->name('hien-thi-them-quy-mo');
-    Route::post('san-pham-nuoi-trong/quy-mo', 'SanphamnuoitrongController@themquymo')->name('them-quy-mo');
+ 
+    
 
 
 

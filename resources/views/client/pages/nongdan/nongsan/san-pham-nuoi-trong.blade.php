@@ -176,7 +176,7 @@
                                         <td>{{$value->mv_thangketthuc}}</td>
                                         <td>
                                             <a href="{{ route('chi-tiet-san-pham-nuoi-trong', ['idspnt'=>$value->spnt_id,'idmv'=>$value->mv_id]) }}" class="btn btn-primary">Chi tiết</a>
-                                            <a href="" class="btn btn-primary">Sửa</a>
+                                            <a href="{{ route('sua-san-pham-nuoi-trong', ['idspnt'=>$value->spnt_id,'idmv'=>$value->mv_id]) }}" class="btn btn-primary">Sửa</a>
                                             <a href="{{ route('xoa-san-pham-nuoi-trong', ['idspnt'=>$value->spnt_id,'idmv'=>$value->mv_id]) }}" class="btn btn-danger">Xóa</a>
                                         </td>
                                     </tr>

@@ -141,7 +141,7 @@
                         <div class="card">
                             <div class="card-header">
                               <h3 class="card-title">
-                                Thêm sản phẩm
+                                Thêm nông sản
                               </h3>
                       
                               <div class="card-title float-right">
@@ -154,7 +154,7 @@
                               <form method="POST" action="{{ route('them-san-pham-nuoi-trong') }}" enctype="multipart/form-data">
                                   @csrf
                                   <div class="form-group">
-                                    <label for="exampleInputEmail1">Tên sản phẩm</label>
+                                    <label for="exampleInputEmail1">Tên nông sản</label>
                                     <input name="tenNongSan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên loại sản phẩm . . . ">
                                   </div>
                                   <div class="form-group">
@@ -164,6 +164,21 @@
                                           <option value="{{$value->lns_id}}">{{$value->lns_ten}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sp">Số lượng nông sản</label>
+                                    <input type="text" value="" name="soluongnongsan"/>
+                                </div>
+                    
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Đơn vị tính</label>
+                                        <select class="form-control" name="donvitinh">
+                                            <option value="1">Kg</option>
+                                            <option value="2">Gam</option>
+                                            <option value="3">Tấn</option>
+                                        </select>
+                                                          
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Hình ảnh nông sản</label>

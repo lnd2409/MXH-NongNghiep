@@ -206,11 +206,7 @@
                     
                             <!-- Table row -->
                             <div class="row">
-                                <div class="col-xs-6 table-responsive">
-                                    <p>
-                                        <a href="{{ route('hien-thi-them-quy-mo', ['id'=> $nuoitrong->spnt_id ]) }}" class="btn btn-primary">Thêm quy mô</a>
-                                    </p>
-                                </div>
+                                
                             
                                 <div class="col-xs-6 table-responsive"  style="margin-left: 10px">
                                     <p>
