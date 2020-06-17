@@ -4,7 +4,8 @@ namespace App\Http\Controllers\NgocDuc;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Auth;
+use DB;
 class ChuyengiaController extends Controller
 {
     /**
@@ -14,7 +15,39 @@ class ChuyengiaController extends Controller
      */
     public function index()
     {
-        return view('client.pages.chuyengia.index');
+        $id = Auth::guard('chuyengia')->user()->cg_id;
+        // dd($id);
+        $linhvucdachon = DB::table('chitietlinhvuc')->where('cg_id',$id)->pluck('lns_id')->toArray();
+        // dd($linhvucdachon);
+        $baiviet = DB::table('chitietlinhvucbaiviet')->join('baiviet','baiviet.bv_id','chitietlinhvucbaiviet.bv_id')->join('nongdan','nongdan.nd_id','=','baiviet.nd_id')->whereIn('lns_id',$linhvucdachon)->get();
+        $hinhanh=array();
+        
+        foreach ($baiviet as $value) {
+        
+            # code...
+            $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
+        }
+        // dd($hinhanh);
+        if($linhvucdachon == ''){
+            $linhvuc = DB::table('loaisanphamnuoitrong')->get();
+            return view('client.pages.chuyengia.index',compact(['linhvuc']));
+        }
+        $linhvuc = DB::table('loaisanphamnuoitrong')->whereNotIn('lns_id',$linhvucdachon)->get();
+        return view('client.pages.chuyengia.index',compact(['linhvuc','baiviet','hinhanh']));
+    }
+
+    public function ChonLinhVuc(Request $request)
+    {
+        $id = Auth::guard('chuyengia')->user()->cg_id;
+        $loainongsan = $request->loainongsan;
+        foreach ($loainongsan as $key => $value) {
+            # code...
+            DB::table('chitietlinhvuc')->insert([
+                'cg_id' => $id,
+                'lns_id' => $value
+            ]);
+        }
+        return redirect()->back();
     }
 
     //Lấy thông tin của chuyên gia

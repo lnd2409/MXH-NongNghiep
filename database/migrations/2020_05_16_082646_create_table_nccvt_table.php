@@ -16,10 +16,11 @@ class CreateTableNccvtTable extends Migration
         Schema::create('nccvt', function (Blueprint $table) {
             $table->bigIncrements('nccvt_id')->unsigned();
             $table->string('nccvt_ten');
-            $table->string('nccvt_tendangnhap');
-            $table->string('nccvt_matkhau');
+            $table->string('username');
+            $table->string('password');
             $table->string('nccvt_diachi');
             $table->string('nccvt_sdt');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

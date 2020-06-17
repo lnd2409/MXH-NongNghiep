@@ -28,20 +28,40 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="forum-questions">
+                                @foreach ($baiviet as $item)
                                 <div class="usr-question">
                                     <div class="usr_img">
-                                        <img src="http://via.placeholder.com/60x60" alt="">
+                                        <img src="{{asset('hinhanh/nguoidung/nongdan/')}}" alt="">
+                                        <p>{{ $item->nd_hoten }}</p>
                                     </div>
                                     <div class="usr_quest">
-                                        <h3 style="margin-bottom: 0px;">Hiển thị tất cả bài viết</h3>
-                                        <p>Nội dung rút gọn</p>
-                                        <ul class="react-links">
+                                        <h3><a href="">{{ $item->bv_tieude }}</a></h3>
+                                        <div>
+                                            {{ $item->bv_noidung }}
+                                        </div>
+                                        
+                                        <ul class="quest-tags">
+                                            @if(!empty($hinhanh[$item->bv_id]))
+                                                @foreach ($hinhanh[$item->bv_id] as $item2)
+                                                    <li><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70"></li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                        
+                                        <ul class="react-links pt-3">
                                             <li><a href="#" title="">Xem chi tiết</a></li>
                                         </ul>
                                     </div>
                                     <!--usr_quest end-->
                                     <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min ago</span>
-                                </div>
+                                    {{-- @if(!empty($hinhanh[$item->bv_id]))
+                                        @foreach ($hinhanh[$item->bv_id] as $item2)
+                                        <img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70">
+                                        @endforeach
+                                    @endif --}}
+                                </div>    
+                                
+                            @endforeach
                             </div>
                             <!--forum-questions end-->
                             <nav aria-label="Page navigation example" class="full-pagi">
@@ -61,26 +81,26 @@
                         {{-- Danh sách nhóm --}}
                         <div class="col-lg-4">
                             <div class="widget widget-user">
-                                <h3 class="title-wd">Các nhóm quản lý</h3>
+                                <h3 class="title-wd">Các nhóm quản lý <span style="padding-left: 4rem !important;"><a href="#" data-toggle="modal" data-target="#ModalNhom"><i class="fa fa-plus"></i> Tạo nhóm</a></span></h3>
                                 <ul>
-                                        <li>
-                                            <div class="usr-msg-details">
-                                                <div class="usr-ms-img">
-                                                    <img src="http://via.placeholder.com/50x50" alt="">
-                                                </div>
-                                                <div class="usr-mg-info">
-                                                    <h3><a href="#">1</a></h3>
-                                                    <p>Graphic Designer </p>
-                                                </div>
-                                                <!--usr-mg-info end-->
+                                    <li>
+                                        <div class="usr-msg-details">
+                                            <div class="usr-ms-img">
+                                                <img src="http://via.placeholder.com/50x50" alt="">
                                             </div>
-                                            <span><img src="images/price1.png" alt="">1185</span>
-                                        </li>
+                                            <div class="usr-mg-info">
+                                                <h3><a href="#">1</a></h3>
+                                                <p>Graphic Designer </p>
+                                            </div>
+                                            <!--usr-mg-info end-->
+                                        </div>
+                                        <span><img src="images/price1.png" alt="">1185</span>
+                                    </li>
                                 </ul>
                             </div>
                             <!--widget-user end-->
-                            <div class="widget widget-adver">
-                                <img src="http://via.placeholder.com/370x270" alt="">
+                            <div class="widget widget-adver pt-3 pb-3">
+                                <a href="#" class="btn btn-success ml-5" data-toggle="modal" data-target="#ModalQuanTam">Chọn lĩnh vực quan tâm</a>
                             </div>
                             <!--widget-adver end-->
                         </div>
@@ -111,21 +131,64 @@
         </footer>
 
 
-        <div class="overview-box" id="question-box">
-            <div class="overview-edit">
-                <h3>Ask a Question</h3>
-                <form>
-                    <input type="text" name="question" placeholder="Type Question Here">
-                    <input type="text" name="tags" placeholder="Tags">
-                    <textarea placeholder="Description"></textarea>
-                    <button type="submit" class="save">Submit</button>
-                    <button type="submit" class="cancel">Cancel</button>
-                </form>
-                <a href="#" title="" class="close-box"><i class="la la-close"></i></a>
+        <!-- Modal -->
+        <div class="modal fade" id="ModalQuanTam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chọn lĩnh vực quan tâm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('chon-linh-vuc') }}" method="POST">
+                        @csrf
+                        @foreach ($linhvuc as $item)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ $item->lns_id }}" id="defaultCheck1" name="loainongsan[]" style="margin-left: 0px;">
+                            <label class="form-check-label" for="defaultCheck1">
+                                {{ $item->lns_ten }}
+                            </label>
+                        </div>
+                        @endforeach
+                        <br>
+                        <button class="btn btn-success" type="submit">Chọn</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </form>
+                </div>
             </div>
-            <!--overview-edit end-->
+            </div>
         </div>
-        <!--overview-box end-->
+        <!-- Modal tạo nhóm-->
+        <div class="modal fade" id="ModalNhom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tạo nhóm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form  method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Tên nhóm</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="">Tên nhóm</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <button class="btn btn-success" type="submit">Tạo</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
     @include('client.template.script')
 </body>
