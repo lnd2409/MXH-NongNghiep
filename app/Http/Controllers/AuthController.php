@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\NongDan;
 use App\ThuongLai;
+use App\NCCVT;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Session;
@@ -97,4 +98,64 @@ class AuthController extends Controller
             return redirect()->back();
         }
     }
+
+
+
+
+     //Đăng nhập của nccvt
+
+    public function form_login_nccvt()
+    {
+        return view('client.pages.signin.nccvt');
+    }
+    public function form_register_nccvt()
+    {
+        return view('client.pages.signin.register-nccvt');
+    }
+    
+    public function LoginNccvt(Request $request) {
+        // dd(123);
+        $arr = [
+            'username' => $request->username,
+            'password' => $request->password,
+        ];
+        if (Auth::guard('nccvt')->attempt($arr, true))
+        {
+            return redirect()->route('sell',Auth::guard('nccvt')->user()->nccvt_id);
+        } else {
+            // $thongbao = Session::put('msg','Sai tên tài khoản hoặc mật khẩu');
+            // return redirect()->back();
+            dd('Tài khoản hoặc mật khẩu không chính xác');
+        }
+    }
+    public function RegisterNccvt(Request $request) {
+        //tìm username đã có chưa
+        $find=NCCVT::where('username',$request->username)->first();
+
+        if($find){
+
+            return view('client.pages.signin.register-nccvt');
+        }
+        //tạo dữ liệu
+        NCCVT::insert([
+            'nccvt_ten'=>$request->name,
+            'nccvt_sdt'=>$request->tel,
+            'nccvt_diachi'=>$request->address,
+            'username'=>$request->username,
+            'password'=>\Hash::make($request->password)
+        ]);
+        //đăng nhập
+        $arr = [
+            'username' => $request->username,
+            'password' => $request->password,
+        ];
+        Auth::guard('nccvt')->attempt($arr, true);
+        return redirect()->route('sell',Auth::guard('nccvt')->user()->nccvt_id);
+    }
+    public function logoutNccvt()
+    {
+        Auth::guard('nccvt')->logout();
+        return redirect()->route('login-nccvt');
+    }
+
 }

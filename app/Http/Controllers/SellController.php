@@ -11,9 +11,9 @@ class SellController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $product=\DB::table('sanpham')->get();
+        $product=\DB::table('sanpham')->where('nccvt_id',$id)->get();
         return view('client.pages.sell.index',compact('product'));
     }
     public function create()
@@ -44,7 +44,7 @@ class SellController extends Controller
             'sp_gia'=>$request->price,
             'sp_soluongcungcap'=>$request->amount,
             'lsp_id'=>$request->type,
-            'nccvt_id'=>1
+            'nccvt_id'=>\Auth::guard('nccvt')->user()->nccvt_id
         ));
         foreach($request->file('img') as $item){
 
