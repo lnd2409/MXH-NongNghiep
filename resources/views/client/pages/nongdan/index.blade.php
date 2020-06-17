@@ -1,5 +1,7 @@
 @include('client.template.head')
-
+@section('title')
+    Trang chủ
+@endsection
 <body>
 
     <div class="wrapper">
@@ -10,7 +12,7 @@
             <div class="container">
                 <div class="forum-links">
                     <ul>
-                        <li class="active"><a href="#" title="">Bài viết mới nhất</a></li>
+                        <li class="active"><a href="#" title="">Bài viết quan tâm</a></li>
                         <li><a href="#" title="">Bài viết trong nhóm</a></li>
                         <li><a href="#" title="">Bách khoa nông nghiệp</a></li>
                     </ul>
@@ -27,27 +29,51 @@
                 <div class="forum-questions-sec">
                     <div class="row">
                         <div class="col-lg-8">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postsModal">
+                                Đăng bài
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-8">
                             <div class="forum-questions">
+                                @foreach ($baiviet as $item)
                                 <div class="usr-question">
                                     <div class="usr_img">
-                                        <img src="http://via.placeholder.com/60x60" alt="">
+                                        <img src="{{asset('hinhanh/nguoidung/nongdan/'.$item->nd_hinhanh)}}" alt="">
+                                        <p>{{ $item->nd_hoten }}</p>
                                     </div>
                                     <div class="usr_quest">
-                                        <h3>Hiển thị tất cả bài viết</h3>
+                                        <h3><a href="">{{ $item->bv_tieude }}</a></h3>
+                                        <div>
+                                            {{ $item->bv_noidung }}
+                                        </div>
+                                        
+                                        <ul class="quest-tags">
+                                            @if(!empty($hinhanh[$item->bv_id]))
+                                                @foreach ($hinhanh[$item->bv_id] as $item2)
+                                                    <li><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70"></li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                        
                                         <ul class="react-links">
                                             <li><a href="#" title=""><i class="fa fa-heart"></i> Vote 150</a></li>
                                             <li><a href="#" title=""><i class="fa fa-comment"></i> Comments 15</a></li>
                                             <li><a href="#" title=""><i class="fa fa-eye"></i> Views 50</a></li>
                                         </ul>
-                                        <ul class="quest-tags">
-                                            <li><a href="#" title="">Work</a></li>
-                                            <li><a href="#" title="">Php</a></li>
-                                            <li><a href="#" title="">Design</a></li>
-                                        </ul>
                                     </div>
                                     <!--usr_quest end-->
                                     <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min ago</span>
-                                </div>
+                                    {{-- @if(!empty($hinhanh[$item->bv_id]))
+                                        @foreach ($hinhanh[$item->bv_id] as $item2)
+                                        <img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70">
+                                        @endforeach
+                                    @endif --}}
+                                </div>    
+                                
+                            @endforeach
                             </div>
                             <!--forum-questions end-->
                             <nav aria-label="Page navigation example" class="full-pagi">
@@ -135,7 +161,100 @@
         </div>
         <!--overview-box end-->
     </div>
+    <!-- Modal Post -->
+    <div class="modal fade" id="postsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Đăng bài</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('nong-dan-dang-bai') }}" enctype="multipart/form-data" method="post" id="upload">
+                        {{-- <div class="form-group">
+                            <label for="">Tiêu đề</label>
+                            <input type="text" name="tieude" class="form-control" id="">
+                        </div> --}}
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Tiêu đề</label>
+                            <input type="text" name="tieude" class="form-control" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nội dung</label>
+                            <textarea name="noidung" id="" class="form-control" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Loại nông sản</label>
+                            <select class="form-control" name="loainongsan">
+                                @foreach ($lns as $item)
+                                    <option value="{{ $item->lns_id }}">{{ $item->lns_ten }}</option>                                
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for=""></label>
+                        </div>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <input type="file" 
+                                name="file[]" 
+                                multiple
+                                id="file-1" 
+                                class="form-control file" 
+                                data-overwrite-initial="false" 
+                                data-min-file-count="2"     
+                                />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" id="uploadImage">Upload</button>
+                        </div> 
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
     @include('client.template.script')
+    <script>
+        $('#file-1').fileinput({
+            theme: 'fa',
+            uploadUrl: "{{ route('nong-dan-dang-bai') }}",
+            uploadExtraData: function () {
+                return {
+                    _token: $("input[name='_token']").val()
+                }
+            },
+            allowedFileExtensions:['jpg','png','gif'],
+            overwriteInitial: false,
+            maxFileSize: 2000,
+            maxFileNum: 5,
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.popup-gallery').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                tLoading: 'Loading image #%curr%...',
+                mainClass: 'mfp-img-mobile',
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                },
+                image: {
+                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    titleSrc: function(item) {
+                        return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -12,10 +12,17 @@ class NhomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function GroupJoined ($id)
     {
-        
+        // return view
+        // return view();
     }
+
+    public function AllGroup ()
+    {
+        return view('client.pages.nhom.index');
+    }
+
 
     /**
      * Show the form for creating a new resource.

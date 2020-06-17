@@ -1,25 +1,27 @@
-@extends('admin.template.master')
-@section('content')
-      
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-4">
-                    <h1>Bách khoa nông nghiệp</h1>
-                </div>
-                <div class="col-sm-4">
-                </div>
-                
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
-    <section class="content">
+@include('client.template.head')
 
-        <!-- Default box -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Sửa</h3>
-          </div>
+<body>
+
+    <div class="wrapper">
+        @include('client.template.header') 
+
+        <section class="forum-page pt-1 pb-2">
+            <div class="container">
+                <div class="forum-questions-sec">
+                    <div class="row">
+                        <div class="col-lg-12 pb-3 pt-3">
+                            {{-- <a href="{{ route('bach-khoa-nong-nghiep') }}">Quay lại</a> --}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-lg-12">
+                            <h1 style="font-size: 30px;">Sửa bài</h1>
+                            <section class="content">
+
+                                <!-- Default box -->
+                                <div class="card">
+                                  
           <div class="card-body">
             <form method="POST" action="{{ route('sua-bach-khoa', ['id'=>$bachkhoa->bk_id]) }}" enctype="multipart/form-data">
                 @csrf
@@ -62,7 +64,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" id="add">Cập nhật</button>
-                <a href="{{ route('trang-chu-bach-khoa') }}" class="btn btn-default">Quay về</a>
+                <a href="{{ route('bach-khoa-nong-nghiep') }}" class="btn btn-default">Quay về</a>
               </form>
           </div>
           <!-- /.card-body -->
@@ -92,4 +94,15 @@
             });
         });
     </script>
-@endsection
+{{-- @endsection --}}
+</div>
+</div>
+</div>
+<!--forum-questions-sec end-->
+</div>
+</section>
+<!--forum-page end-->
+
+</div>
+@include('client.template.script')
+</body>

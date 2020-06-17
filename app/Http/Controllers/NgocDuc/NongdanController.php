@@ -4,9 +4,15 @@ namespace App\Http\Controllers\NgocDuc;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use DB;
 use Hash;
+<<<<<<< HEAD;
 use Auth;
+=======
+use Illuminate\Support\Facades\Auth;
+
+>>>>>>> ngoc.duc
 class NongdanController extends Controller
 {
     /**
@@ -21,7 +27,17 @@ class NongdanController extends Controller
                     ->where('nd_id','=',$nongdan_id)
                     ->join('nhom','nhom.n_id','=','chitietnhom.n_id')
                     ->get();
-        return view('client.pages.nongdan.index',compact('nhom_nong_dan'));
+        
+        $baiviet = DB::table('baiviet')->join('nongdan','nongdan.nd_id','=','baiviet.nd_id')->orderBy('bv_id','desc')->get();
+        $hinhanh=array();
+        $lns = DB::table('loaisanphamnuoitrong')->get();
+        foreach ($baiviet as $value) {
+        
+            # code...
+            $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
+        }
+       
+        return view('client.pages.nongdan.index',compact('nhom_nong_dan','baiviet','hinhanh','lns'));
     }
 
 
@@ -30,7 +46,16 @@ class NongdanController extends Controller
         $id=\Auth::guard('nongdan')->id();
         
         $data = DB::table('nongdan')->where('nd_id',$id)->first();
-        return view ('client.pages.nongdan.trang-ca-nhan',compact('data'));
+        $baiviet = DB::table('baiviet')->where('nd_id',$id)->get();
+        $slbv = count($baiviet);
+        $hinhanh=array();
+        
+        foreach ($baiviet as $value) {
+        
+            # code...
+            $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
+        }
+        return view ('client.pages.nongdan.trang-ca-nhan',compact(['data','baiviet','hinhanh','slbv']));
     }
 
 
@@ -178,4 +203,52 @@ class NongdanController extends Controller
     {
         //
     }
+
+    public function writePosts(Request $request){
+        $now = Carbon::now();
+        $tk = Auth::guard('nongdan')->user()->nd_id;
+        $baiviet = DB::table('baiviet')->insertGetId(
+            [
+                'bv_tieude' => $request->tieude,
+                'bv_noidung' => $request->noidung,
+                'bv_thoigian' => $now,  
+                'n_id' => NULL,
+                'nd_id' => $tk,
+                'cg_id' => NULL,
+                'tl_id' => NULL
+            ]
+        );
+
+        //Thêm vào lĩnh vực bài viết
+        $bviet_lvuc = DB::table('chitietlinhvucbaiviet')->insert(
+            [
+                'bv_id' => $baiviet,
+                'lns_id' => $request->loainongsan
+            ]
+        );
+        if ($request->hasFile('file')) {
+            # code...
+            foreach ($request->file('file') as $file) {
+                # code...
+                // echo $file->getClientOriginalName();
+                $name=$file->getClientOriginalName();
+                $file->move(public_path('upload/bai-viet/nong-dan'), $name);
+                DB::table('hinhanhbaiviet')->insert(
+                    [
+                        'habv_duongdan' => 'upload/bai-viet/nong-dan/'.$name,
+                        'habv_ten' => $name,
+                        'bv_id' => $baiviet
+                    ]
+                );
+            }
+        }
+
+        // $imageName = $request->file('file');
+        
+        // $request->file->move(public_path('upload/bai-viet/nong-dan',$imageName));
+        // dd($imageName);
+        return redirect()->back();
+    }
+
+    
 }

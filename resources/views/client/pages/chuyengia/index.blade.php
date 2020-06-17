@@ -10,9 +10,9 @@
             <div class="container">
                 <div class="forum-links">
                     <ul>
-                        <li class="active"><a href="#" title="">Bài viết mới nhất</a></li>
+                        <li class="active"><a href="{{ route('trang-chu-chuyen-gia') }}" title="">Bài viết quan tâm</a></li>
                         <li><a href="#" title="">Bài viết trong nhóm</a></li>
-                        <li><a href="#" title="">Bách khoa nông nghiệp</a></li>
+                        <li><a href="{{ route('bach-khoa-nong-nghiep') }}" title="">Bách khoa nông nghiệp</a></li>
                     </ul>
                 </div>
                 <!--forum-links end-->
@@ -33,22 +33,18 @@
                                         <img src="http://via.placeholder.com/60x60" alt="">
                                     </div>
                                     <div class="usr_quest">
-                                        <h3>Hiển thị tất cả bài viết</h3>
+                                        <h3 style="margin-bottom: 0px;">Hiển thị tất cả bài viết</h3>
+                                        <p>Nội dung rút gọn</p>
                                         <ul class="react-links">
-                                            <li><a href="#" title=""><i class="fa fa-heart"></i> Vote 150</a></li>
-                                            <li><a href="#" title=""><i class="fa fa-comment"></i> Comments 15</a></li>
-                                            <li><a href="#" title=""><i class="fa fa-eye"></i> Views 50</a></li>
-                                        </ul>
-                                        <ul class="quest-tags">
-                                            <li><a href="#" title="">Work</a></li>
-                                            <li><a href="#" title="">Php</a></li>
-                                            <li><a href="#" title="">Design</a></li>
+                                            <li><a href="#" title="">Xem chi tiết</a></li>
                                         </ul>
                                     </div>
                                     <!--usr_quest end-->
                                     <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min ago</span>
                                 </div>
+                                
                             </div>
+                            
                             <!--forum-questions end-->
                             <nav aria-label="Page navigation example" class="full-pagi">
                                 <ul class="pagination">

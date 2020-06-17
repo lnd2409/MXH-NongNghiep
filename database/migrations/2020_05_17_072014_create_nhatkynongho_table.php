@@ -16,7 +16,7 @@ class CreateNhatkynonghoTable extends Migration
         Schema::create('nhatkynongho', function (Blueprint $table) {
             $table->bigIncrements('nknh_id');
             $table->string('nknh_noidung');
-            $table->date('nknh_ngayviet');
+            $table->string('nknh_ngayviet');
 
             $table->bigInteger('nd_id')->unsigned();
             $table->foreign('nd_id')->references('nd_id')->on('nongdan')->onDelete('CASCADE')->onUpdate('CASCADE');

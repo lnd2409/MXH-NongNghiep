@@ -19,8 +19,8 @@ class BachkhoaController extends Controller
         
         $data = DB::table('bachkhoa')->join('chuyengia','chuyengia.cg_id','=','bachkhoa.cg_id')
         ->get();
-
-        return view('admin.bachkhoanongnghiep.index',compact('data'));
+        dd($data);
+        return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact('data'));
     }
 
     /**
@@ -32,7 +32,7 @@ class BachkhoaController extends Controller
     {
         $data = DB::table('bachkhoa')->get();
         $chuyengia = DB::table('chuyengia')->get();
-        return view('admin.bachkhoanongnghiep.thembachkhoa',compact(['data','chuyengia']));
+        return view('client.pages.chuyengia.viet-bai-bach-khoa',compact(['data','chuyengia']));
     }
 
     /**
@@ -60,12 +60,12 @@ class BachkhoaController extends Controller
             if($bachkhoa)
             {
                 $success = Session::put('alert-info', 'Thêm dữ liệu thành công');
-                return redirect()->route('trang-chu-bach-khoa');
+                return redirect()->route('bach-khoa-nong-nghiep');
             }
             else
             {
                 $success = Session::put('alert-info', 'Thêm dữ liệu không thành công');
-                return redirect()->route('trang-chu-bach-khoa');
+                return redirect()->route('bach-khoa-nong-nghiep');
             }
       
     }
@@ -91,7 +91,7 @@ class BachkhoaController extends Controller
     {
         $chuyengia = DB::table('chuyengia')->get();
         $bachkhoa = DB::table('bachkhoa')->where('bk_id','=',$id)->first();
-        return view('admin.bachkhoanongnghiep.suabachkhoa', compact(['chuyengia', 'bachkhoa']));
+        return view('client.pages.chuyengia.suabachkhoa', compact(['chuyengia', 'bachkhoa']));
     }
 
     /**
@@ -113,7 +113,7 @@ class BachkhoaController extends Controller
                 'cg_id' =>$request->chuyengia
             ]
         );
-        return redirect()->route('trang-chu-bach-khoa');
+        return redirect()->route('bach-khoa-nong-nghiep');
     }
 
     /**
@@ -125,6 +125,6 @@ class BachkhoaController extends Controller
     public function destroy($id)
     {
         $bachkhoa = DB::table('bachkhoa')->where('bk_id',$id)->delete();
-        return redirect()->route('trang-chu-bach-khoa');
+        return redirect()->route('bach-khoa-nong-nghiep');
     }
 }

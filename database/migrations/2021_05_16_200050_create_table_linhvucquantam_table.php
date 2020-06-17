@@ -15,7 +15,12 @@ class CreateTableLinhvucquantamTable extends Migration
     {
         Schema::create('linhvucquantam', function (Blueprint $table) {
             $table->bigIncrements('lv_id');
-            $table->string('lv_ten');
+            $table->bigInteger('lns_id')->unsigned();
+            $table->foreign('lns_id')->references('lns_id')->on('loaisanphamnuoitrong');
+            $table->bigInteger('nd_id')->nullable()->unsigned();
+            $table->foreign('nd_id')->references('nd_id')->on('nongdan');
+            $table->bigInteger('tl_id')->nullable()->unsigned();
+            $table->foreign('tl_id')->references('tl_id')->on('thuonglai');
             $table->timestamps();
         });
     }

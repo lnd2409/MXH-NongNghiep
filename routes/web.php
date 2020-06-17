@@ -31,13 +31,24 @@ Route::get('/admin', function () {
 });
 //Đăng nhập
 Route::get('/', 'AuthController@getLogin')->name('login-user');
+
+
+//Đăng nhập và đăng ký dành cho chuyên gia
+Route::get('/dang-nhap/chuyen-gia', 'AuthController@getLoginChuyenGia')->name('login-chuyen-gia');
+Route::post('dang-ky/chuyen-gia','AuthController@RegisterChuyengia')->name('register-chuyen-gia');
+Route::post('xu-ly-dang-nhap/chuyen-gia/xu-ly-dang-nhap','AuthController@LoginChuyenGia')->name('login-chuyen-gia-2');
+
+
 //Đăng nhập và đăng ký nông dân
 Route::post('dang-nhap/nong-dan','AuthController@LoginNongDan')->name('login-nong-dan');
 Route::post('dang-ky/nong-dan','AuthController@RegisterNongDan')->name('register-nong-dan');
+
+
 //Đăng nhập và đăng ký dành cho thương lái
 Route::post('dang-nhap/thuong-lai','AuthController@LoginThuongLai')->name('login-thuong-lai');
 Route::post('dang-ky/thuong-lai','AuthController@RegisterThuongLai')->name('register-thuong-lai');
-//Đăng nhập dành cho chuyên giá
+
+
 //Chưa làm
 
 
@@ -54,6 +65,9 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     // infor nông dân
     Route::get('/trang-ca-nhan','NgocDuc\NongdanController@mypages')->name('canhan.nongdan');
 
+    //NNhật ký nông hộ -- NGUYÊN
+    Route::get('/nhat-ky-nong-ho/{id}','NgocDuc\NhatkynonghoController@NhatKyNongHo')->name('nhat-ky-nong-ho');
+    Route::post('/nhat-ky-nong-ho/them-nhat-ky', 'NgocDuc\NhatkynonghoController@VietNhatKy')->name('viet-nhat-ky');
     //thay đổi hình nền
     Route::post('/hinh-nen','NgocDuc\NongdanController@background_store')->name('hinhen.submit.nongdan');
 
@@ -70,10 +84,14 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
     //check 2 mật khẩu
     Route::post('/cai-dat/doi-mk','NgocDuc\NongdanController@update')->name('caidat.submit.matkhau.nongdan');
+    
+
+    // Nhóm nông dân
+    Route::get('nhom', 'Ngocduc\NhomController@AllGroup')->name('all-group');
 
 
-
-
+    //Đăng bài dành cho NÔNG DÂN
+    Route::post('/dang-bai-nong-dan','NgocDuc\NongdanController@writePosts')->name('nong-dan-dang-bai');
 
 
 
@@ -81,6 +99,10 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     Route::get('dang-xuat','AuthController@LogoutNongDan')->name('dang-xuat-nong-dan');
    
 });
+Route::get('/ban-hang', 'SellController@index')->name('sell');
+Route::get('/ban-hang/{id}', 'SellController@show')->name('sell.single');
+Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
+Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
 
 
 //Giao diện của thương lái ném vào đây
@@ -109,10 +131,48 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
     //check 2 mật khẩu
     Route::post('/cai-dat/doi-mk','ThuongLaiController@update')->name('caidat.submit.matkhau');
 
+    //Nhóm
+    Route::get('nhom', 'Ngocduc\NhomController@AllGroup')->name('all-group');
+
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutThuongLai')->name('dang-xuat-thuong-lai');
 
 });
+
+
+
+//Trang của chuyên gia
+Route::group(['prefix' => 'chuyen-gia', 'middleware' => 'CheckUserChuyenGia'], function () {
+    Route::get('trang-chu', 'NgocDuc\ChuyengiaController@index')->name('trang-chu-chuyen-gia');
+    Route::get('trang-ca-nhan/{id}','NgocDuc\ChuyengiaController@getInfo')->name('ca-nhan-chuyen-gia');
+    Route::get('dang-xuat','AuthController@LogoutChuyenGia')->name('dang-xuat-chuyen-gia');
+    Route::get('bach-khoa-nong-nghiep','NgocDuc\ChuyengiaController@BachKhoa')->name('bach-khoa-nong-nghiep');
+    Route::get('viet-bai','NgocDuc\ChuyengiaController@DangBai')->name('trang-viet-bai-bach-khoa');
+});
+
+
+//Nghĩa lấy code chổ này nhé!
+
+Route::get('/nccvt-nn', function () {
+    return view('client.pages.nccvtnn.index');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //TỰ LẤY GIAO DIỆN DƯỚI ĐÂY ĐEM LÊN PHÍA TRÊN CHỈ LÀ MẪU
@@ -130,7 +190,7 @@ Route::view('/forum-post-view', 'client.pages.forum.forum-post-view');
 
 //bách khoa nông nghiệp
 Route::get('bach-khoa','BachkhoaController@index')->name('trang-chu-bach-khoa');
-Route::get('hien-thi-them','BachkhoaController@create')->name('hien-thi-them');
+Route::get('/chuyen-gia/viet-bai','BachkhoaController@create')->name('hien-thi-them');
 Route::post('them-bach-khoa','BachkhoaController@store')->name('them-bach-khoa');
 Route::get('hien-thi-sua{id}','BachkhoaController@edit')->name('hien-thi-sua');
 Route::post('sua-bach-khoa{id}','BachkhoaController@update')->name('sua-bach-khoa');

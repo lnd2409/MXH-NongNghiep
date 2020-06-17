@@ -65,6 +65,16 @@ return [
             'driver' => 'token',
             'provider' => 'thuonglai',
         ],
+
+        //Xác thực dành cho chuyên gia
+        'chuyengia' => [
+            'driver' => 'session',
+            'provider' => 'chuyengia',
+        ],
+        'chuyengia-api' => [
+            'driver' => 'token',
+            'provider' => 'chuyengia',
+        ],
     ],
 
     /*
@@ -102,6 +112,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\ThuongLai::class,
         ],
+        'chuyengia' => [
+            'driver' => 'eloquent',
+            'model' => App\ChuyenGia::class,
+        ],
     ],
 
     /*
@@ -132,6 +146,11 @@ return [
         ],
         'thuonglai' => [
             'provider' => 'thuonglai',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'chuyengia' => [
+            'provider' => 'chuyengia',
             'table' => 'password_resets',
             'expire' => 60,
         ],
