@@ -1,12 +1,4 @@
 
-
-    
-
-
-
-
-
-
 @extends('client.client')
 @section('content')
 <section class="cover-sec">
@@ -32,7 +24,7 @@
                                     <ul class="flw-hr">
                                         <li><a href="#" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
                                         
-                                        <li style="margin-top:20px;"><a href="#" title="" class="hre">Sản phẩm nuôi trồng</a></li>
+                                        <li style="margin-top:20px;"><a href="{{route('san-pham-nuoi-trong.nongdan')}}" title="" class="hre">Sản phẩm nuôi trồng</a></li>
                                     </ul>
                                     <ul class="flw-status">
                                         <li>
@@ -148,62 +140,86 @@
                         
                         <div class="card">
                             <div class="card-header">
-                                <div class="form-group ml-1 mr-1">
-                                  {{-- <label>Tìm kiếm</label> --}}
-                                  <input type="text" class="form-control" name="search" id="search" placeholder="Nhập tên sản phẩm">
-                                </div>
+                              <h3 class="card-title">
+                                Thêm sản phẩm
+                              </h3>
+                      
+                              <div class="card-title float-right">
+                                {{-- Refesh lại trang để về dạng mặc định --}}
+                                {{-- <a href="{{ route('danhsachsanpham', ['sort'=> 'danh-sach']) }}" class="btn btn-success"><i class="fas fa-sync"></i></a> --}}
                               </div>
-                          <div class="card-header">
-                            <h3 class="card-title">
-                              <a href="" class="btn btn-info">Thêm Sản phẩm</a>
-                            </h3>
-                            
-                            <div class="card-title float-right">
-                              {{-- Refesh lại trang để về dạng mặc định --}}
-                              <a href="" class="btn btn-success"><i class="fas fa-sync"></i></a>
                             </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive">
+                              <form method="POST" action="{{ route('them-san-pham-nuoi-trong') }}" enctype="multipart/form-data">
+                                  @csrf
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Tên sản phẩm</label>
+                                    <input name="tenNongSan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên loại sản phẩm . . . ">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Loại nông sản</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="loaiNongSan">
+                                        @foreach ($loai as $item => $value)
+                                          <option value="{{$value->lns_id}}">{{$value->lns_ten}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Hình ảnh nông sản</label>
+                                    <input name="hinhanh" type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên loại sản phẩm . . . ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Sản lượng dự tính</label>
+                                    <input name="sanLuongDuTinh" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên loại sản phẩm . . . ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Sản lượng thực tế</label>
+                                    <input name="sanLuongThucTe" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên loại sản phẩm . . . ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tháng bắt đầu mùa vụ</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="thangBatDau">
+                                        <?php
+                                            for ($i=1; $i<=12; $i++)
+                                            {
+                                                ?>
+                                                    <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                                <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                  <div class="form-group">
+                                    <label for="exampleInputEmail1">Tháng kết thúc mùa vụ</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="thangKetThuc">
+                                        <?php
+                                            for ($i=1; $i<=12; $i++)
+                                            {
+                                                ?>
+                                                    <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                                <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                  <label for="exampleFormControlTextarea1">Thông tin nông sản</label>
+                                  {{-- <textarea name="thongTin" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> --}}
+                                      <textarea class="textarea" placeholder="Place some text here" name="thongTinNongSan"
+                                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary" id="add">Thêm</button>
+                                <a href="{{route('danh-sach-san-pham-nuoi-trong')}}" class="btn btn-default">Quay về</a>
+                            </form>
                           </div>
-                          
-                          <!-- /.card-header -->
-                          <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap" id="category_table">
-                              <thead>
-                                <tr>
-                                  <th>STT</th>
-                                  <th>Tên nông sản</th>
-                                  <th>Loại nông sản</th>
-                                  <th>Tháng bắt đầu</th>
-                                  {{-- Cái này là sắp xếp --}}
-                                  <th>Tháng kết thúc</th>
-                                  <th>Thao tác</th>
-                                </tr>
-                              </thead>
-                              <tbody id="category_table">
-                                @php
-                                    $stt=1;
-                                @endphp
-                                @foreach ($nuoitrong as $item => $value)
-                                <tr>
-                                  <td>{{$stt++}}</td>
-                                  <td>{{$value->spnt_ten}}</td>
-                                  <td>{{$value->lns_ten}}</td>
-                                  <td>{{$value->mv_thangbatdau}}</td>
-                                  <td>{{$value->mv_thangketthuc}}</td>
-                                  <td>
-                                    <a href="" class="btn btn-primary">Sửa</a>
-                                    <a href="" class="btn btn-danger">Xóa</a>
-                                  </td>
-                                </tr>
-                                @endforeach
-                              </tbody>
-                              
-                            </table>
-                            <nav aria-label="Page navigation example">
-                              {{-- {!! $sanpham->links() !!} --}}
-                            </nav>
+                            <!-- /.card-body -->
                           </div>
-                          <!-- /.card-body -->
+                          <!-- /.card -->
                         </div>
+                        
                         <!-- /.card -->
                       </div>
                     </div>
@@ -424,4 +440,12 @@
       </div>
     </div>
   </div>
+
+<script>
+    $(document).ready(function() {
+  $('.textarea').summernote();
+  });
+
+</script>
+
 @endsection
