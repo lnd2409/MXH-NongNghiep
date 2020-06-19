@@ -15,13 +15,14 @@ class CreateTableChuyengiaTable extends Migration
     {
         Schema::create('chuyengia', function (Blueprint $table) {
             $table->bigIncrements('cg_id');
+            $table->string('username');
+            $table->string('password');
             $table->string('cg_hoten');
             $table->string('cg_diachi');
             $table->integer('cg_sdt');
-            $table->bigInteger('lv_id')->unsigned();
-            $table->foreign('lv_id')->references('lv_id')->on('linhvucquantam');
             $table->bigInteger('td_id')->unsigned();
             $table->foreign('td_id')->references('td_id')->on('trinhdo');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

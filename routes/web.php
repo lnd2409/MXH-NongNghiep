@@ -31,13 +31,24 @@ Route::get('/admin', function () {
 });
 //Đăng nhập
 Route::get('/', 'AuthController@getLogin')->name('login-user');
+
+
+//Đăng nhập và đăng ký dành cho chuyên gia
+Route::get('/dang-nhap/chuyen-gia', 'AuthController@getLoginChuyenGia')->name('login-chuyen-gia');
+Route::post('dang-ky/chuyen-gia','AuthController@RegisterChuyengia')->name('register-chuyen-gia');
+Route::post('xu-ly-dang-nhap/chuyen-gia/xu-ly-dang-nhap','AuthController@LoginChuyenGia')->name('login-chuyen-gia-2');
+
+
 //Đăng nhập và đăng ký nông dân
 Route::post('dang-nhap/nong-dan','AuthController@LoginNongDan')->name('login-nong-dan');
 Route::post('dang-ky/nong-dan','AuthController@RegisterNongDan')->name('register-nong-dan');
+
+
 //Đăng nhập và đăng ký dành cho thương lái
 Route::post('dang-nhap/thuong-lai','AuthController@LoginThuongLai')->name('login-thuong-lai');
 Route::post('dang-ky/thuong-lai','AuthController@RegisterThuongLai')->name('register-thuong-lai');
-//Đăng nhập dành cho chuyên giá
+
+
 //Chưa làm
 
 
@@ -54,6 +65,9 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     // infor nông dân
     Route::get('/trang-ca-nhan','NgocDuc\NongdanController@mypages')->name('canhan.nongdan');
 
+    //NNhật ký nông hộ -- NGUYÊN
+    Route::get('/nhat-ky-nong-ho/{id}','NgocDuc\NhatkynonghoController@NhatKyNongHo')->name('nhat-ky-nong-ho');
+    Route::post('/nhat-ky-nong-ho/them-nhat-ky', 'NgocDuc\NhatkynonghoController@VietNhatKy')->name('viet-nhat-ky');
     //thay đổi hình nền
     Route::post('/hinh-nen','NgocDuc\NongdanController@background_store')->name('hinhen.submit.nongdan');
 
@@ -70,7 +84,10 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
     //check 2 mật khẩu
     Route::post('/cai-dat/doi-mk','NgocDuc\NongdanController@update')->name('caidat.submit.matkhau.nongdan');
+    
 
+    // Nhóm nông dân
+    Route::get('nhom', 'Ngocduc\NhomController@AllGroup')->name('all-group');
 
 
     //Đăng bài dành cho NÔNG DÂN
@@ -117,19 +134,20 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
     //check 2 mật khẩu
     Route::post('/cai-dat/doi-mk','ThuongLaiController@update')->name('caidat.submit.matkhau');
 
-
-
-    //Đăng bài dành cho Thương lái
-    Route::post('/dang-bai-thuong-lai','ThuongLaiController@writePosts')->name('thuong-lai-dang-bai');
-
-    //Bình luận 
-    Route::post('/binhluan','ThuongLaiController@Ajaxcomment')->name('thuonglai.binhluan');
+    //Nhóm
+    Route::get('nhom', 'Ngocduc\NhomController@AllGroup')->name('all-group');
 
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutThuongLai')->name('dang-xuat-thuong-lai');
 
 });
 
+
+
+//Trang của chuyên gia
+Route::group(['prefix' => 'chuyen-gia', 'middleware' => 'CheckUserChuyenGia'], function () {
+    Route::get('trang-chu', 'NgocDuc\ChuyengiaController@index')->name('trang-chu-chuyen-gia');
+});
 
 
 //Nghĩa lấy code chổ này nhé!

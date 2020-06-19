@@ -30,7 +30,7 @@ p._hinhanh {
             <div class="container">
                 <div class="forum-links">
                     <ul>
-                        <li class="active"><a href="#" title="">Bài viết mới nhất</a></li>
+                        <li class="active"><a href="#" title="">Bài viết quan tâm</a></li>
                         <li><a href="#" title="">Bài viết trong nhóm</a></li>
                         <li><a href="#" title="">Bách khoa nông nghiệp</a></li>
                     </ul>
@@ -59,7 +59,7 @@ p._hinhanh {
                             <div class="forum-questions forum-questions-fix">
                                 <div class="usr-question">
                                     <div class="usr_img">
-                                        <img src="http://via.placeholder.com/60x60" alt="">
+                                        <img src="{{asset('hinhanh/nguoidung/nongdan/'.$item->nd_hinhanh)}}" alt="">
                                         <p>{{ $item->nd_hoten }}</p>
                                     </div>
                                     <div class="usr_quest">
@@ -71,8 +71,7 @@ p._hinhanh {
                                         <ul class="quest-tags">
                                             @if(!empty($hinhanh[$item->bv_id]))
                                                 @foreach ($hinhanh[$item->bv_id] as $item2)
-                                                    <li><a href="#" title=""><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70" class="img-p"></a></li>
-                                                    
+                                                    <li><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70"></li>
                                                 @endforeach
                                             @endif
                                         </ul>
@@ -371,6 +370,27 @@ p._hinhanh {
                $('#popup-img').attr('src',src);
             });
 
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.popup-gallery').magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                tLoading: 'Loading image #%curr%...',
+                mainClass: 'mfp-img-mobile',
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+                },
+                image: {
+                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    titleSrc: function(item) {
+                        return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
+                    }
+                }
+            });
         });
     </script>
 </body>

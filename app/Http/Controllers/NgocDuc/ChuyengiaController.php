@@ -5,24 +5,17 @@ namespace App\Http\Controllers\NgocDuc;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class NhomController extends Controller
+class ChuyengiaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function GroupJoined ($id)
+    public function index()
     {
-        // return view
-        // return view();
+        return view('client.pages.chuyengia.index');
     }
-
-    public function AllGroup ()
-    {
-        return view('client.pages.nhom.index');
-    }
-
 
     /**
      * Show the form for creating a new resource.
