@@ -75,6 +75,15 @@ return [
             'driver' => 'token',
             'provider' => 'chuyengia',
         ],
+        //Xác thực dành cho chuyên gia
+        'nccvt' => [
+            'driver' => 'session',
+            'provider' => 'nccvt',
+        ],
+        'nccvt-api' => [
+            'driver' => 'token',
+            'provider' => 'nccvt',
+        ],
     ],
 
     /*
@@ -116,6 +125,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\ChuyenGia::class,
         ],
+        'nccvt' => [
+            'driver' => 'eloquent',
+            'model' => App\NCCVT::class,
+        ],
     ],
 
     /*
@@ -151,6 +164,11 @@ return [
         ],
         'chuyengia' => [
             'provider' => 'chuyengia',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'nccvt' => [
+            'provider' => 'nccvt',
             'table' => 'password_resets',
             'expire' => 60,
         ],

@@ -1,65 +1,98 @@
 @include('client.template.head')
 <style>
-   
-    .item-slick.slick-slide.slick-current.slick-active{
-        outline: none!important;
+    .item-slick.slick-slide.slick-current.slick-active {
+        outline: none !important;
     }
-        
 
-    .slider-for{
-        
+
+    .slider-for {
+
         margin-bottom: 15px;
-        
-    }
-    .slider-for img{
-        width: 100%;
-        min-height: 100%;
-    }
-            
 
-    .slider-nav{
+    }
+
+    .slider-for img {
+        height: 500px;
+        /* min-width: 800px; */
+        width: auto;
+    }
+
+
+    .slider-nav {
         margin: auto;
     }
-        
-    .item-slick{
-        
+
+    .item-slick {
+
         max-width: 240px;
         margin-right: 15px;
-        outline: none!important;
+        outline: none !important;
         cursor: pointer;
     }
-    .item-slick img
-            {max-width: 100%;
-            background-size: cover;
-            background-position: center;}
-    .slick-arrow
-        {position: absolute;
+
+    .item-slick img {
+        max-width: 100%;
+        height: 160px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .slick-arrow {
+        position: absolute;
         top: 50%;
         z-index: 50;
         margin-top: -12px;
     }
-    .slick-prev
-        {left: 0;}
-    .slick-next
-        {right: 0;}
 
+    .slick-prev {
+        left: 0;
+    }
+
+    .slick-next {
+        right: 0;
+    }
+
+    .name {
+        font-size: 30px;
+    }
+
+    .price {
+        font-size: 20px;
+        color: #cf2f07;
+        /* display: inline; */
+    }
+
+    .info {
+        font-size: 17px;
+        /* margin-left: 50px; */
+    }
+
+    .des {
+        font-size: 20px;
+        color: #212529;
+    }
+
+    .des-content {
+        font-size: 15px;
+    }
 </style>
+
 <body>
 
     <div class="wrapper">
-        @include('client.template.header') 
+        @include('client.template.header')
 
 
         <section class="forum-sec">
             <div class="container">
-                <div class="forum-links">
+                {{-- <div class="forum-links">
                     <ul>
                         <li class="active"><a href="#" title="">Bài viết mới nhất</a></li>
                         <li><a href="#" title="">Chủ đề quan tâm</a></li>
                         <li><a href="#" title="">Bài viết cá nhân</a></li>
                         <li><a href="#" title="">Bài viết khoa học</a></li>
                     </ul>
-                </div>
+                </div> --}}
                 <!--forum-links end-->
                 <div class="forum-links-btn">
                     <a href="#" title=""><i class="fa fa-bars"></i></a>
@@ -78,39 +111,87 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div id="aniimated-thumbnials" class="slider-for">
-                                                    <a href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg">
-                                                        <img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" />
+                                                    @foreach ($img as $item)
+                                                    <a href="{{asset($item->ha_duongdan)}}">
+                                                        <img src="{{asset($item->ha_duongdan)}}" alt=""
+                                                            style="width:100%">
                                                     </a>
-                                                    <a href="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg">
-                                                        <img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" />
-                                                    </a>
-                                                    <a href="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg">
-                                                        <img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" />
-                                                    </a>
-                                                    <a href="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg">
-                                                        <img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" />
-                                                    </a>
+                                                    @endforeach
                                                 </div>
                                                 <div class="slider-nav">
+                                                    @foreach ($img as $item)
+
                                                     <div class="item-slick">
-                                                        <img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" alt="Alt">
+                                                        <img src="{{asset($item->ha_duongdan)}}" alt="Alt">
                                                     </div>
-                                                    <div class="item-slick">
-                                                        <img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" alt="Alt">
-                                                    </div>
-                                                    <div class="item-slick">
-                                                        <img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" alt="Alt">
-                                                    </div>
-                                                    <div class="item-slick">
-                                                        <img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" alt="Alt">
-                                                    </div>
-                                                </div>                    
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <br>
+                                    <div class="name">{{$product->sp_ten}}</div>
+                                    <br>
+                                    <br>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td style="width:30%;">Giá sản phẩm</td>
+                                            <td>
+                                                <div class="price">{{$product->sp_gia}}đ</div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                                <span class="sum">Số lượng cung cấp: </span>
+                                            </td>
+                                            <td>
+
+                                                <span class="info">{{$product->sp_soluongcungcap}}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="des">Thông tin người bán</div>
+                                    <br>
+                                    <table class="table table-bordered">
+
+                                        <tr>
+                                            <td style="width:30%;">
+
+                                                <span class="sum">Người bán: </span>
+                                            </td>
+                                            <td>
+
+                                                <span class="info">{{$product->nccvt_ten}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                                <span class="sum">Số điện thoại: </span>
+                                            </td>
+                                            <td>
+
+                                                <span class="info">{{$product->nccvt_sdt}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                                <span class="sum">Địa chỉ: </span>
+                                            </td>
+                                            <td>
+
+                                                <span class="info">{{$product->nccvt_diachi}}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="des">Chi tiết</div>
+                                    <p class="des-content">{{$product->sp_chitiet}}
+                                    </p>
                                 </div>
                             </div>
-                                
                         </div>
                         <div class="col-lg-4">
                             <div class="widget widget-user">
@@ -182,7 +263,7 @@
     </div>
     @include('client.template.script')
     <script>
-     $(function() {
+        $(function() {
   
                 //   $('#aniimated-thumbnials').lightGallery({
                 //     thumbnail: true,

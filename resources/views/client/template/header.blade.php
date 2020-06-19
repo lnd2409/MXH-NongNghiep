@@ -89,6 +89,10 @@
                         <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_background)}}" alt="" style="width:30px; height:30px;">
                         <a href="#" title="">{{ substr(Auth::guard('thuonglai')->user()->tl_hoten,-(strpos(strrev(Auth::guard('thuonglai')->user()->tl_hoten),' ')),strlen(Auth::guard('thuonglai')->user()->tl_hoten))}}</a>
                         <i class="la la-sort-down"></i>
+                    @elseif (Auth::guard('chuyengia')->check())
+                    <img src="" alt="Avata chuyên gia" style="width:30px; height:30px;">
+                    <a href="#" title="">{{ substr(Auth::guard('chuyengia')->user()->cg_hoten,-(strpos(strrev(Auth::guard('chuyengia')->user()->cg_hoten),' ')),strlen(Auth::guard('chuyengia')->user()->cg_hoten))}}</a>
+                    <i class="la la-sort-down"></i>
                     @endif
                 </div>
                 <div class="user-account-settingss">
@@ -104,12 +108,16 @@
                         {{-- <li><a href="#" title="">Privacy</a></li>
                         <li><a href="#" title="">Faqs</a></li>
                         <li><a href="#" title="">Terms & Conditions</a></li> --}}
+                        @elseif (Auth::guard('chuyengia')->check())
+                        <li><a href="{{ route('caidat') }}" title="">Cài đặt tài khoản</a></li>
                         @endif
                     </ul>
                     @if (Auth::guard('nongdan')->check())
                         <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Đăng xuất</a></h3>
                     @elseif(Auth::guard('thuonglai')->check())
                         <h3 class="tc"><a href="{{ route('dang-xuat-thuong-lai') }}" title="">Đăng xuất</a></h3>
+                    @elseif(Auth::guard('chuyengia')->check())
+                        <h3 class="tc"><a href="{{ route('dang-xuat-chuyen-gia') }}" title="">Đăng xuất</a></h3>
                     @endif
                     
                 </div>

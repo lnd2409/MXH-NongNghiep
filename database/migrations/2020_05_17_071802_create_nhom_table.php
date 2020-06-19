@@ -19,6 +19,10 @@ class CreateNhomTable extends Migration
 
             $table->string('n_tennhom');
             
+           
+            $table->bigInteger('lns_id')->unsigned();
+            $table->foreign('lns_id')->references('lns_id')->on('loaisanphamnuoitrong');
+
             $table->timestamps();
 
 
