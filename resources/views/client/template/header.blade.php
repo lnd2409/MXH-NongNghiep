@@ -60,7 +60,7 @@
                             Trang cá nhân
                         </a>
                         @elseif(Auth::guard('chuyengia')->check())
-                            <a href="" title="">
+                            <a href="{{ route('ca-nhan-chuyen-gia') }}" title="">
                                 <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
                                 Trang cá nhân
                             </a>

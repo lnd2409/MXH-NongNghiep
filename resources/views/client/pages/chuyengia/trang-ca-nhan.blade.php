@@ -1,7 +1,7 @@
 @extends('client.client')
 @section('content')
 <section class="cover-sec">
-    <img src="{{asset('hinhanh/nguoidung/nongdan/'.$data->nd_background)}}" style="height: 400px" alt="">
+    <img src="{{asset('hinhanh/nguoidung/chuyengia/'.$data->cg_background)}}" style="height: 400px" alt="">
     <a title="" data-toggle="modal" data-target="#changeBG"><i class="fa fa-camera"></i>Thay đổi hình nền</a>
 </section>
 
@@ -15,19 +15,19 @@
                         <div class="main-left-sidebar">
                             <div class="user_profile">
                                 <div class="user-pro-img">
-                                <img src="{{asset('hinhanh/nguoidung/nongdan/'.$data->nd_hinhanh)}}" style="width:70%" alt="">
+                                <img src="{{asset('hinhanh/nguoidung/chuyengia/'.$data->cg_hinhanh)}}" style="width:70%" alt="">
                                     <a href="#" data-toggle="modal" data-target="#changeAvatar"><i class="fa fa-camera"></i></a>
                                 </div>
                                 <!--user-pro-img end-->
                                 <div class="user_pro_status">
                                     <ul class="flw-hr">
-                                        <li><a href="{{ route('nhat-ky-nong-ho',[ 'id' => \Auth::guard('nongdan')->user()->nd_id ]) }}" title="" class="flww"><i class="la la-book"></i> Nhật ký nông hô</a></li>
+                                        <li><a href="" title="" class="flww"><i class="la la-book"></i> Nhật ký nông hô</a></li>
                                         <li><a href="#" title="" class="hre">Hire</a></li>
                                     </ul>
                                     <ul class="flw-status">
                                         <li>
                                             <span>Bài viết</span>
-                                            <b>{{ $slbv }}</b>
+                                            <b>ccc</b>
                                         </li>
                                         <li>
                                             <span>Nhóm tham gia</span>
@@ -47,7 +47,7 @@
                     <div class="col-lg-6">
                         <div class="main-ws-sec">
                             <div class="user-tab-sec">
-                                <h3>{{$data->nd_hoten}}</h3>
+                            <h3>{{$data->cg_hoten}}</h3>
                                 {{-- <div class="star-descp">
                                     <span>Graphic Designer at Self Employed</span>
                                     <ul>
@@ -67,14 +67,15 @@
                             <!--user-tab-sec end-->
                             <div class="product-feed-tab current" id="feed-dd">
                                 <div class="posts-section">
+                                    {{-- {{dd($baiviet)}} --}}
                                     @foreach ($baiviet as $item)
                                         
                                         <div class="post-bar">
                                             <div class="post_topbar">
                                                 <div class="usy-dt">
-                                                    <img src="{{asset('hinhanh/nguoidung/nongdan/'.$data->nd_hinhanh)}}" height="50px" width="50px" alt="">
+                                                    <img src="{{asset('hinhanh/nguoidung/chuyengia/'.$data->cg_hinhanh)}}" height="50px" width="50px" alt="">
                                                     <div class="usy-name">
-                                                        <h3>{{ $data->nd_hoten }}</h3>
+                                                        <h3>{{ $data->cg_hoten }}</h3>
                                                         <span><img src="images/clock.png" alt="">3 min ago</span>
                                                     </div>
                                                 </div>
@@ -95,19 +96,19 @@
                                                 
                                             </div>
                                             <div class="job_descp">
-                                                <h3>{{ $item->bv_tieude }}</h3>
+                                                <h3>{{ $item->bk_tieude }}</h3>
                                                 
                                                 <p>
-                                                    {{ $item->bv_noidung }}
+                                                    {{ $item->bk_noidung }}
                                                 </p>
                                                 <p><a href="#" style="color: greenyellow;">Xem chi tiết</a></p>
-                                                <ul class="skill-tags">
+                                                {{-- <ul class="skill-tags">
                                                     @if(!empty($hinhanh[$item->bv_id]))
                                                         @foreach ($hinhanh[$item->bv_id] as $item2)
                                                             <li><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70"></li>
                                                         @endforeach
                                                     @endif
-                                                </ul>
+                                                </ul> --}}
                                             </div>
                                             <div class="job-status-bar">
                                                 <ul class="like-com">
@@ -197,10 +198,11 @@
           </button>
         </div>
         <div class="modal-body">
-         <form action="{{ route('hinhen.submit.nongdan') }}" method="post" enctype="multipart/form-data">
+            <img src="" style="width:200px; height:200px" id="bgd" alt="" >
+         <form action="{{ route('hinhen.submit.chuyengia') }}" method="post" enctype="multipart/form-data">
              @csrf
             <div class="form-group">
-              <input type="file" class="form-control-file" name="nd_background" id="">
+              <input type="file" class="form-control-file" name="cg_background"  onchange="readURL4(this);">
             </div>
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
@@ -221,10 +223,11 @@
           </button>
         </div>
         <div class="modal-body">
-         <form action="{{ route('daidien.submit.nongdan') }}" method="post" enctype="multipart/form-data">
+            <img src="" style="width:200px; height:200px" id="avatar" alt="" >
+         <form action="{{ route('daidien.submit.chuyengia') }}" method="post" enctype="multipart/form-data">
              @csrf
             <div class="form-group">
-              <input type="file" class="form-control-file" name="nd_hinhanh">
+              <input type="file" class="form-control-file" name="cg_hinhanh" onchange="readURL3(this);">
             </div>
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
@@ -233,4 +236,28 @@
       </div>
     </div>
   </div>
+@endsection
+@section('script')
+<script>
+    function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                console.log('ok');
+                reader.onload = function (e) {
+                    $('#avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }    
+    function readURL4(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                // console.log('ok');
+                reader.onload = function (e) {
+                    $('#bgd').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }    
+</script>
 @endsection
