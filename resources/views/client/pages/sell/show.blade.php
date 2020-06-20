@@ -111,6 +111,10 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div id="aniimated-thumbnials" class="slider-for">
+                                                  <a href="{{asset($product->sp_hinhdaidien)}}">
+                                                      <img src="{{asset($product->sp_hinhdaidien)}}" alt=""
+                                                          style="width:100%">
+                                                  </a>
                                                     @foreach ($img as $item)
                                                     <a href="{{asset($item->ha_duongdan)}}">
                                                         <img src="{{asset($item->ha_duongdan)}}" alt=""
@@ -119,6 +123,9 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="slider-nav">
+                                                  <div class="item-slick">
+                                                      <img src="{{asset($product->sp_hinhdaidien)}}" alt="Alt">
+                                                  </div>
                                                     @foreach ($img as $item)
 
                                                     <div class="item-slick">
@@ -137,7 +144,7 @@
                                         <tr>
                                             <td style="width:30%;">Giá sản phẩm</td>
                                             <td>
-                                                <div class="price">{{$product->sp_gia}}đ</div>
+                                                <div class="price">{{number_format($product->sp_gia)}}đ</div>
 
                                             </td>
                                         </tr>
@@ -148,7 +155,7 @@
                                             </td>
                                             <td>
 
-                                                <span class="info">{{$product->sp_soluongcungcap}}</span>
+                                                <span class="info">{{number_format($product->sp_soluongcungcap)}}</span>
                                             </td>
                                         </tr>
                                     </table>
@@ -264,7 +271,7 @@
     @include('client.template.script')
     <script>
         $(function() {
-  
+
                 //   $('#aniimated-thumbnials').lightGallery({
                 //     thumbnail: true,
                 //   });

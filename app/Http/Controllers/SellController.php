@@ -46,7 +46,8 @@ class SellController extends Controller
             'lsp_id'=>$request->type,
             'nccvt_id'=>\Auth::guard('nccvt')->user()->nccvt_id
         ));
-        foreach($request->file('img') as $item){
+        if($request->hasFile('img')){
+          foreach($request->file('img') as $item){
 
             $file_name2 = $item->getClientOriginalName(); //Trả về tên file
             //lưu file
@@ -60,8 +61,9 @@ class SellController extends Controller
                 'sp_id'=>$id
             ]);
         }
+        }
         return redirect()->route('sell',['id' => \Auth::guard('nccvt')->user()->nccvt_id]);
-    
+
     }
 
     /**
@@ -102,5 +104,11 @@ class SellController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function list(Request $request)
+    {
+      $nccvt=\DB::table('nccvt')->get();
+      // dd($nccvt);
+      return view('client.pages.sell.list',compact('nccvt'));
     }
 }

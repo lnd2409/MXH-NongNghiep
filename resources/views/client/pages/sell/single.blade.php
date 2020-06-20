@@ -49,7 +49,7 @@
                             <tbody>
                                 <tr>
                                     {{-- <td>{{$product->dv_ten}}</td> --}}
-                                    <td>{{$product->sp_gia}} đ</td>
+                                    <td>{{number_format($product->sp_gia)}} đ</td>
                                     <td>
                                         100
                                     </td>

@@ -86,6 +86,8 @@
                                                     <br>
                                                     <br>
                                                     <a href="{{ route('login-chuyen-gia') }}" class="text-center">Đăng nhập với chuyên gia</a>
+                                                    <br>
+                                                    <a href="{{ route('login-nccvt') }}" class="text-center">Đăng nhập với nhà cung cấp vật tư</a>
                                                 </div>
                                             </div>
                                         </form>
@@ -141,7 +143,7 @@
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="password" name="password" placeholder="Mật khẩu">
@@ -166,7 +168,7 @@
                                                         <input type="text" name="nd_sdt" placeholder="Số điện thoại">
                                                         <i class="la la-user"></i>
                                                     </div>
-                                                </div>  
+                                                </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="text" name="nd_diachi" placeholder="Địa chỉ">
@@ -191,7 +193,7 @@
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="password" name="password" placeholder="Mật khẩu">
@@ -216,7 +218,7 @@
                                                         <input type="text" name="tl_sdt" placeholder="Số điện thoại">
                                                         <i class="la la-user"></i>
                                                     </div>
-                                                </div>  
+                                                </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="text" name="tl_diachi" placeholder="Địa chỉ">
@@ -242,7 +244,7 @@
             <div class="footy-sec">
                 <div class="container">
                     <ul>
-                        
+
                     </ul>
                     <p><img src="{{asset('client/images/copy-icon.png')}}" alt="">Copyright 2018</p>
                 </div>

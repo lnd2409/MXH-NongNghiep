@@ -27,17 +27,17 @@
                             Trang chủ
                         </a>
                         @endif
-                       
+
                     </li>
                     <li>
-                        <a href="companies.html" title="">
+                        <a href="{{route('sell.list')}}" title="">
                             <span><img src="{{asset('client/images/icon2.png')}}" alt=""></span>
-                            Mua bán
+                            Nhà cung cấp
                         </a>
-                        <ul>
+                        <!-- <ul>
                             <li><a href="companies.html" title="">Bán nông sản</a></li>
                             <li><a href="company-profile.html" title="">Vật tư nông nghiệp</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
                     @if(Auth::guard('nongdan')->check())
                         <li>
@@ -47,7 +47,7 @@
                             </a>
                         </li>
                     @endif
-                    
+
                     <li>
                         @if (Auth::guard('nongdan')->check())
                         <a href="{{ route('canhan.nongdan') }}" title="">
@@ -119,7 +119,7 @@
                     @elseif(Auth::guard('chuyengia')->check())
                         <h3 class="tc"><a href="{{ route('dang-xuat-chuyen-gia') }}" title="">Đăng xuất</a></h3>
                     @endif
-                    
+
                 </div>
                 <!--user-account-settingss end-->
             </div>
