@@ -39,15 +39,15 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="company_profile_info">
                         <div class="company-up-info">
-<h2>{{$item->nccvt_diachi}}</h2>
+                            <h3 class="title">{{$item->nccvt_diachi}}</h3>
                             <table style="text-align: left;width:100%" class="m-3">
-                              <!-- <tr>
+                                <!-- <tr>
                                 <td colspan="2"><h2>{{substr($item->nccvt_diachi,0,255)}}...</h2></td>
                               </tr> -->
-                              <tr>
-                                  <td>Số điện thoại</td>
-                                  <td> {{$item->nccvt_sdt}}</td>
-                              </tr>
+                                <tr>
+                                    <td>Số điện thoại</td>
+                                    <td> {{$item->nccvt_sdt}}</td>
+                                </tr>
                                 <tr>
                                     <td>Địa chỉ</td>
                                     <td> {{substr($item->nccvt_diachi,0,45)}}...</td>
