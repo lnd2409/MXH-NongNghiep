@@ -109,12 +109,19 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     Route::get('dang-xuat','AuthController@LogoutNongDan')->name('dang-xuat-nong-dan');
 
 });
+// Nhà cung cấp vật tư
 Route::group(['prefix' => 'nccvt'], function () {
+    // hiển thị danh sách nccvt
     Route::get('/danh-sach-cua-hang', 'SellController@list')->name('sell.list');
+    //chi tiết 1 nccvt
     Route::get('/cua-hang/{id}', 'SellController@index')->name('sell');
+    //tạo sp
     Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
     Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
+    // xem chi tiết sản phẩm
     Route::get('/san-pham/{id}', 'SellController@show')->name('sell.show');
+
+    //cài đặt
 });
 
 
