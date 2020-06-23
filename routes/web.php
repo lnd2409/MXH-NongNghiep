@@ -162,7 +162,9 @@ Route::group(['prefix' => 'chuyen-gia', 'middleware' => 'CheckUserChuyenGia'], f
     Route::get('bach-khoa-nong-nghiep','NgocDuc\ChuyengiaController@BachKhoa')->name('bach-khoa-nong-nghiep');
     Route::get('viet-bai','NgocDuc\ChuyengiaController@DangBai')->name('trang-viet-bai-bach-khoa');
     Route::post('chon-linh-vuc','NgocDuc\ChuyengiaController@ChonLinhVuc')->name('chon-linh-vuc');
-
+    Route::get('nhom/chi-tiet/{idGroup}', 'NgocDuc\NhomController@GroupDetail')->name('chi-tiet-nhom');
+    
+    Route::get('nhom-tham-gia','NgocDuc\NhomController@GroupJoin')->name('group-join');
     //Tạo nhóm
     Route::post('tao-nhom','NgocDuc\ChuyengiaController@CreateGroup')->name('tao-nhom');
 

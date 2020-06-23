@@ -43,9 +43,10 @@ class ChuyengiaController extends Controller
         
         $linhvuc = DB::table('loaisanphamnuoitrong')->whereNotIn('lns_id',$linhvucdachon)->get();
         $linhvuc2 = DB::table('chitietlinhvuc')->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','chitietlinhvuc.lns_id')->where('cg_id',$id)->get();
+        
         $nhomquanly = DB::table('chitietchuyengia')->join('nhom','nhom.n_id','chitietchuyengia.n_id')
                         ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','nhom.lns_id')
-                        ->where('cg_id',$id)->get();
+                        ->where('cg_id',$id)->paginate(5);
 
         // $baivietquantam = DB::table('chitietlinhvucbaiviet')->join('baiviet','baiviet.bv_id','chitietlinhvucbaiviet.bv_id')->whereIn('lns_id',$linhvucdachon)->get();
 

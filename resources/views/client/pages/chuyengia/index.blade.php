@@ -11,7 +11,6 @@
                 <div class="forum-links">
                     <ul>
                         <li class="active"><a href="{{ route('trang-chu-chuyen-gia') }}" title="">Bài viết quan tâm</a></li>
-                        <li><a href="#" title="">Bài viết trong nhóm</a></li>
                         <li><a href="{{ route('bach-khoa-nong-nghiep') }}" title="">Bách khoa nông nghiệp</a></li>
                     </ul>
                 </div>

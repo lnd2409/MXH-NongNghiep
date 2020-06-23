@@ -66,12 +66,16 @@
                             </a>
                         @endif
                     </li>
-                    <li>
-                        <a href="{{ route('all-group') }}" title="">
-                            <span><img src="{{asset('client/images/icon5.png')}}" alt=""></span>
-                            Nhóm
-                        </a>
-                        </li>
+                    @if (Auth::guard('chuyengia')->check())
+                            
+                        @else
+                            <li>
+                                <a href="{{ route('all-group') }}" title="">
+                                    <span><img src="{{asset('client/images/icon5.png')}}" alt=""></span>
+                                    Nhóm
+                                </a>
+                            </li>
+                        @endif
                 </ul>
             </nav>
             <!--nav end-->
