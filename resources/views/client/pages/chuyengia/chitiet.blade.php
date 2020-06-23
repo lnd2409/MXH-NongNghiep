@@ -27,10 +27,11 @@
             <div class="container">
                 <div class="forum-questions-sec">
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-8 ">
                             <br>
-                            <h1 style="font-size: 2em">{{$data->bk_tieude}}</h1>
-                            <div style="max-width:100%">{!! $data->bk_noidung !!}</div>
+                            <h1 style="font-size: 2em" class="text-center">{{$data->bk_tieude}}</h1>
+                            <br>
+                            {!! $data->bk_noidung !!}
                         </div>
 
                         {{-- Danh sách nhóm --}}

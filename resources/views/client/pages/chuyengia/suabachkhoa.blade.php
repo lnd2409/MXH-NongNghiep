@@ -1,5 +1,9 @@
 @include('client.template.head')
-
+<script src="{{asset('vendor/tinymce/js/tinymce/tinymce.min.js')}}"></script>
+<script src="{{asset('vendor/tinymce/langs/vi.js')}}"></script>
+<script>
+    tinymce.init({selector:'#tiny'});
+</script>
 <body>
 
     <div class="wrapper">
@@ -44,9 +48,11 @@
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1">Nội dung </label>
                                                 {{-- <textarea name="thongTin" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> --}}
-                                                <textarea class="textarea" name="noidung" required
-                                                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-                    {!!$bachkhoa->bk_noidung!!}</textarea>
+                                                <textarea class="textarea" name="noidung" required id="tiny"
+                                                    rows="80"
+                                                    style="width: 100%; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                                                    {!! $bachkhoa->bk_noidung !!}
+                                                </textarea>
                                             </div>
 
 
@@ -60,29 +66,6 @@
                                 <!-- /.card -->
 
                             </section>
-
-                            <script>
-                                $(function () {
-          // Summernote
-          $('.textarea').summernote()
-        })
-                            </script>
-
-                            <script>
-                                $(document).ready(function(){
-            $('#fileInput').on('change', function() {
-                var file = $(this)[0].files[0];
-
-                var fileReader = new FileReader();
-                fileReader.onload = function() {
-                    var imageSrc = event.target.result;
-                    $('.js-file-image').attr('src', imageSrc);
-                };
-                fileReader.readAsDataURL(file);
-            });
-        });
-                            </script>
-                            {{-- @endsection --}}
                         </div>
                     </div>
                 </div>
