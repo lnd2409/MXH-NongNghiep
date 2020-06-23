@@ -7,12 +7,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use DB;
 use Hash;
-<<<<<<< HEAD;
 use Auth;
-=======
-use Illuminate\Support\Facades\Auth;
-
->>>>>>> ngoc.duc
 class NongdanController extends Controller
 {
     /**

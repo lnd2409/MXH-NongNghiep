@@ -4,6 +4,7 @@ namespace App\Http\Controllers\NgocDuc;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class ChuyengiaController extends Controller
 {
@@ -30,7 +31,13 @@ class ChuyengiaController extends Controller
         // return view('client.pages.chuyengia.bach-khoa-nong-nghiep');
         $data = DB::table('bachkhoa')->join('chuyengia','chuyengia.cg_id','=','bachkhoa.cg_id')
         ->get();
-        return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact('data'));
+        $day[]='';
+        Carbon::setlocale('vi');
+        $now = Carbon::now();
+        foreach ($data as $item) {
+            $day[$item->bk_id]=Carbon::parse($item->bk_ngaydang)->diffForHumans(($now));
+        }
+        return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact('data','day'));
 
     }
 
@@ -104,5 +111,11 @@ class ChuyengiaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function ChiTiet($id)
+    {
+        $data = DB::table('bachkhoa')
+        ->where('bk_id',$id)->first();
+        return view('client.pages.chuyengia.chitiet',compact('data'));
     }
 }

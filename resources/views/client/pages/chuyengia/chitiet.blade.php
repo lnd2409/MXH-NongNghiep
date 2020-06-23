@@ -22,65 +22,15 @@
                 </div>
             </div>
         </section>
-        <section class="forum-page pt-2 pb-2">
-            <div class="container">
-                <div class="forum-questions-sec">
-                    <div class="row">
-                        <div class="col-12">
-                            <a href="{{ route('hien-thi-them') }}" class="btn btn-primary">Đăng bài viết mới</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
         <section class="forum-page pt-1 pb-2">
             <div class="container">
                 <div class="forum-questions-sec">
                     <div class="row">
                         <div class="col-lg-8">
-                            @foreach ($data as $item)
-
-                            <div class="forum-questions">
-                                <div class="usr-question">
-                                    <div class="usr_img">
-                                        <img src="http://via.placeholder.com/60x60" alt="">
-                                    </div>
-                                    <div class="usr_quest">
-                                        <h3 style="margin-bottom: 0px;"><a
-                                                href="{{route('chi-tiet',$item->bk_id)}}">{{$item->bk_tieude}}</a></h3>
-
-                                        <ul class="react-links">
-                                            <li>{{$item->cg_hoten}}</li>
-                                        </ul>
-                                        <br>
-                                        <br>
-                                        @if(\Auth::guard('chuyengia')->id()==$item->cg_id)
-                                        <a href="{{ route('hien-thi-sua', ['id'=>$item->bk_id]) }}"
-                                            class="btn btn-warning" style="padding: 2px 6px;">Sửa</a>
-                                        <a href="{{ route('xoa-bach-khoa', ['id'=>$item->bk_id]) }}"
-                                            class="btn btn-danger" style="padding: 2px 6px;">Xóa</a>
-                                        @endif
-                                    </div>
-                                    <!--usr_quest end-->
-                                    <span class="quest-posted-time"><i
-                                            class="fa fa-clock-o"></i>{{$day[$item->bk_id]}}</span>
-                                </div>
-                            </div>
-                            @endforeach
-
-                            <!--forum-questions end-->
-                            <nav aria-label="Page navigation example" class="full-pagi">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link pvr" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                    <li class="page-item"><a class="page-link pvr" href="#">Next</a></li>
-                                </ul>
-                            </nav>
+                            <br>
+                            <h1 style="font-size: 2em">{{$data->bk_tieude}}</h1>
+                            <div style="max-width:100%">{!! $data->bk_noidung !!}</div>
                         </div>
 
                         {{-- Danh sách nhóm --}}

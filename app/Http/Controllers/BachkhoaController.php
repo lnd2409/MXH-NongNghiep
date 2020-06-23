@@ -19,7 +19,6 @@ class BachkhoaController extends Controller
         
         $data = DB::table('bachkhoa')->join('chuyengia','chuyengia.cg_id','=','bachkhoa.cg_id')
         ->get();
-        dd($data);
         return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact('data'));
     }
 
@@ -51,7 +50,7 @@ class BachkhoaController extends Controller
                     // 'bk_hinhanh' => $random.$tenHA,
                     'bk_noidung' => $request->noidung,
                     // 'bn_trangthai' => 1,
-                    'cg_id' =>$request->chuyengia,
+                    'cg_id' =>\Auth::guard('chuyengia')->id(),
                     'bk_ngaydang' =>$now,
                     'created_at' => $now,
                     'updated_at' => $now,
@@ -89,9 +88,14 @@ class BachkhoaController extends Controller
      */
     public function edit($id)
     {
+        
         $chuyengia = DB::table('chuyengia')->get();
         $bachkhoa = DB::table('bachkhoa')->where('bk_id','=',$id)->first();
-        return view('client.pages.chuyengia.suabachkhoa', compact(['chuyengia', 'bachkhoa']));
+        if($bachkhoa->cg_id==\Auth::guard('chuyengia')->id()){
+
+            return view('client.pages.chuyengia.suabachkhoa', compact(['chuyengia', 'bachkhoa']));
+        }
+        return redirect()->route('bach-khoa-nong-nghiep');
     }
 
     /**
@@ -110,7 +114,6 @@ class BachkhoaController extends Controller
                 'bk_tieude' => $request->tieude,
                 'bk_noidung' =>$request->noidung,
                 'bk_ngaydang' =>$now,
-                'cg_id' =>$request->chuyengia
             ]
         );
         return redirect()->route('bach-khoa-nong-nghiep');
