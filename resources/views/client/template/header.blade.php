@@ -26,6 +26,11 @@
                             <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
                             Trang chủ
                         </a>
+                        @elseif(Auth::guard('chuyengia')->check())
+                            <a href="{{ route('trang-chu-chuyen-gia') }}" title="">
+                                <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
+                                Trang chủ
+                            </a>
                         @endif
                        
                     </li>
@@ -66,8 +71,13 @@
                             </a>
                         @endif
                     </li>
-                    @if (Auth::guard('chuyengia')->check())
-                            
+                        @if (Auth::guard('chuyengia')->check())
+                        <li>
+                            <a href="{{ route('group-join') }}" title="">
+                                <span><img src="{{asset('client/images/icon5.png')}}" alt=""></span>
+                                Nhóm
+                            </a>
+                        </li>
                         @else
                             <li>
                                 <a href="{{ route('all-group') }}" title="">

@@ -95,6 +95,12 @@ class NhomController extends Controller
         }
     }
 
+    // public function AllGroup ()
+    // {
+    //     return view('client.pages.nhom.index');
+    // }
+
+
     /**
      * Show the form for creating a new resource.
      *

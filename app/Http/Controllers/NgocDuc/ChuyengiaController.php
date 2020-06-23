@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\NgocDuc;
-
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
-use DB;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 class ChuyengiaController extends Controller
 {
     /**
@@ -182,5 +183,11 @@ class ChuyengiaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function ChiTiet($id)
+    {
+        $data = DB::table('bachkhoa')
+        ->where('bk_id',$id)->first();
+        return view('client.pages.chuyengia.chitiet',compact('data'));
     }
 }

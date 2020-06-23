@@ -23,6 +23,13 @@
           <span class="menu-title">Bảng điều khiển</span>
         </a>
       </li>
+      {{-- bách khoa nông nghiệp --}}
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ route('trang-chu-bach-khoa') }}">
+          <i class="icon-rocket menu-icon"></i>
+          <span class="menu-title">Bách khoa nông nghiệp</span>
+        </a>
+      </li>
     </ul>
   </nav>
   <!-- partial -->

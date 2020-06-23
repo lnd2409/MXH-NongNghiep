@@ -29,7 +29,11 @@
 <section class="companies-info">
     <div class="container">
         <div class="company-title">
+<<<<<<< HEAD
             <button class="btn btn-success" onclick="window.location.href='{{route('sell.create')}}'">Đăng bán</button>
+=======
+            <h3>Thực phẩm khô</h3>
+>>>>>>> kimchi
         </div>
         <!--company-title end-->
         <div class="companies-list">
@@ -39,7 +43,11 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="company_profile_info">
                         <div class="company-up-info">
+<<<<<<< HEAD
                             <a href="{{route('sell.show',$item->sp_id)}}">
+=======
+                            <a href="{{route('sell.single',$item->sp_id)}}">
+>>>>>>> kimchi
 
                                 <img src="{{asset($item->sp_hinhdaidien)}}" alt="">
                                 <h3 class="title">{{substr($item->sp_ten,0,45)}}...</h3>
@@ -56,7 +64,11 @@
                             </table>
                             <br>
                             <ul>
+<<<<<<< HEAD
                                 <li><a href="{{route('sell.show',$item->sp_id)}}" title="" class="follow">Xem gian
+=======
+                                <li><a href="{{route('sell.single',$item->sp_id)}}" title="" class="follow">Xem gian
+>>>>>>> kimchi
                                         hàng</a></li>
                             </ul>
                         </div>

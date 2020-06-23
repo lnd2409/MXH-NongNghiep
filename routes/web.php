@@ -116,6 +116,10 @@ Route::group(['prefix' => 'nccvt'], function () {
     Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
     Route::get('/san-pham/{id}', 'SellController@show')->name('sell.show');
 });
+Route::get('/ban-hang', 'SellController@index')->name('sell');
+Route::get('/ban-hang/{id}', 'SellController@show')->name('sell.single');
+Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
+Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
 
 
 //Giao diện của thương lái ném vào đây
@@ -168,11 +172,16 @@ Route::group(['prefix' => 'chuyen-gia', 'middleware' => 'CheckUserChuyenGia'], f
     //Tạo nhóm
     Route::post('tao-nhom','NgocDuc\ChuyengiaController@CreateGroup')->name('tao-nhom');
 
+    Route::get('bai-viet/{id}','NgocDuc\ChuyengiaController@ChiTiet')->name('chi-tiet');
+    Route::get('viet-bai','NgocDuc\ChuyengiaController@DangBai')->name('trang-viet-bai-bach-khoa');
 });
 
 
 //Nghĩa lấy code chổ này nhé!
 
+Route::get('/nccvt-nn', function () {
+    return view('client.pages.nccvtnn.index');
+});
 
 
 
@@ -204,3 +213,11 @@ Route::view('/message', 'client.pages.message.index');
 Route::view('/profile-account-setting', 'client.pages.account.profile-account-setting');
 Route::view('/forum', 'client.pages.forum.index');
 Route::view('/forum-post-view', 'client.pages.forum.forum-post-view');
+
+//bách khoa nông nghiệp
+Route::get('bach-khoa','BachkhoaController@index')->name('trang-chu-bach-khoa');
+Route::get('/chuyen-gia/viet-bai','BachkhoaController@create')->name('hien-thi-them');
+Route::post('them-bach-khoa','BachkhoaController@store')->name('them-bach-khoa');
+Route::get('hien-thi-sua{id}','BachkhoaController@edit')->name('hien-thi-sua');
+Route::post('sua-bach-khoa{id}','BachkhoaController@update')->name('sua-bach-khoa');
+Route::get('xoa-bach-khoa{id}','BachkhoaController@destroy')->name('xoa-bach-khoa');

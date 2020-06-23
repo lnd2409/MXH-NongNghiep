@@ -62,6 +62,7 @@
                                 
                             @endforeach
                             </div>
+                            
                             <!--forum-questions end-->
                             <nav aria-label="Page navigation example" class="full-pagi">
                                 <ul class="pagination">

@@ -7,8 +7,12 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use DB;
 use Hash;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
 
+=======
+use Auth;
+>>>>>>> kimchi
 class NongdanController extends Controller
 {
     /**
