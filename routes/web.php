@@ -153,6 +153,11 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutThuongLai')->name('dang-xuat-thuong-lai');
 
+    //Đăng bài dành cho Thương lái
+    Route::post('/dang-bai-thuong-lai','ThuongLaiController@writePosts')->name('thuong-lai-dang-bai');
+
+    //Bình luận 
+    Route::post('/binhluan','ThuongLaiController@Ajaxcomment')->name('thuonglai.binhluan');
 });
 
 
