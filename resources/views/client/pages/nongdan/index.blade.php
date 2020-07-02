@@ -21,6 +21,35 @@ p._hinhanh {
     /* border-radius: 9%; */
 }
 
+
+.text-comment {
+    height: 26px;
+    width: 347px !important;
+    margin-left: 55px;
+    border-radius: 10px;
+}
+
+.comment-send{
+    width: 80px;
+    height: 28px;
+    line-height: 8px;
+    font-size: 15px;
+    margin-left: -80px;
+}
+.id_delete {
+    /* border: 1px solid; */
+    width: 116px;
+    height: 29px;
+    /* float: right; */
+    position: absolute;
+    right: 14px;
+    top: 28px;
+    /* padding: 0 7px; */
+}
+.id_delete :hover{
+    color: red;
+}
+
 </style>
 @endsection
 <body>
@@ -64,6 +93,9 @@ p._hinhanh {
                                     </div>
                                     <div class="usr_quest">
                                         <h3><a href="">{{ $item->bv_tieude }}</a></h3>
+                                        <div class="id_delete">
+                                            <a href="{{ route('nongdan.bai-dang-xoa', $item->bv_id) }}"  ><i class="fa fa-trash" aria-hidden="true"> Xóa bài viết</i></a>  
+                                        </div>
                                         <div>
                                             {{ $item->bv_noidung }}
                                         </div>
@@ -71,7 +103,7 @@ p._hinhanh {
                                         <ul class="quest-tags">
                                             @if(!empty($hinhanh[$item->bv_id]))
                                                 @foreach ($hinhanh[$item->bv_id] as $item2)
-                                                    <li><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70"></li>
+                                                    <li><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70" class="img-p" ></li>
                                                 @endforeach
                                             @endif
                                         </ul>
@@ -79,7 +111,7 @@ p._hinhanh {
                                             <li><a href="#" ><i class="fa fa-heart"></i>Thích</a></li>
                                             {{-- Bình luận --}}
                                             <li>    
-                                                <a class="showForm" data-id="{!! $item->bv_id !!}">Bình luận</a>
+                                                <a class="showForm" data-id="{!! $item->bv_id !!} ">Bình luận</a>
                                             </li>
                                             <li><a href="#" ><i class="fa fa-eye"></i> Lượt xem</a></li>
                                         </ul>
@@ -91,7 +123,7 @@ p._hinhanh {
                                                             <div class="col-1 p-0">
                                                                 <img src="{{asset('hinhanh/nguoidung/nongdan').'/'.$val->nd_hinhanh}}" style="width: 60%; border-radius: 50%;" alt="">
                                                             </div>
-                                                            <div class="col-10 h-100" style="border-radius: 20px; background-color: #cccccc">
+                                                            <div class="col-10 h-100" style="border-radius: 20px; background-color: #f2f3f5">
                                                                 <div class="pt-2 pb-2" style="font-size: 13px;">
                                                                     <a href="">{{ $val->nd_hoten }}</a>
                                                                     {{$val->bl_noidung}}
@@ -102,21 +134,23 @@ p._hinhanh {
                                                 @endif
                                             </div>
                                             {{-- form viết binh luận --}}
-                                            <form>
+                                            <form >
+                                                @csrf
                                                 <div class="form-group">
                                                     <div class="row">
+                                                        
                                                         <div class="col-10 p-0">
-                                                            <input type="text" class="form-control content_cm{!! $item->bv_id !!}" name="_content" style="width: 100%;">
+                                                            <input type="text"  class="form-control content_cm{!! $item->bv_id !!} text-comment" name="_content" style="width: 100%;">
                                                             <input type="hidden" value="{{$item->bv_id}}" class="bv_id">
                                                             <input type="hidden" value="{{ csrf_token() }}" class="_token">
                                                             <input type="hidden" value="{{Auth::guard('nongdan')->id()}}" class="nd_id">
                                                         </div>
                                                         <div class="col-2 p-0">
-                                                            <button class="btn btn-lg btn-default send{!! $item->bv_id !!}" data-send="{!! $item->bv_id !!}"  >ok</button>
+                                                            <button class="btn btn-lg btn-default send{!! $item->bv_id !!} comment-send" data-send="{!! $item->bv_id !!}"  >Gửi</button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                    
+                                                   
                                             </form>
                                          </div>
                                         <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min ago</span>    
@@ -334,7 +368,7 @@ p._hinhanh {
                     data: { noidung:noidung, bv_id:bv_id, nd_id:nd_id, _token:_token},
                     dataType: "json",
                     success: function (response) {
-                        // console.log(response.data);
+                        console.log(response.data);
                         var ha =response.data.nd_hinhanh;
                         var src_img ='{{asset('hinhanh/nguoidung/nongdan')}}';
                         src_img += "/";
@@ -345,7 +379,7 @@ p._hinhanh {
                         var noidung1 = response.data.bl_noidung;
                         var data2 =  '<div class="row mb-3" >'+'<div class="col-1 p-0">' + 
                                     '<img src="'+ src_img +'" style="width: 60%; border-radius: 50%;" alt=""></div>'
-                                    +'<div class="col-10 h-100" style="border-radius: 20px; background-color: #cccccc">' + 
+                                    +'<div class="col-10 h-100" style="border-radius: 20px; background-color: #f2f3f5">' + 
                                         '<div class="pt-2 pb-2" style="font-size: 13px;">' +
                                         '<a href="">'+ hoten1 + '</a>' + noidung1 +' </div>' + '</div>'+'</div>';
                         
@@ -365,6 +399,7 @@ p._hinhanh {
 
             $('.img-p').click(function (e) { 
                 e.preventDefault();
+                console.log("ok");
                 var src = $(this).attr('src');
                 $('#exampleModal1').modal('show');
                $('#popup-img').attr('src',src);
@@ -372,7 +407,7 @@ p._hinhanh {
 
         });
     </script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('.popup-gallery').magnificPopup({
                 delegate: 'a',
@@ -392,7 +427,7 @@ p._hinhanh {
                 }
             });
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>

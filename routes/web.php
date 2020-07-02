@@ -129,6 +129,11 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutNongDan')->name('dang-xuat-nong-dan');
+
+    //Xóa bài viết
+    Route::get('/dang-bai-xoa/{id}','NgocDuc\NongdanController@destroy')->name('nongdan.bai-dang-xoa');
+    
+
    
 });
 
@@ -182,6 +187,9 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
 
     //Bình luận 
     Route::post('/binhluan','ThuongLaiController@Ajaxcomment')->name('thuonglai.binhluan');
+
+    //Xóa bài viết
+    Route::get('/dang-bai-xoa/{id}','ThuongLaiController@destroy')->name('thuonglai.bai-dang-xoa');
 });
 
 

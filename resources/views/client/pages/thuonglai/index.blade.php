@@ -20,6 +20,36 @@ p._hinhanh {
     /* border: 1px solid; */
     /* border-radius: 9%; */
 }
+ .text-comment {
+    height: 26px;
+    width: 347px !important;
+    margin-left: 55px;
+    border-radius: 10px;
+}
+
+ .comment-send {
+    width: 80px;
+    height: 28px;
+    line-height: 8px;
+    font-size: 15px;
+    margin-left: -80px;
+}
+
+.id_delete {
+    /* border: 1px solid; */
+    width: 116px;
+    height: 29px;
+    /* float: right; */
+    position: absolute;
+    right: 14px;
+    top: 28px;
+    /* padding: 0 7px; */
+}
+.id_delete :hover{
+    color: red;
+}
+
+
 
 </style>
 @endsection
@@ -64,6 +94,10 @@ p._hinhanh {
                                     </div>
                                     <div class="usr_quest">
                                         <h3><a href="">{{ $item->bv_tieude }}</a></h3>
+                                        <div class="id_delete">
+                                            <a href="{{ route('thuonglai.bai-dang-xoa', $item->bv_id) }}"  ><i class="fa fa-trash" aria-hidden="true"> Xóa bài viết</i></a>  
+                                        </div>
+                                        
                                         <div>
                                             {{ $item->bv_noidung }}
                                         </div>
@@ -107,13 +141,13 @@ p._hinhanh {
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-10 p-0">
-                                                            <input type="text" class="form-control content_cm{!! $item->bv_id !!}" name="_content" style="width: 100%;">
+                                                            <input type="text" class="form-control content_cm{!! $item->bv_id !!} text-comment" name="_content" style="width: 100%;">
                                                             <input type="hidden" value="{{$item->bv_id}}" class="bv_id">
                                                             <input type="hidden" value="{{ csrf_token() }}" class="_token">
                                                             <input type="hidden" value="{{Auth::guard('thuonglai')->id()}}" class="tl_id">
                                                         </div>
                                                         <div class="col-2 p-0">
-                                                            <button class="btn btn-lg btn-default send{!! $item->bv_id !!}" data-send="{!! $item->bv_id !!}"  >ok</button>
+                                                            <button class="btn btn-lg btn-default send{!! $item->bv_id !!} comment-send" data-send="{!! $item->bv_id !!} "  >Gửi</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -332,7 +366,7 @@ p._hinhanh {
                     data: { noidung:noidung, bv_id:bv_id, tl_id:tl_id, _token:_token},
                     dataType: "json",
                     success: function (response) {
-                        // console.log(response.data);
+                        console.log(response.data);
                         var ha =response.data.tl_hinhanh;
                         var src_img ='{{asset('hinhanh/nguoidung/thuonglai')}}';
                         src_img += "/";
@@ -343,7 +377,7 @@ p._hinhanh {
                         var noidung1 = response.data.bl_noidung;
                         var data2 =  '<div class="row mb-3" >'+'<div class="col-1 p-0">' + 
                                     '<img src="'+ src_img +'" style="width: 60%; border-radius: 50%;" alt=""></div>'
-                                    +'<div class="col-10 h-100" style="border-radius: 20px; background-color: #cccccc">' + 
+                                    +'<div class="col-10 h-100" style="border-radius: 20px; background-color: #f2f3f5">' + 
                                         '<div class="pt-2 pb-2" style="font-size: 13px;">' +
                                         '<a href="">'+ hoten1 + '</a>' + noidung1 +' </div>' + '</div>'+'</div>';
                         

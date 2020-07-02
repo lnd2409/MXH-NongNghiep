@@ -30,6 +30,7 @@ class NongdanController extends Controller
         $baiviet = DB::table('baiviet')->join('nongdan','nongdan.nd_id','=','baiviet.nd_id')->orderBy('bv_id','desc')->get();
         $hinhanh=array();
         $lns = DB::table('loaisanphamnuoitrong')->get();
+        $binhluan = DB::table('binhluan')->get();
         foreach ($baiviet as $value) {
         
             # code...
@@ -41,7 +42,7 @@ class NongdanController extends Controller
             ->get();
         }
        
-        return view('client.pages.nongdan.index',compact('nhom_nong_dan','baiviet','hinhanh','lns'));
+        return view('client.pages.nongdan.index',compact('nhom_nong_dan','baiviet','hinhanh','lns','binhluan'));
     }
 
 
@@ -59,25 +60,29 @@ class NongdanController extends Controller
             # code...
             $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
         }
-        return view ('client.pages.nongdan.trang-ca-nhan',compact(['data','baiviet','hinhanh','slbv','lns']));
+        return view ('client.pages.nongdan.trang-ca-nhan',compact(['data','baiviet','hinhanh','slbv']));
     }
 
 
     //bình luận
     public function Ajaxcomment(Request $request)
     {
+        $tg =Carbon::now();
         $data['bl_noidung'] = $request->noidung;
+        $data['bl_thoigian'] = $tg;
         $data['bv_id'] = $request->bv_id;
         $data['nd_id'] = $request->nd_id;
+        // dd($data);
 
-        $result = DB::table('binhluan')->insert($data);
-
+      DB::table('binhluan')->insert($data);
+      
         $data1 =  DB::table('binhluan')
         ->join('nongdan','nongdan.nd_id','binhluan.nd_id')
         ->orderBy('binhluan.bl_id','DESC')->first();
-        return response()->json(['data'=>$data1],200);
+
+         return response()->json(['data'=>$data1],200);
+
         
-      
     }
 
 
@@ -224,7 +229,17 @@ class NongdanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('chitietlinhvucbaiviet')->where('bv_id',$id)->delete();
+
+        DB::table('binhluan')->where('bv_id',$id)->delete();
+        DB::table('hinhanhbaiviet')->where('bv_id',$id)->delete();
+  
+
+        $result = DB::table('baiviet')->where('bv_id',$id)->delete();
+        if($result)
+        {
+            return redirect()->back();
+        }
     }
 
     public function writePosts(Request $request){

@@ -47,7 +47,9 @@ class ThuongLaiController extends Controller
     //bình luận
     public function Ajaxcomment(Request $request)
     {
+        $tg =Carbon::now();
         $data['bl_noidung'] = $request->noidung;
+        $data['bl_thoigian'] = $tg;
         $data['bv_id'] = $request->bv_id;
         $data['tl_id'] = $request->tl_id;
 
@@ -198,7 +200,17 @@ class ThuongLaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('chitietlinhvucbaiviet')->where('bv_id',$id)->delete();
+
+        DB::table('binhluan')->where('bv_id',$id)->delete();
+        DB::table('hinhanhbaiviet')->where('bv_id',$id)->delete();
+  
+
+        $result = DB::table('baiviet')->where('bv_id',$id)->delete();
+        if($result)
+        {
+            return redirect()->back();
+        }
     }
 
 
