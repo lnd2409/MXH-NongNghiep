@@ -31,4 +31,10 @@
             padding: 0 !important;
         }
     </style>
+    <!-- summernote -->
+    <link rel="stylesheet" type="text/css" href="{{asset('client/plugins/summernote/summernote-bs4.css')}}">
+   
+    
+
+    
 </head>

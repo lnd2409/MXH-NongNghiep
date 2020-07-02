@@ -41,8 +41,11 @@ class NhomController extends Controller
     {
         if (Auth::guard('nongdan')->check()) {
             # code...
-            
-
+            $id = Auth::guard('nongdan')->user()->nd_id;
+            $nhomthamgia = DB::table('chitietnhom')->join('nhom','nhom.n_id','chitietnhom.n_id')
+                        ->where('nd_id',$id)->paginate(5);
+            $count1 = $nhomthamgia->count();
+            return view('client.pages.nhom.index',compact(['nhomthamgia','count1']));
         }elseif (Auth::guard('thuonglai')->check()) {
             # code...
 
@@ -52,7 +55,8 @@ class NhomController extends Controller
             $nhomquanly = DB::table('chitietchuyengia')->join('nhom','nhom.n_id','chitietchuyengia.n_id')
                         ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','nhom.lns_id')
                         ->where('cg_id',$id)->paginate(5);
-            return view('client.pages.nhom.index',compact(['nhomquanly']));
+            $count3 = $nhomquanly->count();
+            return view('client.pages.nhom.index',compact(['nhomquanly','count3']));
         }else
         {
             dd("Chưa tham gia nhóm này");

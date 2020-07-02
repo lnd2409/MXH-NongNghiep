@@ -110,7 +110,10 @@ class ChuyengiaController extends Controller
     //Qua trang bách khoa nông nghiệp
     public function BachKhoa()
     {
-        return view('client.pages.chuyengia.bach-khoa-nong-nghiep');
+
+        $data = DB::table('bachkhoa')->join('chuyengia','chuyengia.cg_id','=','bachkhoa.cg_id')
+        ->get();
+        return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact('data'));
     }
 
 

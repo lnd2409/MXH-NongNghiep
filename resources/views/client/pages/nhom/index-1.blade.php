@@ -8,14 +8,15 @@
 
         <section class="forum-sec">
             <div class="container">
+                
                 <div class="forum-links">
                     <ul>
                         
                         @if (Auth::guard('chuyengia')->check())
                             <li class="active"><a href="{{ route('group-join') }}" title="">Nhóm quản lý</a></li>
-                        @else
-                            <li class="active"><a href="{{ route('all-group') }}" title="">Nhóm</a></li>
-                            <li><a href="{{ route('group-join') }}" title="">Nhóm đã tham gia</a></li>
+                        @elseif(Auth::guard('nongdan')->check())
+                            <li class="active"><a href="{{ route('all-group1') }}" title="">Nhóm</a></li>
+                            <li><a href="{{ route('group-join-1') }}" title="">Nhóm đã tham gia</a></li>
                         @endif
                     </ul>
                 </div>

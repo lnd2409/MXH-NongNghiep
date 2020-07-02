@@ -62,8 +62,6 @@
                                         @endif
                                     </div>
                                     <!--usr_quest end-->
-                                    <span class="quest-posted-time"><i
-                                            class="fa fa-clock-o"></i>{{$day[$item->bk_id]}}</span>
                                 </div>
                             </div>
                             @endforeach

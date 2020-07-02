@@ -78,6 +78,13 @@
                                 Nhóm
                             </a>
                         </li>
+                        @elseif(Auth::guard('nongdan')->check())
+                            <li>
+                                <a href="{{ route('all-group1') }}" title="">
+                                    <span><img src="{{asset('client/images/icon5.png')}}" alt=""></span>
+                                    Nhóm
+                                </a>
+                            </li>
                         @else
                             <li>
                                 <a href="{{ route('all-group') }}" title="">

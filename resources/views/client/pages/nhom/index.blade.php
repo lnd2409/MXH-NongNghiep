@@ -12,9 +12,9 @@
                     <ul>
                         @if (Auth::guard('chuyengia')->check())
                             <li class="active"><a href="{{ route('group-join') }}" title="">Nhóm quản lý</a></li>
-                        @else
-                            <li class="active"><a href="{{ route('all-group') }}" title="">Nhóm</a></li>
-                            <li><a href="{{ route('group-join') }}" title="">Nhóm đã tham gia</a></li>
+                        @elseif(Auth::guard('nongdan')->check())
+                            <li class="active"><a href="{{ route('all-group1') }}" title="">Nhóm</a></li>
+                            <li><a href="{{ route('group-join-1') }}" title="">Nhóm đã tham gia</a></li>
                         @endif
                     </ul>
                 </div>
@@ -43,30 +43,64 @@
                     <br>
                     <div class="row">
                         <div class="col-lg-12">
-                            @if ($nhomquanly)
-                            @foreach ($nhomquanly as $item)
-                                <div class="forum-questions">
-                                    <div class="usr-question">
-                                        <div class="usr_img">
-                                            <img src="http://via.placeholder.com/60x60" alt="">
-                                        </div>
-                                        <div class="usr_quest">
-                                            <h3><a href="{{ route('chi-tiet-nhom', ['idGroup'=>$item->n_id]) }}">{{ $item->n_tennhom }}</a></h3>
-                                            <ul class="react-links">
-                                                <li><a href="#" title=""><i class="fa fa-heart"></i> Vote 150</a></li>
-                                                <li><a href="#" title=""><i class="fa fa-comment"></i> Comments 15</a></li>
-                                                <li><a href="#" title=""><i class="fa fa-eye"></i> Views 50</a></li>
-                                            </ul>
-                                            <ul class="quest-tags">
-                                                <li><a href="#" title="">Work</a></li>
-                                                <li><a href="#" title="">Php</a></li>
-                                                <li><a href="#" title="">Design</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!--usr-question end-->
-                                </div>     
-                            @endforeach
+                            @if (Auth::guard('chuyengia')->check())
+                                @if ($count3 == 0)
+                                    Chưa tạo nhóm
+                                @else
+                                    @foreach ($nhomquanly as $item)
+                                        <div class="forum-questions">
+                                            <div class="usr-question">
+                                                <div class="usr_img">
+                                                    <img src="http://via.placeholder.com/60x60" alt="">
+                                                </div>
+                                                <div class="usr_quest">
+                                                    <h3><a href="{{ route('chi-tiet-nhom', ['idGroup'=>$item->n_id]) }}">{{ $item->n_tennhom }}</a></h3>
+                                                    <ul class="react-links">
+                                                        <li><a href="#" title=""><i class="fa fa-heart"></i> Vote 150</a></li>
+                                                        <li><a href="#" title=""><i class="fa fa-comment"></i> Comments 15</a></li>
+                                                        <li><a href="#" title=""><i class="fa fa-eye"></i> Views 50</a></li>
+                                                    </ul>
+                                                    <ul class="quest-tags">
+                                                        <li><a href="#" title="">Work</a></li>
+                                                        <li><a href="#" title="">Php</a></li>
+                                                        <li><a href="#" title="">Design</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!--usr-question end-->
+                                        </div>     
+                                    @endforeach
+                                @endif
+                                
+                            @elseif(Auth::guard('nongdan')->check())
+                                @if ($count1 == 0)
+                                    <p class="text-center">Bạn chưa tham gia nhóm nào</p>
+                                @else
+                                    @foreach ($nhomthamgia as $item)
+                                        <div class="forum-questions">
+                                            <div class="usr-question">
+                                                <div class="usr_img">
+                                                    <img src="http://via.placeholder.com/60x60" alt="">
+                                                </div>
+                                                <div class="usr_quest">
+                                                    <h3><a href="{{ route('chi-tiet-nhom', ['idGroup'=>$item->n_id]) }}">{{ $item->n_tennhom }}</a></h3>
+                                                    <ul class="react-links">
+                                                        <li><a href="#" title=""><i class="fa fa-heart"></i> Vote 150</a></li>
+                                                        <li><a href="#" title=""><i class="fa fa-comment"></i> Comments 15</a></li>
+                                                        <li><a href="#" title=""><i class="fa fa-eye"></i> Views 50</a></li>
+                                                    </ul>
+                                                    <ul class="quest-tags">
+                                                        <li><a href="#" title="">Work</a></li>
+                                                        <li><a href="#" title="">Php</a></li>
+                                                        <li><a href="#" title="">Design</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!--usr-question end-->
+                                        </div>     
+                                    @endforeach
+                                @endif
+                                
                             @else
                                 <h2>Bạn chưa tham gia nhóm nào hết</h2>
                             @endif
@@ -74,7 +108,11 @@
                            
                             <!--forum-questions end-->
                                 <nav aria-label="Page navigation example" class="full-pagi">
+                                    @if (Auth::guard('chuyengia')->check())
                                         {{ $nhomquanly->links() }}
+                                    @elseif(Auth::guard('nongdan')->check())
+                                        {{ $nhomthamgia->links() }}
+                                    @endif
                                 </nav>
                             
                                 

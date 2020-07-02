@@ -7,12 +7,11 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use DB;
 use Hash;
-<<<<<<< HEAD
+
 use Illuminate\Support\Facades\Auth;
 
-=======
-use Auth;
->>>>>>> kimchi
+
+
 class NongdanController extends Controller
 {
     /**
@@ -43,7 +42,7 @@ class NongdanController extends Controller
 
     public function mypages()
     {
-        $id=\Auth::guard('nongdan')->id();
+        $id=Auth::guard('nongdan')->id();
         
         $data = DB::table('nongdan')->where('nd_id',$id)->first();
         $baiviet = DB::table('baiviet')->where('nd_id',$id)->get();
@@ -57,6 +56,7 @@ class NongdanController extends Controller
         }
         return view ('client.pages.nongdan.trang-ca-nhan',compact(['data','baiviet','hinhanh','slbv']));
     }
+
 
 
 

@@ -97,8 +97,27 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     
 
     // Nhóm nông dân
-    Route::get('nhom', 'Ngocduc\NhomController@AllGroup')->name('all-group');
+    Route::get('nhom', 'Ngocduc\NhomController@AllGroup')->name('all-group1');
+    Route::get('nhom-tham-gia','NgocDuc\NhomController@GroupJoin')->name('group-join-1');
 
+    //spnt
+    Route::get('/trang-ca-nhan/san-pham-nuoi-trong','SanphamnuoitrongController@index')->name('san-pham-nuoi-trong.nongdan');
+    //Sản phẩm nuôi trồng
+    Route::get('san-pham-nuoi-trong', 'SanphamnuoitrongController@index')->name('danh-sach-san-pham-nuoi-trong');
+    Route::post('san-pham-nuoi-trong','SanphamnuoitrongController@store')->name('them-san-pham-nuoi-trong');
+    Route::get('san-pham-nuoi-trong/{idspnt}/{idmv}/hien-thi-chinh-sua','SanphamnuoitrongController@edit')->name('sua-san-pham-nuoi-trong');
+    Route::post('san-pham-nuoi-trong/{idspnt}/{idmv}/chinh-sua', 'SanphamnuoitrongController@update')->name('cap-nhat-san-pham-nuoi-trong');
+    Route::get('san-pham-nuoi-trong/{idspnt}/{idmv}/xoa','SanphamnuoitrongController@destroy')->name('xoa-san-pham-nuoi-trong');
+    Route::get('them-san-pham-nuoi-trong', 'SanphamnuoitrongController@create')->name('hien-thi-them-san-pham-nuoi-trong');
+    Route::get('san-pham-nuoi-trong/tim-kiem', 'SanphamnuoitrongController@search')->name('tim-kiem');
+    Route::get('san-pham-nuoi-trong/{idspnt}/{idmv}/chi-tiet', 'SanphamnuoitrongController@show')->name('chi-tiet-san-pham-nuoi-trong');
+    Route::get('san-pham-nuoi-trong/don-vi-tinh/{idspnt}', 'SanphamnuoitrongController@donvitinh')->name('don-vi-tinh');
+    //Hình ảnh cho nông sản
+    Route::get('san-pham-nuoi-trong/{id}/hinhanh','HinhanhController@create')->name('giao-dien-them-hinh-anh');
+    Route::post('san-pham-nuoi-trong/hinhanh', 'HinhanhController@store')->name('them-hinh-anh');
+    Route::get('san-pham-nuoi-trong/{idHA}/{idSP}/ha-delete','HinhanhController@destroy')->name('xoa-hinh-anh');
+ 
+    
 
     //Đăng bài dành cho NÔNG DÂN
     Route::post('/dang-bai-nong-dan','NgocDuc\NongdanController@writePosts')->name('nong-dan-dang-bai');
@@ -221,3 +240,11 @@ Route::post('them-bach-khoa','BachkhoaController@store')->name('them-bach-khoa')
 Route::get('hien-thi-sua{id}','BachkhoaController@edit')->name('hien-thi-sua');
 Route::post('sua-bach-khoa{id}','BachkhoaController@update')->name('sua-bach-khoa');
 Route::get('xoa-bach-khoa{id}','BachkhoaController@destroy')->name('xoa-bach-khoa');
+//Trang admin
+//Loại sản phẩm nuôi trồng
+Route::get('/loai-san-pham-nuoi-trong', 'LoaisanphamnuoitrongController@index')->name('danh-sach-loai-san-pham-nuoi-trong');
+Route::post('/loai-san-pham-nuoi-trong','LoaisanphamnuoitrongController@store')->name('them-loai-san-pham-nuoi-trong');
+Route::get('/loai-san-pham-nuoi-trong/{id}/chinh-sua','LoaisanphamnuoitrongController@edit')->name('sua-loai-san-pham-nuoi-trong');
+Route::post('/loai-san-pham-nuoi-trong/{id}/chinh-sua', 'LoaisanphamnuoitrongController@update')->name('cap-nhat-loai-san-pham-nuoi-trong');
+Route::get('/loai-san-pham-nuoi-trong/{id}/xoa','LoaisanphamnuoitrongController@destroy')->name('xoa-loai-san-pham-nuoi-trong');
+
