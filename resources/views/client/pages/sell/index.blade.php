@@ -40,6 +40,7 @@
                     <div class="company_profile_info">
                         <div class="company-up-info">
                             <a href="{{route('sell.show',$item->sp_id)}}">
+                            <a href="{{route('sell.single',$item->sp_id)}}">
 
                                 <img src="{{asset($item->sp_hinhdaidien)}}" alt="">
                                 <h3 class="title">{{substr($item->sp_ten,0,45)}}...</h3>
@@ -57,6 +58,7 @@
                             <br>
                             <ul>
                                 <li><a href="{{route('sell.show',$item->sp_id)}}" title="" class="follow">Xem gian
+                                <li><a href="{{route('sell.single',$item->sp_id)}}" title="" class="follow">Xem gian
                                         hàng</a></li>
                             </ul>
                         </div>
