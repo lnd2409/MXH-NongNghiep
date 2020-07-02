@@ -128,6 +128,7 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     Route::get('dang-xuat','AuthController@LogoutNongDan')->name('dang-xuat-nong-dan');
    
 });
+
 Route::group(['prefix' => 'nccvt'], function () {
     
     Route::get('/cua-hang/{id}', 'SellController@index')->name('sell');
