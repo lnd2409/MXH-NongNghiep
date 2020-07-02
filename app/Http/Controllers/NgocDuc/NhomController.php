@@ -4,7 +4,8 @@ namespace App\Http\Controllers\NgocDuc;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
+use DB;
 class NhomController extends Controller
 {
     /**
@@ -20,8 +21,88 @@ class NhomController extends Controller
 
     public function AllGroup ()
     {
-        return view('client.pages.nhom.index');
+        if(Auth::guard('nongdan')->check())
+        {
+
+        }
+        elseif (Auth::guard('thuonglai')->check()) 
+        {
+            # code...
+            
+        }
+        elseif (Auth::guard('chuyengia')->check()) {
+            # code...
+            
+        }
+        return view('client.pages.nhom.index-1');
     }
+
+    public function GroupJoin()
+    {
+        if (Auth::guard('nongdan')->check()) {
+            # code...
+            $id = Auth::guard('nongdan')->user()->nd_id;
+            $nhomthamgia = DB::table('chitietnhom')->join('nhom','nhom.n_id','chitietnhom.n_id')
+                        ->where('nd_id',$id)->paginate(5);
+            $count1 = $nhomthamgia->count();
+            return view('client.pages.nhom.index',compact(['nhomthamgia','count1']));
+        }elseif (Auth::guard('thuonglai')->check()) {
+            # code...
+
+        }elseif (Auth::guard('chuyengia')->check()) {
+            # code...
+            $id = Auth::guard('chuyengia')->user()->cg_id;
+            $nhomquanly = DB::table('chitietchuyengia')->join('nhom','nhom.n_id','chitietchuyengia.n_id')
+                        ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','nhom.lns_id')
+                        ->where('cg_id',$id)->paginate(5);
+            $count3 = $nhomquanly->count();
+            return view('client.pages.nhom.index',compact(['nhomquanly','count3']));
+        }else
+        {
+            dd("Chưa tham gia nhóm này");
+        }
+        
+
+    }
+
+    public function GroupDetail($idGroup)
+    {
+        if (Auth::guard('nongdan')->check()) {
+            # code...
+            
+
+        }elseif (Auth::guard('thuonglai')->check()) {
+            # code...
+
+        }elseif (Auth::guard('chuyengia')->check()) {
+            # code...
+            $id = Auth::guard('chuyengia')->user()->cg_id;
+            $check = DB::table('chitietchuyengia')->where('cg_id','=',$id)->first();
+            if($check != '')
+            {
+                $nhom = DB::table('nhom')->where('n_id','=',$idGroup)->first();
+
+                $baiviet = DB::table('chitietlinhvucbaiviet')
+                ->join('baiviet','baiviet.bv_id','chitietlinhvucbaiviet.bv_id')
+                ->where('n_id','=',$idGroup)
+                ->join('nongdan','nongdan.nd_id','baiviet.nd_id')
+                ->leftjoin('thuonglai','thuonglai.tl_id','baiviet.tl_id')
+                ->get();
+
+
+
+                return view('client.pages.nhom.detail',compact(['baiviet','nhom']));
+            }
+        }else
+        {
+            dd("Chưa tham gia nhóm này");
+        }
+    }
+
+    // public function AllGroup ()
+    // {
+    //     return view('client.pages.nhom.index');
+    // }
 
 
     /**

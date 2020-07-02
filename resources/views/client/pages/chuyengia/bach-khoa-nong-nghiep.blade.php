@@ -3,7 +3,7 @@
 <body>
 
     <div class="wrapper">
-        @include('client.template.header') 
+        @include('client.template.header')
 
 
         <section class="forum-sec">
@@ -12,7 +12,8 @@
                     <ul>
                         <li><a href="{{ route('trang-chu-chuyen-gia') }}" title="">Bài viết quan tâm</a></li>
                         <li><a href="#" title="">Bài viết trong nhóm</a></li>
-                        <li  class="active"><a href="{{ route('bach-khoa-nong-nghiep') }}" title="">Bách khoa nông nghiệp</a></li>
+                        <li class="active"><a href="{{ route('bach-khoa-nong-nghiep') }}" title="">Bách khoa nông
+                                nghiệp</a></li>
                     </ul>
                 </div>
                 <!--forum-links end-->
@@ -26,7 +27,7 @@
                 <div class="forum-questions-sec">
                     <div class="row">
                         <div class="col-12">
-                            <a href="{{ route('trang-viet-bai-bach-khoa') }}" class="btn btn-primary">Đăng bài viết mới</a>
+                            <a href="{{ route('hien-thi-them') }}" class="btn btn-primary">Đăng bài viết mới</a>
                         </div>
                     </div>
                 </div>
@@ -37,22 +38,34 @@
                 <div class="forum-questions-sec">
                     <div class="row">
                         <div class="col-lg-8">
+                            @foreach ($data as $item)
+
                             <div class="forum-questions">
                                 <div class="usr-question">
                                     <div class="usr_img">
                                         <img src="http://via.placeholder.com/60x60" alt="">
                                     </div>
                                     <div class="usr_quest">
-                                        <h3 style="margin-bottom: 0px;"><a href="">Hiển thị tất cả bài viết</a></h3>
-                                        <p>Nội dung rút gọn</p>
+                                        <h3 style="margin-bottom: 0px;"><a
+                                                href="{{route('chi-tiet',$item->bk_id)}}">{{$item->bk_tieude}}</a></h3>
+
                                         <ul class="react-links">
-                                            <li><a href="#" title="">Xem chi tiết</a></li>
+                                            <li>{{$item->cg_hoten}}</li>
                                         </ul>
+                                        <br>
+                                        <br>
+                                        @if(\Auth::guard('chuyengia')->id()==$item->cg_id)
+                                        <a href="{{ route('hien-thi-sua', ['id'=>$item->bk_id]) }}"
+                                            class="btn btn-warning" style="padding: 2px 6px;">Sửa</a>
+                                        <a href="{{ route('xoa-bach-khoa', ['id'=>$item->bk_id]) }}"
+                                            class="btn btn-danger" style="padding: 2px 6px;">Xóa</a>
+                                        @endif
                                     </div>
                                     <!--usr_quest end-->
-                                    <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min ago</span>
                                 </div>
                             </div>
+                            @endforeach
+
                             <!--forum-questions end-->
                             <nav aria-label="Page navigation example" class="full-pagi">
                                 <ul class="pagination">
@@ -73,19 +86,19 @@
                             <div class="widget widget-user">
                                 <h3 class="title-wd">Các nhóm quản lý</h3>
                                 <ul>
-                                        <li>
-                                            <div class="usr-msg-details">
-                                                <div class="usr-ms-img">
-                                                    <img src="http://via.placeholder.com/50x50" alt="">
-                                                </div>
-                                                <div class="usr-mg-info">
-                                                    <h3><a href="#">1</a></h3>
-                                                    <p>Graphic Designer </p>
-                                                </div>
-                                                <!--usr-mg-info end-->
+                                    <li>
+                                        <div class="usr-msg-details">
+                                            <div class="usr-ms-img">
+                                                <img src="http://via.placeholder.com/50x50" alt="">
                                             </div>
-                                            <span><img src="images/price1.png" alt="">1185</span>
-                                        </li>
+                                            <div class="usr-mg-info">
+                                                <h3><a href="#">1</a></h3>
+                                                <p>Graphic Designer </p>
+                                            </div>
+                                            <!--usr-mg-info end-->
+                                        </div>
+                                        <span><img src="images/price1.png" alt="">1185</span>
+                                    </li>
                                 </ul>
                             </div>
                             <!--widget-user end-->

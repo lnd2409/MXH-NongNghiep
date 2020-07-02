@@ -21,8 +21,9 @@
                                 <!--user-pro-img end-->
                                 <div class="user_pro_status">
                                     <ul class="flw-hr">
+                                        <br>
                                         <li><a href="{{ route('nhat-ky-nong-ho',[ 'id' => \Auth::guard('nongdan')->user()->nd_id ]) }}" title="" class="flww"><i class="la la-book"></i> Nhật ký nông hô</a></li>
-                                        <li><a href="#" title="" class="hre">Hire</a></li>
+                                        <li style="margin-top:20px;"><a href="{{route('san-pham-nuoi-trong.nongdan')}}" title="" class="hre">Sản phẩm nuôi trồng</a></li>
                                     </ul>
                                     <ul class="flw-status">
                                         <li>

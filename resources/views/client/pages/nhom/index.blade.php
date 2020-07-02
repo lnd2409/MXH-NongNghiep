@@ -3,51 +3,19 @@
 <body>
 
     <div class="wrapper">
-        <header>
-            <div class="container">
-                <div class="header-data">
-                    <div class="logo pd-btm">
-                        <a href="index.html" title=""><img src="images/logo.png" alt=""></a>
-                    </div>
-                    <!--logo end-->
-                    <div class="forum-bar">
-                        <h2>Forum</h2>
-                        <ul>
-                            <li><a href="#" title="">Tags</a></li>
-                            <li><a href="#" title="">Users</a></li>
-                            <li><a href="#" title="" class="ask-question">Ask a question</a></li>
-                        </ul>
-                    </div>
-                    <!--search-bar end-->
-                    <div class="login_register">
-                        <ul>
-                            <li><a href="sign-in.html" title="">Login</a></li>
-                            <li><a href="sign-in.html" title="">Register</a></li>
-                        </ul>
-                    </div>
-                    <!--login_register end-->
-                    <div class="search-bar st2">
-                        <form>
-                            <input type="text" name="search" placeholder="Search...">
-                            <button type="submit"><i class="la la-search"></i></button>
-                        </form>
-                    </div>
-                    <!--search-bar end-->
-                </div>
-                <!--header-data end-->
-            </div>
-        </header>
+        @include('client.template.header') 
 
 
         <section class="forum-sec">
             <div class="container">
                 <div class="forum-links">
                     <ul>
-                        <li class="active"><a href="#" title="">Latest</a></li>
-                        <li><a href="#" title="">Unanswered</a></li>
-                        <li><a href="#" title="">Treading</a></li>
-                        <li><a href="#" title="">Popular This Week</a></li>
-                        <li><a href="#" title="">Popular of Month</a></li>
+                        @if (Auth::guard('chuyengia')->check())
+                            <li class="active"><a href="{{ route('group-join') }}" title="">Nhóm quản lý</a></li>
+                        @elseif(Auth::guard('nongdan')->check())
+                            <li class="active"><a href="{{ route('all-group1') }}" title="">Nhóm</a></li>
+                            <li><a href="{{ route('group-join-1') }}" title="">Nhóm đã tham gia</a></li>
+                        @endif
                     </ul>
                 </div>
                 <!--forum-links end-->
@@ -56,112 +24,99 @@
                 </div>
             </div>
         </section>
-
         <section class="forum-page">
             <div class="container">
+                
                 <div class="forum-questions-sec">
                     <div class="row">
-                        <div class="col-lg-8">
-                            <div class="forum-questions">
-                                <div class="usr-question">
-                                    <div class="usr_img">
-                                        <img src="http://via.placeholder.com/60x60" alt="">
-                                    </div>
-                                    <div class="usr_quest">
-                                        <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-                                        <ul class="react-links">
-                                            <li><a href="#" title=""><i class="fa fa-heart"></i> Vote 150</a></li>
-                                            <li><a href="#" title=""><i class="fa fa-comment"></i> Comments 15</a></li>
-                                            <li><a href="#" title=""><i class="fa fa-eye"></i> Views 50</a></li>
-                                        </ul>
-                                        <ul class="quest-tags">
-                                            <li><a href="#" title="">Work</a></li>
-                                            <li><a href="#" title="">Php</a></li>
-                                            <li><a href="#" title="">Design</a></li>
-                                        </ul>
-                                    </div>
-                                    <!--usr_quest end-->
-                                    <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min ago</span>
-                                </div>
-                                <!--usr-question end-->
-                            </div>
-                            <!--forum-questions end-->
-                            <nav aria-label="Page navigation example" class="full-pagi">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link pvr" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                    <li class="page-item"><a class="page-link pvr" href="#">Next</a></li>
-                                </ul>
-                            </nav>
+                        <div class="col-lg-12">
+                            
+                            <h1 class="text-center" style="font-size: 50px">
+                                @if (Auth::guard('chuyengia')->check())
+                                    Các nhóm quản lý
+                                @else
+                                    Các nhóm đã tham gia
+                                @endif
+                            </h1>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="widget widget-user">
-                                <h3 class="title-wd">Top User of the Week</h3>
-                                <ul>
-                                    <li>
-                                        <div class="usr-msg-details">
-                                            <div class="usr-ms-img">
-                                                <img src="http://via.placeholder.com/50x50" alt="">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @if (Auth::guard('chuyengia')->check())
+                                @if ($count3 == 0)
+                                    Chưa tạo nhóm
+                                @else
+                                    @foreach ($nhomquanly as $item)
+                                        <div class="forum-questions">
+                                            <div class="usr-question">
+                                                <div class="usr_img">
+                                                    <img src="http://via.placeholder.com/60x60" alt="">
+                                                </div>
+                                                <div class="usr_quest">
+                                                    <h3><a href="{{ route('chi-tiet-nhom', ['idGroup'=>$item->n_id]) }}">{{ $item->n_tennhom }}</a></h3>
+                                                    <ul class="react-links">
+                                                        <li><a href="#" title=""><i class="fa fa-heart"></i> Vote 150</a></li>
+                                                        <li><a href="#" title=""><i class="fa fa-comment"></i> Comments 15</a></li>
+                                                        <li><a href="#" title=""><i class="fa fa-eye"></i> Views 50</a></li>
+                                                    </ul>
+                                                    <ul class="quest-tags">
+                                                        <li><a href="#" title="">Work</a></li>
+                                                        <li><a href="#" title="">Php</a></li>
+                                                        <li><a href="#" title="">Design</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div class="usr-mg-info">
-                                                <h3>Jessica William</h3>
-                                                <p>Graphic Designer </p>
+                                            <!--usr-question end-->
+                                        </div>     
+                                    @endforeach
+                                @endif
+                                
+                            @elseif(Auth::guard('nongdan')->check())
+                                @if ($count1 == 0)
+                                    <p class="text-center">Bạn chưa tham gia nhóm nào</p>
+                                @else
+                                    @foreach ($nhomthamgia as $item)
+                                        <div class="forum-questions">
+                                            <div class="usr-question">
+                                                <div class="usr_img">
+                                                    <img src="http://via.placeholder.com/60x60" alt="">
+                                                </div>
+                                                <div class="usr_quest">
+                                                    <h3><a href="{{ route('chi-tiet-nhom', ['idGroup'=>$item->n_id]) }}">{{ $item->n_tennhom }}</a></h3>
+                                                    <ul class="react-links">
+                                                        <li><a href="#" title=""><i class="fa fa-heart"></i> Vote 150</a></li>
+                                                        <li><a href="#" title=""><i class="fa fa-comment"></i> Comments 15</a></li>
+                                                        <li><a href="#" title=""><i class="fa fa-eye"></i> Views 50</a></li>
+                                                    </ul>
+                                                    <ul class="quest-tags">
+                                                        <li><a href="#" title="">Work</a></li>
+                                                        <li><a href="#" title="">Php</a></li>
+                                                        <li><a href="#" title="">Design</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <!--usr-mg-info end-->
-                                        </div>
-                                        <span><img src="images/price1.png" alt="">1185</span>
-                                    </li>
-                                    <li>
-                                        <div class="usr-msg-details">
-                                            <div class="usr-ms-img">
-                                                <img src="http://via.placeholder.com/50x50" alt="">
-                                            </div>
-                                            <div class="usr-mg-info">
-                                                <h3>John Doe</h3>
-                                                <p>PHP Developer</p>
-                                            </div>
-                                            <!--usr-mg-info end-->
-                                        </div>
-                                        <span><img src="images/price2.png" alt="">1165</span>
-                                    </li>
-                                    <li>
-                                        <div class="usr-msg-details">
-                                            <div class="usr-ms-img">
-                                                <img src="http://via.placeholder.com/50x50" alt="">
-                                            </div>
-                                            <div class="usr-mg-info">
-                                                <h3>Poonam</h3>
-                                                <p>Wordpress Developer </p>
-                                            </div>
-                                            <!--usr-mg-info end-->
-                                        </div>
-                                        <span><img src="images/price3.png" alt="">1120</span>
-                                    </li>
-                                    <li>
-                                        <div class="usr-msg-details">
-                                            <div class="usr-ms-img">
-                                                <img src="http://via.placeholder.com/50x50" alt="">
-                                            </div>
-                                            <div class="usr-mg-info">
-                                                <h3>Bill Gates</h3>
-                                                <p>C & C++ Developer </p>
-                                            </div>
-                                            <!--usr-mg-info end-->
-                                        </div>
-                                        <span><img src="images/price4.png" alt="">1009</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--widget-user end-->
-                            <div class="widget widget-adver">
-                                <img src="http://via.placeholder.com/370x270" alt="">
-                            </div>
-                            <!--widget-adver end-->
+                                            <!--usr-question end-->
+                                        </div>     
+                                    @endforeach
+                                @endif
+                                
+                            @else
+                                <h2>Bạn chưa tham gia nhóm nào hết</h2>
+                            @endif
+                            
+                           
+                            <!--forum-questions end-->
+                                <nav aria-label="Page navigation example" class="full-pagi">
+                                    @if (Auth::guard('chuyengia')->check())
+                                        {{ $nhomquanly->links() }}
+                                    @elseif(Auth::guard('nongdan')->check())
+                                        {{ $nhomthamgia->links() }}
+                                    @endif
+                                </nav>
+                            
+                                
+                            
                         </div>
                     </div>
                 </div>

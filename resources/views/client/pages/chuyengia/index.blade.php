@@ -11,7 +11,6 @@
                 <div class="forum-links">
                     <ul>
                         <li class="active"><a href="{{ route('trang-chu-chuyen-gia') }}" title="">Bài viết quan tâm</a></li>
-                        <li><a href="#" title="">Bài viết trong nhóm</a></li>
                         <li><a href="{{ route('bach-khoa-nong-nghiep') }}" title="">Bách khoa nông nghiệp</a></li>
                     </ul>
                 </div>
@@ -28,7 +27,7 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="forum-questions">
-                                @foreach ($baiviet as $item)
+                                @foreach ($baivietquantam as $item)
                                 <div class="usr-question">
                                     <div class="usr_img">
                                         <img src="{{asset('hinhanh/nguoidung/nongdan/')}}" alt="">
@@ -63,6 +62,7 @@
                                 
                             @endforeach
                             </div>
+                            
                             <!--forum-questions end-->
                             <nav aria-label="Page navigation example" class="full-pagi">
                                 <ul class="pagination">
@@ -83,19 +83,21 @@
                             <div class="widget widget-user">
                                 <h3 class="title-wd">Các nhóm quản lý <span style="padding-left: 4rem !important;"><a href="#" data-toggle="modal" data-target="#ModalNhom"><i class="fa fa-plus"></i> Tạo nhóm</a></span></h3>
                                 <ul>
-                                    <li>
-                                        <div class="usr-msg-details">
-                                            <div class="usr-ms-img">
-                                                <img src="http://via.placeholder.com/50x50" alt="">
+                                    @foreach ($nhomquanly as $item)
+                                        <li>
+                                            <div class="usr-msg-details">
+                                                <div class="usr-ms-img">
+                                                    <img src="http://via.placeholder.com/50x50" alt="">
+                                                </div>
+                                                <div class="usr-mg-info">
+                                                    <h3><a href="#">{{ $item->n_tennhom }}</a></h3>
+                                                    <p>{{ $item->lns_ten }}</p>
+                                                </div>
+                                                <!--usr-mg-info end-->
                                             </div>
-                                            <div class="usr-mg-info">
-                                                <h3><a href="#">1</a></h3>
-                                                <p>Graphic Designer </p>
-                                            </div>
-                                            <!--usr-mg-info end-->
-                                        </div>
-                                        <span><img src="images/price1.png" alt="">1185</span>
-                                    </li>
+                                            <span><img src="images/price1.png" alt="">1185</span>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <!--widget-user end-->
@@ -171,16 +173,19 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form  method="POST">
+                    <form  method="POST" action="{{ route('tao-nhom') }}">
                         @csrf
                         <div class="form-group">
-                            <label for="">Tên nhóm</label>
-                            <input type="text" class="form-control">
+                            <label for="">Chủ đề</label>
+                            <select class="form-control" name="loainongsan">
+                                @foreach ($linhvuc2 as $item)                                    
+                                    <option value="{{ $item->lns_id }}">{{ $item->lns_ten }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        
                         <div class="form-group">
                             <label for="">Tên nhóm</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="tennhom">
                         </div>
                         <button class="btn btn-success" type="submit">Tạo</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
