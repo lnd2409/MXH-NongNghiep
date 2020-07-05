@@ -1,7 +1,8 @@
 @extends('client.client')
 @section('content')
 <section class="cover-sec">
-    <img src="{{asset('hinhanh/nguoidung/nongdan/'.$data->nd_background)}}" style="height: 400px" alt="">
+   
+    <img src=" {{asset('hinhanh/nguoidung/nongdan/'.$data->nd_background)}}" style="height: 400px" alt="">
     <a title="" data-toggle="modal" data-target="#changeBG"><i class="fa fa-camera"></i>Thay đổi hình nền</a>
 </section>
 

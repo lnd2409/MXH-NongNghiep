@@ -31,6 +31,7 @@
                                 <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
                                 Trang chủ
                             </a>
+                        
                         @endif
                        
                     </li>
@@ -107,11 +108,11 @@
                         <a href="#" title="">{{ substr(Auth::guard('nongdan')->user()->nd_hoten,-(strpos(strrev(Auth::guard('nongdan')->user()->nd_hoten),' ')),strlen(Auth::guard('nongdan')->user()->nd_hoten))}}</a>
                         <i class="la la-sort-down"></i>
                     @elseif (Auth::guard('thuonglai')->check())
-                        <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_background)}}" alt="" style="width:30px; height:30px;">
+                        <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_hinhanh)}}" alt="" style="width:30px; height:30px;">
                         <a href="#" title="">{{ substr(Auth::guard('thuonglai')->user()->tl_hoten,-(strpos(strrev(Auth::guard('thuonglai')->user()->tl_hoten),' ')),strlen(Auth::guard('thuonglai')->user()->tl_hoten))}}</a>
                         <i class="la la-sort-down"></i>
                     @elseif (Auth::guard('chuyengia')->check())
-                    <img src="" alt="Avata chuyên gia" style="width:30px; height:30px;">
+                    <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('chuyengia')->user()->cg_hinhanh)}}" alt="" style="width:30px; height:30px;">
                     <a href="#" title="">{{ substr(Auth::guard('chuyengia')->user()->cg_hoten,-(strpos(strrev(Auth::guard('chuyengia')->user()->cg_hoten),' ')),strlen(Auth::guard('chuyengia')->user()->cg_hoten))}}</a>
                     <i class="la la-sort-down"></i>
                     @endif

@@ -75,7 +75,9 @@ class ThuongLaiController extends Controller
         $id=\Auth::guard('thuonglai')->id();
         
         $data = DB::table('thuonglai')->where('tl_id',$id)->first();
-        return view ('client.pages.thuonglai.trang-ca-nhan',compact('data'));
+        $baiviet = DB::table('baiviet')->where('tl_id',$id)->get();
+        $slbv = count($baiviet);
+        return view ('client.pages.thuonglai.trang-ca-nhan',compact('data','slbv','baiviet'));
     }
 
     public function background_store(Request $request)

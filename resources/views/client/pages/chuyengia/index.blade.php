@@ -28,9 +28,10 @@
                         <div class="col-lg-8">
                             <div class="forum-questions">
                                 @foreach ($baivietquantam as $item)
+  
                                 <div class="usr-question">
                                     <div class="usr_img">
-                                        <img src="{{asset('hinhanh/nguoidung/nongdan/')}}" alt="">
+                                        <img src="{{asset('hinhanh/nguoidung/chuyengia/')}}" alt="">
                                         <p>{{ $item->nd_hoten }}</p>
                                     </div>
                                     <div class="usr_quest">

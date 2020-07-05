@@ -25,7 +25,7 @@ class CreateTableBinhluanTable extends Migration
             $table->foreign('nccvt_id')->references('nccvt_id')->on('nccvt');
             $table->bigInteger('tl_id')->unsigned()->nullable();
             $table->foreign('tl_id')->references('tl_id')->on('thuonglai');
-            $table->bigInteger('cg_id')->unsigned();
+            $table->bigInteger('cg_id')->unsigned()->nullable();
             $table->foreign('cg_id')->references('cg_id')->on('chuyengia');
             $table->timestamps();
         });
