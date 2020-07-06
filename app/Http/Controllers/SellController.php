@@ -11,15 +11,9 @@ class SellController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function index($id)
     {
         $product=\DB::table('sanpham')->where('nccvt_id',$id)->get();
-=======
-    public function index()
-    {
-        $product=\DB::table('sanpham')->get();
->>>>>>> kimchi
         return view('client.pages.sell.index',compact('product'));
     }
     public function create()
@@ -50,11 +44,7 @@ class SellController extends Controller
             'sp_gia'=>$request->price,
             'sp_soluongcungcap'=>$request->amount,
             'lsp_id'=>$request->type,
-<<<<<<< HEAD
             'nccvt_id'=>\Auth::guard('nccvt')->user()->nccvt_id
-=======
-            'nccvt_id'=>1
->>>>>>> kimchi
         ));
         foreach($request->file('img') as $item){
 
@@ -70,11 +60,7 @@ class SellController extends Controller
                 'sp_id'=>$id
             ]);
         }
-<<<<<<< HEAD
         return redirect()->route('sell',['id' => \Auth::guard('nccvt')->user()->nccvt_id]);
-=======
-        return redirect()->route('sell');
->>>>>>> kimchi
     
     }
 
@@ -86,7 +72,6 @@ class SellController extends Controller
      */
     public function show($id)
     {
-<<<<<<< HEAD
         $product=\DB::table('sanpham')->where('sp_id',$id)
         ->join('nccvt','nccvt.nccvt_id','sanpham.nccvt_id')
         ->first();
@@ -94,12 +79,6 @@ class SellController extends Controller
         // dd($product);
         // dd($img);
         return view('client.pages.sell.show',compact('product','img'));
-=======
-        $product=\DB::table('sanpham')->where('sp_id',$id)->first();
-        $img=\DB::table('hinhanh')->where('sp_id',$product->sp_id)->get();
-        // dd($product);
-        return view('client.pages.sell.single',compact('product','img'));
->>>>>>> kimchi
     }
 
     /**
