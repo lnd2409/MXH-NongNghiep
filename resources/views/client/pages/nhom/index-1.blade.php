@@ -15,7 +15,7 @@
                         @if (Auth::guard('chuyengia')->check())
                             <li class="active"><a href="{{ route('group-join') }}" title="">Nhóm quản lý</a></li>
                         @elseif(Auth::guard('nongdan')->check())
-                            <li class="active"><a href="{{ route('all-group1') }}" title="">Nhóm</a></li>
+                            <li class="active"><a href="{{ route('all-group1') }}" title="">Nhóm gợi ý</a></li>
                             <li><a href="{{ route('group-join-1') }}" title="">Nhóm đã tham gia</a></li>
                         @endif
                     </ul>
@@ -33,33 +33,34 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="forum-questions">
-                                <div class="usr-question">
-                                    <div class="usr_img">
-                                        <img src="{{asset('hinhanh/nguoidung/nongdan/')}}" alt="">
-                                        <p>123</p>
-                                    </div>
-                                    <div class="usr_quest">
-                                        <h3><a href="">123</a></h3>
-                                        <div>
-                                            123
+                                @foreach ($nhomgoiy as $item)                                    
+                                    <div class="usr-question">
+                                        <div class="usr_img">
+                                            <img src="{{asset('hinhanh/nguoidung/nongdan/')}}" alt="">
+                                            {{-- <p>{{ $item->n_tennhom }}</p> --}}
                                         </div>
-                                        
-                                        <ul class="quest-tags">
-                                             
-                                        </ul>
-                                        
-                                        <ul class="react-links pt-3">
-                                            <li><a href="#" title="">Xem chi tiết</a></li>
-                                        </ul>
-                                    </div>
-                                    <!--usr_quest end-->
-                                    <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min ago</span>
-                                    {{-- @if(!empty($hinhanh[$item->bv_id]))
-                                        @foreach ($hinhanh[$item->bv_id] as $item2)
-                                        <img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70">
-                                        @endforeach
-                                    @endif --}}
-                                </div>    
+                                        <div class="usr_quest">
+                                            <h3><a href="{{ $item->n_id }}">{{ $item->n_tennhom }}</a></h3>
+                                            <div>
+                                                Chủ nhóm: <a href="{{ $item->cg_id }}">{{ $item->cg_hoten }}</a>
+                                            </div>
+                                            
+                                            <ul class="quest-tags">
+                                                Ngày tạo: {{ date('d-m-Y', strtotime($item->created_at)) }}
+                                            </ul>
+                                            
+                                            <ul class="react-links pt-3">
+                                                <li><a href="#" title="">Tham gia</a></li>
+                                            </ul>
+                                        </div>
+                                        <!--usr_quest end-->
+                                        {{-- @if(!empty($hinhanh[$item->bv_id]))
+                                            @foreach ($hinhanh[$item->bv_id] as $item2)
+                                            <img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70">
+                                            @endforeach
+                                        @endif --}}
+                                    </div>    
+                                @endforeach
                             </div>
                             <!--forum-questions end-->
                             <nav aria-label="Page navigation example" class="full-pagi">
