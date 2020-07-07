@@ -136,7 +136,6 @@
                     <div class="col-lg-3">
                         <div class="right-sidebar">
                             <div class="message-btn">
-                                <a href="#" title=""><i class="fa fa-envelope"></i> Message</a>
                             </div>
                             <div class="widget widget-portfolio">
                                 <div class="wd-heady">
