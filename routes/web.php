@@ -134,6 +134,9 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     Route::get('/dang-bai-xoa/{id}','NgocDuc\NongdanController@destroy')->name('nongdan.bai-dang-xoa');
     
 
+     //Xóa bình luận thương lái
+     Route::get('/binh-luan-xoa/{id}','NgocDuc\NongdanController@destroyComment')->name('nongdan.xoa-binhluan');
+
    
 });
 
@@ -190,6 +193,9 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
 
     //Xóa bài viết
     Route::get('/dang-bai-xoa/{id}','ThuongLaiController@destroy')->name('thuonglai.bai-dang-xoa');
+
+    //Xóa bình luận thương lái
+    Route::get('/binh-luan-xoa/{id}','ThuongLaiController@destroyComment')->name('thuonglai.xoa-binhluan');
 });
 
 

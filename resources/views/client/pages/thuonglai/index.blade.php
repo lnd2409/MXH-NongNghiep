@@ -36,18 +36,34 @@ p._hinhanh {
 }
 
 .id_delete {
-    /* border: 1px solid; */
     width: 116px;
     height: 29px;
     /* float: right; */
     position: absolute;
-    right: 14px;
+    right: -118px;
     top: 28px;
     /* padding: 0 7px; */
+    transition:all 3s;
+    display: none;
 }
 .id_delete :hover{
     color: red;
+    
 }
+.usr-question:hover .id_delete{
+    position: absolute;
+    right: 14px;
+    display: block;
+}
+.icon-delete > a {
+    position: absolute;
+    top: 8px;
+    right: 11px;
+    font-size: 13px;
+    color: #08b400;
+    transition: all 0.2s;
+}
+
 
 
 
@@ -89,13 +105,15 @@ p._hinhanh {
                             <div class="forum-questions forum-questions-fix">
                                 <div class="usr-question">
                                     <div class="usr_img">
-                                        <img src="http://via.placeholder.com/60x60" alt="">
+                                        <img src="{{asset('hinhanh/nguoidung/thuonglai').'/'.$item->tl_hinhanh}}" alt="">
                                         <p>{{ $item->tl_hoten}}</p>
                                     </div>
                                     <div class="usr_quest">
-                                        <h3><a href="">{{ $item->bv_tieude }}</a></h3>
+                                        <h3><a style="color: #08b400">{{ $item->bv_tieude }}</a></h3>
                                         <div class="id_delete">
-                                            <a href="{{ route('thuonglai.bai-dang-xoa', $item->bv_id) }}"  ><i class="fa fa-trash" aria-hidden="true"> Xóa bài viết</i></a>  
+                                            @if($item->tl_id == Auth::guard('thuonglai')->id())
+                                                <a href="{{ route('thuonglai.bai-dang-xoa', $item->bv_id) }}"  ><i class="fa fa-trash" aria-hidden="true"> Xóa bài viết</i></a> 
+                                            @endif 
                                         </div>
                                         
                                         <div>
@@ -126,11 +144,12 @@ p._hinhanh {
                                                             <div class="col-1 p-0">
                                                                 <img src="{{asset('hinhanh/nguoidung/thuonglai').'/'.$val->tl_hinhanh}}" style="width: 60%; border-radius: 50%;" alt="">
                                                             </div>
-                                                            <div class="col-10 h-100" style="border-radius: 20px; background-color: #cccccc">
+                                                            <div class="col-10 h-100" style="border-radius: 20px; background-color: #cccccc; position: relative;">
                                                                 <div class="pt-2 pb-2" style="font-size: 13px;">
                                                                     <a href="">{{ $val->tl_hoten }}</a>
-                                                                    {{$val->bl_noidung}}
+                                                                   <span style="margin-left: 5px;">{{$val->bl_noidung}}</span> 
                                                                 </div>
+                                                                <div class="icon-delete"><a href="{{ route('thuonglai.xoa-binhluan',$val->bl_id) }}" title="Xóa"><i class="fa fa-trash" ></i></a></div>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -349,8 +368,9 @@ p._hinhanh {
                     var _token = $("input[name='_token']").val();
                     var bv_id = id;
                     var tl_id = $('.tl_id').val();
-                    
-                    // console.log(_token);
+                  
+
+           
                     // console.log(noidung);
                     // console.log(bv_id);
                     // console.log(tl_id);
@@ -367,19 +387,22 @@ p._hinhanh {
                     dataType: "json",
                     success: function (response) {
                         console.log(response.data);
+                        let bl_id= response.data.bl_id;
                         var ha =response.data.tl_hinhanh;
                         var src_img ='{{asset('hinhanh/nguoidung/thuonglai')}}';
                         src_img += "/";
                         src_img +=ha;
+                        let route = "http://localhost:8080/MXH-NongNghiep/public/nong-dan/binh-luan-xoa/"+bl_id;
+                        var xoa = '<div class="icon-delete"><a href="'+ route +'" title="Xóa"><i class="fa fa-trash" ></i></a></div>';
                         // var bv_id_add=$('._cmm').attr('data-bl-id');
-                        // console.log(bv_id_add);
+
                         var hoten1 = response.data.tl_hoten;
                         var noidung1 = response.data.bl_noidung;
                         var data2 =  '<div class="row mb-3" >'+'<div class="col-1 p-0">' + 
                                     '<img src="'+ src_img +'" style="width: 60%; border-radius: 50%;" alt=""></div>'
-                                    +'<div class="col-10 h-100" style="border-radius: 20px; background-color: #f2f3f5">' + 
+                                    +'<div class="col-10 h-100" style="border-radius: 20px; background-color: #cccccc">' + 
                                         '<div class="pt-2 pb-2" style="font-size: 13px;">' +
-                                        '<a href="">'+ hoten1 + '</a>' + noidung1 +' </div>' + '</div>'+'</div>';
+                                        '<a href="">'+ hoten1 + '</a><span style="margin-left: 5px;">' +  noidung1 +' </span></div>'+xoa+'</div>';
                         
                         //   console.log(id);                       
                         $('._cmm'+id).append(data2);

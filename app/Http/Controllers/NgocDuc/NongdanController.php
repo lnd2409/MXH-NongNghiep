@@ -41,7 +41,7 @@ class NongdanController extends Controller
             ->where('baiviet.bv_id','=',$value->bv_id)
             ->get();
         }
-       
+
         return view('client.pages.nongdan.index',compact('nhom_nong_dan','baiviet','hinhanh','lns','binhluan'));
     }
 
@@ -240,6 +240,13 @@ class NongdanController extends Controller
         {
             return redirect()->back();
         }
+    }
+
+    //Xóa bình luận
+    public function destroyComment($id)
+    {
+       \DB::table('binhluan')->where('bl_id',$id)->delete();
+       return redirect()->back();
     }
 
     public function writePosts(Request $request){

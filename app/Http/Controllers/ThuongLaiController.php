@@ -174,6 +174,11 @@ class ThuongLaiController extends Controller
     {
         //
     }
+    public function destroyComment($id)
+    {
+       \DB::table('binhluan')->where('bl_id',$id)->delete();
+       return redirect()->back();
+    }
 
     /**
      * Update the specified resource in storage.
