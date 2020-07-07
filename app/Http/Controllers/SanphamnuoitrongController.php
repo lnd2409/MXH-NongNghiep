@@ -63,8 +63,8 @@ class SanphamnuoitrongController extends Controller
         $nongdan = \Auth::guard('nongdan')->user()->nd_id;
         $now = Carbon::now();
         
-        if($request->ten=='' || $request->thongtin=='' || $request->thangbatdau=='' || $request->thangketthuc=='' || $request->sanluongdutinh=='' || $request->donvitinh=='' || $request->soluongnongsan=='' ){
-            $success = Session::put('alert-del', 'Tên sản phẩm nuôi trống không được trống');
+        if($request->tenNongSan=='' || $request->thongTinNongSan=='' || $request->thangBatDau=='' || $request->thangKetThuc=='' || $request->sanLuongDuTinh=='' || $request->donvitinh=='' || $request->soluongnongsan=='' ){
+            $success = Session::put('alert-del', 'Dữ liệu không được trống');
             return redirect()->back();
         }
        
@@ -253,6 +253,7 @@ class SanphamnuoitrongController extends Controller
                     
                     'qm_soluongnongsan' => $request->soluongnongsan,
                     'quymo.dvt_id' => $request->donvitinh,
+                    
                     'quymo.updated_at' => $now,
                     
                 ]
