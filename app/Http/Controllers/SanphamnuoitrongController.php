@@ -356,7 +356,7 @@ class SanphamnuoitrongController extends Controller
         
         $donvitinh = $request->donvitinh;
         
-        DB::table('quymo')->where('spnt_id',$id)->update(['dvt_id' => $donvitinh]);
+        DB::table('quymo')->where('spnt_id',$idspnt)->update(['dvt_id' => $donvitinh]);
         $success = Session::put('alert-info', 'Cập nhật thành công');
         return redirect()->back();
     }
