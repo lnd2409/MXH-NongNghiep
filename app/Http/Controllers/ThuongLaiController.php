@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use DB;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class ThuongLaiController extends Controller
 {
@@ -15,14 +17,67 @@ class ThuongLaiController extends Controller
      */
     public function index()
     {
-        return view ('client.pages.thuonglai.index');
+        $thuonglai_id = Auth::guard('thuonglai')->id();
+        $baiviet = DB::table('baiviet')->join('thuonglai','thuonglai.tl_id','=','baiviet.tl_id')->get();
+        $hinhanh=array();
+        // $hinhanh=array();
+        $binhluan=array();
+        
+        foreach ($baiviet as $value) {
+        
+            # code...
+            $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
+            $binhluan[$value->bv_id] = DB::table('binhluan')
+            ->join('baiviet','baiviet.bv_id','binhluan.bv_id')
+            ->join('thuonglai','thuonglai.tl_id','binhluan.tl_id')
+            ->where('baiviet.bv_id','=',$value->bv_id)
+            ->get();
+        }
+
+
+
+
+
+        return view ('client.pages.thuonglai.index',compact('baiviet','hinhanh','binhluan'));
     }
+
+
+
+
+    //bình luận
+    public function Ajaxcomment(Request $request)
+    {
+        $tg =Carbon::now();
+        $data['bl_noidung'] = $request->noidung;
+        $data['bl_thoigian'] = $tg;
+        $data['bv_id'] = $request->bv_id;
+        $data['tl_id'] = $request->tl_id;
+
+        $result = DB::table('binhluan')->insert($data);
+
+        $data1 =  DB::table('binhluan')
+        ->join('thuonglai','thuonglai.tl_id','binhluan.tl_id')
+        ->orderBy('binhluan.bl_id','DESC')->first();
+        
+        return response()->json(['data'=>$data1],200);
+        
+    
+    }
+
+
+
+
+
+
+
     public function mypages()
     {
         $id=\Auth::guard('thuonglai')->id();
         
         $data = DB::table('thuonglai')->where('tl_id',$id)->first();
-        return view ('client.pages.thuonglai.trang-ca-nhan',compact('data'));
+        $baiviet = DB::table('baiviet')->where('tl_id',$id)->get();
+        $slbv = count($baiviet);
+        return view ('client.pages.thuonglai.trang-ca-nhan',compact('data','slbv','baiviet'));
     }
 
     public function background_store(Request $request)
@@ -119,6 +174,11 @@ class ThuongLaiController extends Controller
     {
         //
     }
+    public function destroyComment($id)
+    {
+       \DB::table('binhluan')->where('bl_id',$id)->delete();
+       return redirect()->back();
+    }
 
     /**
      * Update the specified resource in storage.
@@ -147,6 +207,64 @@ class ThuongLaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('chitietlinhvucbaiviet')->where('bv_id',$id)->delete();
+
+        DB::table('binhluan')->where('bv_id',$id)->delete();
+        DB::table('hinhanhbaiviet')->where('bv_id',$id)->delete();
+  
+
+        $result = DB::table('baiviet')->where('bv_id',$id)->delete();
+        if($result)
+        {
+            return redirect()->back();
+        }
+    }
+
+
+
+    public function writePosts(Request $request){
+        $now = Carbon::now();
+        $tk = Auth::guard('thuonglai')->user()->tl_id;
+        $baiviet = DB::table('baiviet')->insertGetId(
+            [
+                'bv_tieude' => $request->tieude,
+                'bv_noidung' => $request->noidung,
+                'bv_thoigian' => $now,  
+                'n_id' => NULL,
+                'nd_id' => NULL,
+                'cg_id' => NULL,
+                'tl_id' => $tk
+            ]
+        );
+
+        //Thêm vào lĩnh vực bài viết
+        $bviet_lvuc = DB::table('chitietlinhvucbaiviet')->insert(
+            [
+                'bv_id' => $baiviet,
+                'lns_id' => $request->loainongsan
+            ]
+        );
+        if ($request->hasFile('file')) {
+            # code...
+            foreach ($request->file('file') as $file) {
+                # code...
+                // echo $file->getClientOriginalName();
+                $name=$file->getClientOriginalName();
+                $file->move(public_path('upload/bai-viet/thuong-lai'), $name);
+                DB::table('hinhanhbaiviet')->insert(
+                    [
+                        'habv_duongdan' => 'upload/bai-viet/nong-dan/'.$name,
+                        'habv_ten' => $name,
+                        'bv_id' => $baiviet
+                    ]
+                );
+            }
+        }
+
+        // $imageName = $request->file('file');
+        
+        // $request->file->move(public_path('upload/bai-viet/nong-dan',$imageName));
+        // dd($imageName);
+        return redirect()->back();
     }
 }

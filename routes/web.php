@@ -122,12 +122,24 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     //Đăng bài dành cho NÔNG DÂN
     Route::post('/dang-bai-nong-dan','NgocDuc\NongdanController@writePosts')->name('nong-dan-dang-bai');
 
+    //Bình luận 
+    Route::post('/binhluan','NgocDuc\NongdanController@Ajaxcomment')->name('nongdan.binhluan');
+
 
 
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutNongDan')->name('dang-xuat-nong-dan');
+
+    //Xóa bài viết
+    Route::get('/dang-bai-xoa/{id}','NgocDuc\NongdanController@destroy')->name('nongdan.bai-dang-xoa');
+    
+
+     //Xóa bình luận thương lái
+     Route::get('/binh-luan-xoa/{id}','NgocDuc\NongdanController@destroyComment')->name('nongdan.xoa-binhluan');
+
    
 });
+
 Route::group(['prefix' => 'nccvt'], function () {
     
     Route::get('/cua-hang/{id}', 'SellController@index')->name('sell');
@@ -173,6 +185,17 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
     //Đăng xuất
     Route::get('dang-xuat','AuthController@LogoutThuongLai')->name('dang-xuat-thuong-lai');
 
+    //Đăng bài dành cho Thương lái
+    Route::post('/dang-bai-thuong-lai','ThuongLaiController@writePosts')->name('thuong-lai-dang-bai');
+
+    //Bình luận 
+    Route::post('/binhluan','ThuongLaiController@Ajaxcomment')->name('thuonglai.binhluan');
+
+    //Xóa bài viết
+    Route::get('/dang-bai-xoa/{id}','ThuongLaiController@destroy')->name('thuonglai.bai-dang-xoa');
+
+    //Xóa bình luận thương lái
+    Route::get('/binh-luan-xoa/{id}','ThuongLaiController@destroyComment')->name('thuonglai.xoa-binhluan');
 });
 
 
@@ -180,10 +203,23 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
 //Trang của chuyên gia
 Route::group(['prefix' => 'chuyen-gia', 'middleware' => 'CheckUserChuyenGia'], function () {
     Route::get('trang-chu', 'NgocDuc\ChuyengiaController@index')->name('trang-chu-chuyen-gia');
-    Route::get('trang-ca-nhan/{id}','NgocDuc\ChuyengiaController@getInfo')->name('ca-nhan-chuyen-gia');
+
+    //Phụng đã vào đây
+    Route::get('trang-ca-nhan','NgocDuc\ChuyengiaController@getInfo')->name('ca-nhan-chuyen-gia');
+
+    //thay đổi hình nền
+    Route::post('/hinh-nen','NgocDuc\ChuyengiaController@background_store')->name('hinhen.submit.chuyengia');
+
+    
+    //thay đổi hình đại diện
+    Route::post('/hinh-dai-dien','NgocDuc\ChuyengiaController@avatar_store')->name('daidien.submit.chuyengia');
+
     Route::get('dang-xuat','AuthController@LogoutChuyenGia')->name('dang-xuat-chuyen-gia');
+
     Route::get('bach-khoa-nong-nghiep','NgocDuc\ChuyengiaController@BachKhoa')->name('bach-khoa-nong-nghiep');
+
     Route::get('viet-bai','NgocDuc\ChuyengiaController@DangBai')->name('trang-viet-bai-bach-khoa');
+
     Route::post('chon-linh-vuc','NgocDuc\ChuyengiaController@ChonLinhVuc')->name('chon-linh-vuc');
     Route::get('nhom/chi-tiet/{idGroup}', 'NgocDuc\NhomController@GroupDetail')->name('chi-tiet-nhom');
     

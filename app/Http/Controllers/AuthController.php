@@ -143,6 +143,8 @@ class AuthController extends Controller
         $nongdan->nd_hoten = $request->nd_hoten;
         $nongdan->nd_diachi = $request->nd_diachi;
         $nongdan->nd_sdt = $request->nd_sdt;
+        $nongdan->nd_hinhanh ='nd1.png';
+        $nongdan->nd_background ='bg11.png';
         $nongdan->save();
 
         if($nongdan) {

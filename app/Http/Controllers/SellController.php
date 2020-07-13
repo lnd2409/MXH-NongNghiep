@@ -11,9 +11,13 @@ class SellController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    // public function index($id)
+    // {
+    //     $product=\DB::table('sanpham')->where('nccvt_id',$id)->get();
+    // }
+    public function index()
     {
-        $product=\DB::table('sanpham')->where('nccvt_id',$id)->get();
+        $product=\DB::table('sanpham')->get();
         return view('client.pages.sell.index',compact('product'));
     }
     public function create()
@@ -35,8 +39,7 @@ class SellController extends Controller
         //lưu file
         $request->file('avatar')->move(
         'img/Product', //nơi cần lưu
-        $file_name,
-        );
+        $file_name);
         $id=\DB::table('sanpham')->insertGetID(array(
             'sp_hinhdaidien' => 'img/Product/'.$file_name,
             'sp_ten'=>$request->title,
@@ -61,7 +64,7 @@ class SellController extends Controller
             ]);
         }
         return redirect()->route('sell',['id' => \Auth::guard('nccvt')->user()->nccvt_id]);
-    
+
     }
 
     /**

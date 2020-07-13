@@ -18,6 +18,8 @@ class CreateTableChuyengiaTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('cg_hoten');
+            $table->string('cg_background');
+            $table->string('cg_hinhanh');
             $table->string('cg_diachi');
             $table->integer('cg_sdt');
             $table->bigInteger('td_id')->unsigned();

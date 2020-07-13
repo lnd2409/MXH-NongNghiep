@@ -69,10 +69,69 @@ class ChuyengiaController extends Controller
     }
 
     //Lấy thông tin của chuyên gia
-    public function getInfo($id) 
+    public function getInfo() 
     {
-        return view('');
+        $id=\Auth::guard('chuyengia')->id();
+        // $lns = DB::table('loaisanphamnuoitrong')->get();
+        $data = DB::table('chuyengia')->where('cg_id',$id)->first();
+        $baiviet = DB::table('bachkhoa')->where('cg_id',$id)->get();
+        // $slbv = count($baiviet);
+        $hinhanh=array();
+        
+        // foreach ($baiviet as $value) {
+        
+        //     # code...
+        //     $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
+        // }
+        return view('client.pages.chuyengia.trang-ca-nhan',compact('data','baiviet'));
     }
+
+    // hình nền
+    public function background_store(Request $request)
+    {
+        
+        if($request->hasFile('cg_background'))
+            { 
+                $file=$request->file('cg_background');
+                $filename =$file->getClientOriginalName('cg_background');
+                // dd( $filename);
+                $file->move('hinhanh/nguoidung/chuyengia',$filename);
+                // dd($file);
+                 DB::table('chuyengia')->where('cg_id',\Auth::guard('chuyengia')->id())->update([
+                  'cg_background' => $filename
+                    
+                  ]);
+                  return redirect()->route('ca-nhan-chuyen-gia');
+          }
+    }
+
+
+    public function avatar_store(Request $request)
+    {
+        
+        if($request->hasFile('cg_hinhanh'))
+            { 
+                $file=$request->file('cg_hinhanh');
+                $filename =$file->getClientOriginalName('cg_hinhanh');
+                // echo $filename;
+                $file->move('hinhanh/nguoidung/chuyengia',$filename);
+                // dd($file);
+                 DB::table('chuyengia')->where('cg_id',\Auth::guard('chuyengia')->id())->update([
+                  'cg_hinhanh' => $filename
+                    
+                  ]);
+                  return redirect()->route('ca-nhan-chuyen-gia');
+          }
+    }
+
+
+
+
+
+
+
+
+
 
 
     //Tạo nhóm

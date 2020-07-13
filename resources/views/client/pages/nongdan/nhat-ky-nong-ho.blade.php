@@ -36,10 +36,10 @@
                                     </ul>
                                 </div>
                                 <!--user_pro_status end-->
-                                
+
                             </div>
                             <!--user_profile end-->
-                            
+
                             <!--suggestions end-->
                         </div>
                         <!--main-left-sidebar end-->
@@ -90,25 +90,7 @@
     </div>
 </main>
 
-<footer>
-    <div class="footy-sec mn no-margin">
-        <div class="container">
-            <ul>
-                <li><a href="#" title="">Help Center</a></li>
-                <li><a href="#" title="">Privacy Policy</a></li>
-                <li><a href="#" title="">Community Guidelines</a></li>
-                <li><a href="#" title="">Cookies Policy</a></li>
-                <li><a href="#" title="">Career</a></li>
-                <li><a href="#" title="">Forum</a></li>
-                <li><a href="#" title="">Language</a></li>
-                <li><a href="#" title="">Copyright Policy</a></li>
-            </ul>
-            <p><img src="images/copy-icon2.png" alt="">Copyright 2018</p>
-            <img class="fl-rgt" src="images/logo2.png" alt="">
-        </div>
-    </div>
-</footer>
-<!--footer end-->
+
 
 {{-- hình nền --}}
 <div class="modal fade" id="changeBG" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -129,7 +111,7 @@
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -153,7 +135,7 @@
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
         </div>
-       
+
       </div>
     </div>
   </div>
