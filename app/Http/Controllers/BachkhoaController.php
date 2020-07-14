@@ -16,10 +16,34 @@ class BachkhoaController extends Controller
      */
     public function index()
     {
-        
+        $id = Auth::guard('chuyengia')->user()->cg_id;
+        $nhomquanly = DB::table('chitietchuyengia')->join('nhom','nhom.n_id','chitietchuyengia.n_id')
+                        ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','nhom.lns_id')
+                        ->where('cg_id',$id)->paginate(5);
+
         $data = DB::table('bachkhoa')->join('chuyengia','chuyengia.cg_id','=','bachkhoa.cg_id')
         ->get();
-        return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact('data'));
+        dd($nhomquanly);
+        // return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact('data','nhomquanly'));
+    }
+
+    public function getPost()
+    {
+        $baiviet = DB::table('bachkhoa')
+                    ->join('chuyengia','chuyengia.cg_id','=','bachkhoa.cg_id')
+                    ->get();
+        return view('client.pages.nongdan.bachkhoa.index',compact('baiviet'));
+    }
+
+    public function PostDetail($id)
+    {
+        $baiviet = DB::table('bachkhoa')
+                ->join('chuyengia','chuyengia.cg_id','=','bachkhoa.cg_id')
+                ->where('bk_id','=',$id)
+                ->first();
+                // dd($baiviet);
+        return view('client.pages.nongdan.bachkhoa.detail',compact('baiviet'));
+        // return
     }
 
     /**
@@ -66,7 +90,7 @@ class BachkhoaController extends Controller
                 $success = Session::put('alert-info', 'Thêm dữ liệu không thành công');
                 return redirect()->route('bach-khoa-nong-nghiep');
             }
-      
+
     }
 
     /**
@@ -88,7 +112,7 @@ class BachkhoaController extends Controller
      */
     public function edit($id)
     {
-        
+
         $chuyengia = DB::table('chuyengia')->get();
         $bachkhoa = DB::table('bachkhoa')->where('bk_id','=',$id)->first();
         if($bachkhoa->cg_id==\Auth::guard('chuyengia')->id()){

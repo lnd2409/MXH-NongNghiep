@@ -22,17 +22,17 @@ class ChuyengiaController extends Controller
         // dd($linhvucdachon);
         $baivietquantam = DB::table('chitietlinhvucbaiviet')
                 ->join('baiviet','baiviet.bv_id','chitietlinhvucbaiviet.bv_id')
-                
+
                 ->whereIn('lns_id',$linhvucdachon)
                 ->join('nongdan','nongdan.nd_id','baiviet.nd_id')
                 ->leftjoin('thuonglai','thuonglai.tl_id','baiviet.tl_id')
                 // ->leftjoin
                 ->get();
-        
+
         $hinhanh=array();
-        
+
         foreach ($baivietquantam as $value) {
-        
+
             # code...
             $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
         }
@@ -41,10 +41,10 @@ class ChuyengiaController extends Controller
             $linhvuc = DB::table('loaisanphamnuoitrong')->get();
             return view('client.pages.chuyengia.index',compact(['linhvuc']));
         }
-        
+
         $linhvuc = DB::table('loaisanphamnuoitrong')->whereNotIn('lns_id',$linhvucdachon)->get();
         $linhvuc2 = DB::table('chitietlinhvuc')->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','chitietlinhvuc.lns_id')->where('cg_id',$id)->get();
-        
+
         $nhomquanly = DB::table('chitietchuyengia')->join('nhom','nhom.n_id','chitietchuyengia.n_id')
                         ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','nhom.lns_id')
                         ->where('cg_id',$id)->paginate(5);
@@ -69,7 +69,7 @@ class ChuyengiaController extends Controller
     }
 
     //Lấy thông tin của chuyên gia
-    public function getInfo() 
+    public function getInfo()
     {
         $id=\Auth::guard('chuyengia')->id();
         // $lns = DB::table('loaisanphamnuoitrong')->get();
@@ -77,9 +77,9 @@ class ChuyengiaController extends Controller
         $baiviet = DB::table('bachkhoa')->where('cg_id',$id)->get();
         // $slbv = count($baiviet);
         $hinhanh=array();
-        
+
         // foreach ($baiviet as $value) {
-        
+
         //     # code...
         //     $hinhanh[$value->bv_id] = DB::table('hinhanhbaiviet')->where('bv_id','=',$value->bv_id)->get();
         // }
@@ -89,9 +89,9 @@ class ChuyengiaController extends Controller
     // hình nền
     public function background_store(Request $request)
     {
-        
+
         if($request->hasFile('cg_background'))
-            { 
+            {
                 $file=$request->file('cg_background');
                 $filename =$file->getClientOriginalName('cg_background');
                 // dd( $filename);
@@ -99,7 +99,7 @@ class ChuyengiaController extends Controller
                 // dd($file);
                  DB::table('chuyengia')->where('cg_id',\Auth::guard('chuyengia')->id())->update([
                   'cg_background' => $filename
-                    
+
                   ]);
                   return redirect()->route('ca-nhan-chuyen-gia');
           }
@@ -108,9 +108,9 @@ class ChuyengiaController extends Controller
 
     public function avatar_store(Request $request)
     {
-        
+
         if($request->hasFile('cg_hinhanh'))
-            { 
+            {
                 $file=$request->file('cg_hinhanh');
                 $filename =$file->getClientOriginalName('cg_hinhanh');
                 // echo $filename;
@@ -118,7 +118,7 @@ class ChuyengiaController extends Controller
                 // dd($file);
                  DB::table('chuyengia')->where('cg_id',\Auth::guard('chuyengia')->id())->update([
                   'cg_hinhanh' => $filename
-                    
+
                   ]);
                   return redirect()->route('ca-nhan-chuyen-gia');
           }
@@ -169,10 +169,24 @@ class ChuyengiaController extends Controller
     //Qua trang bách khoa nông nghiệp
     public function BachKhoa()
     {
+        $id = Auth::guard('chuyengia')->user()->cg_id;
+        $nhomquanly = DB::table('chitietchuyengia')->join('nhom','nhom.n_id','chitietchuyengia.n_id')
+                        ->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','nhom.lns_id')
+                        ->where('cg_id',$id)->paginate(5);
 
         $data = DB::table('bachkhoa')->join('chuyengia','chuyengia.cg_id','=','bachkhoa.cg_id')
         ->get();
-        return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact('data'));
+        $linhvucdachon = DB::table('chitietlinhvuc')->where('cg_id',$id)->pluck('lns_id')->toArray();
+        // dd($hinhanh);
+        if($linhvucdachon == ''){
+            $linhvuc = DB::table('loaisanphamnuoitrong')->get();
+            return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact(['linhvuc']));
+        }
+
+        $linhvuc = DB::table('loaisanphamnuoitrong')->whereNotIn('lns_id',$linhvucdachon)->get();
+        $linhvuc2 = DB::table('chitietlinhvuc')->join('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','chitietlinhvuc.lns_id')->where('cg_id',$id)->get();
+
+        return view('client.pages.chuyengia.bach-khoa-nong-nghiep',compact('data','linhvuc2','linhvuc','nhomquanly'));
     }
 
 
