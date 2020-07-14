@@ -78,10 +78,10 @@ class DatabaseSeeder extends Seeder
         ];
         DB::table('thuonglai')->insert($thuonglai);
 
-
+        
         //Dữ liệu mẫu cho Nhóm
         $now = Carbon::now();
-
+        
 
         //Dữ liệu cho loại nông sản
         $loaisanphamnuoitrong = [
@@ -152,7 +152,7 @@ class DatabaseSeeder extends Seeder
                 'cg_background'=>'bg11.jpg',
                 'td_id'=>1
             ],
-
+           
         ];
         DB::table('chuyengia')->insert($chuyengia);
 

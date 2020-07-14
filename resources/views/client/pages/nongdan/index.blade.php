@@ -49,7 +49,7 @@ p._hinhanh {
 }
 .id_delete :hover{
     color: red;
-
+    
 }
 .usr-question:hover .id_delete{
     position: absolute;
@@ -70,7 +70,7 @@ p._hinhanh {
 @endsection
 <body>
     <div class="wrapper">
-        @include('client.template.header')
+        @include('client.template.header') 
         <section class="forum-sec">
             <div class="container">
                 <div class="forum-links">
@@ -111,13 +111,13 @@ p._hinhanh {
                                         <h3><a style="color: #08b400">{{ $item->bv_tieude }}</a></h3>
                                         <div class="id_delete">
                                             @if($item->nd_id == Auth::guard('nongdan')->id())
-                                            <a href="{{ route('nongdan.bai-dang-xoa', $item->bv_id) }}"  ><i class="fa fa-trash" aria-hidden="true"> Xóa bài viết</i></a>
-                                            @endif
+                                            <a href="{{ route('nongdan.bai-dang-xoa', $item->bv_id) }}"  ><i class="fa fa-trash" aria-hidden="true"> Xóa bài viết</i></a> 
+                                            @endif 
                                         </div>
                                         <div>
                                             {{ $item->bv_noidung }}
                                         </div>
-
+                                        
                                         <ul class="quest-tags">
                                             @if(!empty($hinhanh[$item->bv_id]))
                                                 @foreach ($hinhanh[$item->bv_id] as $item2)
@@ -128,7 +128,7 @@ p._hinhanh {
                                         <ul class="react-links">
                                             <li><a href="#" ><i class="fa fa-heart"></i>Thích</a></li>
                                             {{-- Bình luận --}}
-                                            <li>
+                                            <li>    
                                                 <a class="showForm" data-id="{!! $item->bv_id !!} ">Bình luận</a>
                                             </li>
                                             <li><a href="#" ><i class="fa fa-eye"></i> Lượt xem</a></li>
@@ -146,9 +146,7 @@ p._hinhanh {
                                                                     <a href="">{{ $val->nd_hoten }}</a>
                                                                     <span style="margin-left: 5px;">{{$val->bl_noidung}}</span>
                                                                 </div>
-                                                                @if (Auth::guard('nongdan')->user()->nd_id == $val->nd_id)
-                                                                    <div class="icon-delete"><a href="{{ route('nongdan.xoa-binhluan',$val->bl_id) }}" title="Xóa"><i class="fa fa-trash" ></i></a></div>
-                                                                @endif
+                                                                <div class="icon-delete"><a href="{{ route('nongdan.xoa-binhluan',$val->bl_id) }}" title="Xóa"><i class="fa fa-trash" ></i></a></div>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -159,7 +157,7 @@ p._hinhanh {
                                                 @csrf
                                                 <div class="form-group">
                                                     <div class="row">
-
+                                                        
                                                         <div class="col-10 p-0">
                                                             <input type="text"  class="form-control content_cm{!! $item->bv_id !!} text-comment" name="_content" style="width: 100%;">
                                                             <input type="hidden" value="{{$item->bv_id}}" class="bv_id">
@@ -171,19 +169,19 @@ p._hinhanh {
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                   
                                             </form>
                                          </div>
-                                        <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min ago</span>
+                                        <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min ago</span>    
                                     </div>
                                     <!--usr_quest end-->
-
+                                    
                                     {{-- @if(!empty($hinhanh[$item->bv_id]))
                                         @foreach ($hinhanh[$item->bv_id] as $item2)
                                         <img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70">
                                         @endforeach
                                     @endif --}}
-                                </div>
+                                </div>    
                             </div>
                             @endforeach
                             <!--forum-questions end-->
@@ -301,7 +299,7 @@ p._hinhanh {
                             <label>Loại nông sản</label>
                             <select class="form-control" name="loainongsan">
                                 @foreach ($lns as $item)
-                                    <option value="{{ $item->lns_id }}">{{ $item->lns_ten }}</option>
+                                    <option value="{{ $item->lns_id }}">{{ $item->lns_ten }}</option>                                
                                 @endforeach
                             </select>
                         </div>
@@ -311,21 +309,21 @@ p._hinhanh {
                         </div>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
-                            <input type="file"
-                                name="file[]"
+                            <input type="file" 
+                                name="file[]" 
                                 multiple
-                                id="file-1"
-                                class="form-control file"
-                                data-overwrite-initial="false"
-                                data-min-file-count="2"
+                                id="file-1" 
+                                class="form-control file" 
+                                data-overwrite-initial="false" 
+                                data-min-file-count="2"     
                                 />
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" id="uploadImage">Upload</button>
-                        </div>
+                        </div> 
                     </form>
                 </div>
-
+                
             </div>
         </div>
     </div>
@@ -363,7 +361,7 @@ p._hinhanh {
                 // var send_id = $(this).attr('data-send');
                 // $(".nd-comment").hide();
                 $("#"+id).toggle();
-                $('.send'+id).click(function (e) {
+                $('.send'+id).click(function (e) { 
                     // var send_id = $(this).data('send');
                     e.preventDefault();
                     // console.log(id);
@@ -372,7 +370,7 @@ p._hinhanh {
                     var _token = $("input[name='_token']").val();
                     var bv_id = id;
                     var nd_id = $('.nd_id').val();
-
+                    
                     // console.log(_token);
                     // console.log(noidung);
                     // console.log(bv_id);
@@ -399,22 +397,22 @@ p._hinhanh {
                         // var bv_id_add=$('._cmm').attr('data-bl-id');
                         // console.log(bv_id_add);
                         var hoten1 = response.data.nd_hoten;
-                        let route =  "{{ Request::url() }}" + "/binh-luan-xoa/"+bl_id;
+                        let route = "http://localhost:8080/MXH-NongNghiep/public/nong-dan/binh-luan-xoa/"+bl_id;
                         //console.log(route);
                         var xoa = '<div class="icon-delete"><a href="' + route + '" title="Xóa"><i class="fa fa-trash" ></i></a></div>';
                         var noidung1 = response.data.bl_noidung;
-                        var data2 =  '<div class="row mb-3" >'+'<div class="col-1 p-0">' +
+                        var data2 =  '<div class="row mb-3" >'+'<div class="col-1 p-0">' + 
                                     '<img src="'+ src_img +'" style="width: 60%; border-radius: 50%;" alt=""></div>'
-                                    +'<div class="col-10 h-100" style="border-radius: 20px; background-color: #cccccc;position: relative;">' +
+                                    +'<div class="col-10 h-100" style="border-radius: 20px; background-color: #cccccc;position: relative;">' + 
                                         '<div class="pt-2 pb-2" style="font-size: 13px;">' +
                                         '<a href="">'+ hoten1 + '</a><span style="margin-left: 5px;">' +  noidung1 +' </span></div>' +xoa+'</div>'+'</div>';
-
-                        //   console.log(id);
+                        
+                        //   console.log(id);                       
                         $('._cmm'+id).append(data2);
                         // console.log(data2);
                     }
                 });
-
+                
                 $(".content_cm"+id).val('');
 
 
@@ -423,7 +421,7 @@ p._hinhanh {
 
             //popup hình
 
-            $('.img-p').click(function (e) {
+            $('.img-p').click(function (e) { 
                 e.preventDefault();
                 console.log("ok");
                 var src = $(this).attr('src');
@@ -436,7 +434,7 @@ p._hinhanh {
         //Xóa bài
         function myFunction() {
             confirm("Bạn có muốn xóa bài đăng này!");
-            return;
+            return;     
             }
     </script>
     {{-- <script>
