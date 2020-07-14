@@ -11,13 +11,9 @@ class SellController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index($id)
-    // {
-    //     $product=\DB::table('sanpham')->where('nccvt_id',$id)->get();
-    // }
-    public function index()
+    public function index($id)
     {
-        $product=\DB::table('sanpham')->get();
+        $product=\DB::table('sanpham')->where('nccvt_id',$id)->get();
         return view('client.pages.sell.index',compact('product'));
     }
     public function create()
