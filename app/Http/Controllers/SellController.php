@@ -49,19 +49,21 @@ class SellController extends Controller
             'lsp_id'=>$request->type,
             'nccvt_id'=>\Auth::guard('nccvt')->user()->nccvt_id
         ));
-        foreach($request->file('img') as $item){
+        if($request->hasFile('img')){
+          foreach($request->file('img') as $item){
 
             $file_name2 = $item->getClientOriginalName(); //Trả về tên file
             //lưu file
             $item->move(
                 'img/Product', //nơi cần lưu
-                $file_name2,
+                $file_name2
             );
             \DB::table('hinhanh')->insert([
                 'ha_ten'=>$file_name2,
                 'ha_duongdan'=>'img/Product/'.$file_name2,
                 'sp_id'=>$id
             ]);
+        }
         }
         return redirect()->route('sell',['id' => \Auth::guard('nccvt')->user()->nccvt_id]);
 
@@ -78,6 +80,7 @@ class SellController extends Controller
         $product=\DB::table('sanpham')->where('sp_id',$id)
         ->join('nccvt','nccvt.nccvt_id','sanpham.nccvt_id')
         ->first();
+        // dd($product)
         $img=\DB::table('hinhanh')->where('sp_id',$product->sp_id)->get();
         // dd($product);
         // dd($img);
@@ -105,5 +108,11 @@ class SellController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function list(Request $request)
+    {
+      $nccvt=\DB::table('nccvt')->get();
+      // dd($nccvt);
+      return view('client.pages.sell.list',compact('nccvt'));
     }
 }

@@ -86,7 +86,7 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
     //Cập nhât thông tin thương lái
     Route::get('/cai-dat','NgocDuc\NongdanController@setting')->name('caidat.nongdan');
-    
+
     Route::post('/cai-dat/thong-tin','NgocDuc\NongdanController@changeinfor')->name('caidat.submit.nongdan');
 
     //Thay đổi mật khẩu của thương láy
@@ -94,7 +94,7 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
     //check 2 mật khẩu
     Route::post('/cai-dat/doi-mk','NgocDuc\NongdanController@update')->name('caidat.submit.matkhau.nongdan');
-    
+
 
     // Nhóm nông dân
     Route::get('nhom', 'Ngocduc\NhomController@AllGroup')->name('all-group1');
@@ -116,13 +116,13 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
     Route::get('san-pham-nuoi-trong/{id}/hinhanh','HinhanhController@create')->name('giao-dien-them-hinh-anh');
     Route::post('san-pham-nuoi-trong/hinhanh', 'HinhanhController@store')->name('them-hinh-anh');
     Route::get('san-pham-nuoi-trong/{idHA}/{idSP}/ha-delete','HinhanhController@destroy')->name('xoa-hinh-anh');
- 
-    
+
+
 
     //Đăng bài dành cho NÔNG DÂN
     Route::post('/dang-bai-nong-dan','NgocDuc\NongdanController@writePosts')->name('nong-dan-dang-bai');
 
-    //Bình luận 
+    //Bình luận
     Route::post('/binhluan','NgocDuc\NongdanController@Ajaxcomment')->name('nongdan.binhluan');
 
 
@@ -132,25 +132,38 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
     //Xóa bài viết
     Route::get('/dang-bai-xoa/{id}','NgocDuc\NongdanController@destroy')->name('nongdan.bai-dang-xoa');
-    
+
 
      //Xóa bình luận thương lái
      Route::get('/binh-luan-xoa/{id}','NgocDuc\NongdanController@destroyComment')->name('nongdan.xoa-binhluan');
 
-   
+
 });
 
+// Nhà cung cấp vật tư
 Route::group(['prefix' => 'nccvt'], function () {
-    
+    // ủa là sao, kiếm gì
+    // cái bán nông sản là sao ai bán =)))
+    // bán nông sản nào, t bán vạt liệu mà, à v thôi để t xóa code
+    //  sản bán trong bài viết như fb á
+    // okok
+    // hiển thị danh sách nccvt
+    Route::get('/danh-sach-cua-hang', 'SellController@list')->name('sell.list');
+    //chi tiết 1 nccvt
     Route::get('/cua-hang/{id}', 'SellController@index')->name('sell');
+    //tạo sp
     Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
     Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
+    // xem chi tiết sản phẩm
     Route::get('/san-pham/{id}', 'SellController@show')->name('sell.show');
+
+    //cài đặt
 });
+Route::get('/danh-sach-cua-hang', 'SellController@list')->name('sell.list.1');
 Route::get('/ban-hang', 'SellController@index')->name('sell');
 Route::get('/ban-hang/{id}', 'SellController@show')->name('sell.single');
-Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
-Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
+// Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
+// Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
 
 
 //Giao diện của thương lái ném vào đây
@@ -170,7 +183,7 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
 
     //Cập nhât thông tin thương lái
     Route::get('/cai-dat','ThuongLaiController@setting')->name('caidat');
-    
+
     Route::post('/cai-dat/thong-tin','ThuongLaiController@changeinfor')->name('caidat.submit');
 
     //Thay đổi mật khẩu của thương láy
@@ -188,7 +201,7 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
     //Đăng bài dành cho Thương lái
     Route::post('/dang-bai-thuong-lai','ThuongLaiController@writePosts')->name('thuong-lai-dang-bai');
 
-    //Bình luận 
+    //Bình luận
     Route::post('/binhluan','ThuongLaiController@Ajaxcomment')->name('thuonglai.binhluan');
 
     //Xóa bài viết
@@ -210,7 +223,7 @@ Route::group(['prefix' => 'chuyen-gia', 'middleware' => 'CheckUserChuyenGia'], f
     //thay đổi hình nền
     Route::post('/hinh-nen','NgocDuc\ChuyengiaController@background_store')->name('hinhen.submit.chuyengia');
 
-    
+
     //thay đổi hình đại diện
     Route::post('/hinh-dai-dien','NgocDuc\ChuyengiaController@avatar_store')->name('daidien.submit.chuyengia');
 
@@ -222,7 +235,7 @@ Route::group(['prefix' => 'chuyen-gia', 'middleware' => 'CheckUserChuyenGia'], f
 
     Route::post('chon-linh-vuc','NgocDuc\ChuyengiaController@ChonLinhVuc')->name('chon-linh-vuc');
     Route::get('nhom/chi-tiet/{idGroup}', 'NgocDuc\NhomController@GroupDetail')->name('chi-tiet-nhom');
-    
+
     Route::get('nhom-tham-gia','NgocDuc\NhomController@GroupJoin')->name('group-join');
     //Tạo nhóm
     Route::post('tao-nhom','NgocDuc\ChuyengiaController@CreateGroup')->name('tao-nhom');

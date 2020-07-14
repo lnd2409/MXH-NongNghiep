@@ -90,6 +90,11 @@
                                                     <a href="{{ route('login-chuyen-gia') }}" class="text-center" style="text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                                                     0px 8px 13px rgba(0,0,0,0.1),
                                                     0px 18px 23px rgba(0,0,0,0.1); color: green;">Đăng nhập với chuyên gia</a>
+                                                    <br>
+                                                    <br>
+                                                    <a href="{{ route('login-nccvt') }}" class="text-center" style="text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                                                    0px 8px 13px rgba(0,0,0,0.1),
+                                                    0px 18px 23px rgba(0,0,0,0.1); color: green;">Đăng nhập với nhà cung cấp vật tư</a>
                                                 </div>
                                             </div>
                                         </form>

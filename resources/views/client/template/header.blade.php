@@ -1,4 +1,3 @@
-
 <header>
     <div class="container">
         <div class="header-data">
@@ -48,22 +47,29 @@
 
                     </li>
                     <li>
-                        <a href="companies.html" title="">
+                        <a href="{{route('sell.list.1')}}" title="">
                             <span><img src="{{asset('client/images/icon2.png')}}" alt=""></span>
-                            Mua bán
+                            Nhà cung cấp
                         </a>
-                        <ul>
-                            <li><a href="companies.html" title="">Bán nông sản</a></li>
-                            <li><a href="company-profile.html" title="">Vật tư nông nghiệp</a></li>
-                        </ul>
+                        @if (Auth::guard('nccvt')->check())
+                            <ul>
+                                <li>
+                                    <a href="#">Chi tiết gian hàng</a>
+                                </li>
+                            </ul>
+                        @else
+
+                        @endif
+
                     </li>
                     @if(Auth::guard('nongdan')->check())
-                        <li>
-                            <a href="{{ route('nhat-ky-nong-ho',[ 'id' => \Auth::guard('nongdan')->user()->nd_id ]) }}" title="">
-                                <span><img src="{{asset('client/images/icon3.png')}}" alt=""></span>
-                                Nhật ký nông hộ
-                            </a>
-                        </li>
+                    <li>
+                        <a href="{{ route('nhat-ky-nong-ho',[ 'id' => \Auth::guard('nongdan')->user()->nd_id ]) }}"
+                            title="">
+                            <span><img src="{{asset('client/images/icon3.png')}}" alt=""></span>
+                            Nhật ký nông hộ
+                        </a>
+                    </li>
                     @endif
 
                     <li>
@@ -116,9 +122,11 @@
             <div class="user-account">
                 <div class="user-info">
                     @if (Auth::guard('nongdan')->check())
-                        <img src="{{asset('hinhanh/nguoidung/nongdan/'.Auth::guard('nongdan')->user()->nd_hinhanh)}}" alt="" style="width:30px; height:30px;">
-                        <a href="#" title="">{{ substr(Auth::guard('nongdan')->user()->nd_hoten,-(strpos(strrev(Auth::guard('nongdan')->user()->nd_hoten),' ')),strlen(Auth::guard('nongdan')->user()->nd_hoten))}}</a>
-                        <i class="la la-sort-down"></i>
+                    <img src="{{asset('hinhanh/nguoidung/nongdan/'.Auth::guard('nongdan')->user()->nd_hinhanh)}}" alt=""
+                        style="width:30px; height:30px;">
+                    <a href="#"
+                        title="">{{ substr(Auth::guard('nongdan')->user()->nd_hoten,-(strpos(strrev(Auth::guard('nongdan')->user()->nd_hoten),' ')),strlen(Auth::guard('nongdan')->user()->nd_hoten))}}</a>
+                    <i class="la la-sort-down"></i>
                     @elseif (Auth::guard('thuonglai')->check())
                         <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_hinhanh)}}" alt="" style="width:30px; height:30px;">
                         <a href="#" title="">{{ substr(Auth::guard('thuonglai')->user()->tl_hoten,-(strpos(strrev(Auth::guard('thuonglai')->user()->tl_hoten),' ')),strlen(Auth::guard('thuonglai')->user()->tl_hoten))}}</a>
@@ -144,14 +152,18 @@
                         <li><a href="#" title="">Terms & Conditions</a></li> --}}
                         @elseif (Auth::guard('chuyengia')->check())
                         <li><a href="{{ route('caidat') }}" title="">Cài đặt tài khoản</a></li>
+                        @elseif (Auth::guard('nccvt')->check())
+                        <li><a href="{{ route('caidat') }}" title="">Cài đặt tài khoản</a></li>
                         @endif
                     </ul>
                     @if (Auth::guard('nongdan')->check())
-                        <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Đăng xuất</a></h3>
+                    <h3 class="tc"><a href="{{ route('dang-xuat-nong-dan') }}" title="">Đăng xuất</a></h3>
                     @elseif(Auth::guard('thuonglai')->check())
-                        <h3 class="tc"><a href="{{ route('dang-xuat-thuong-lai') }}" title="">Đăng xuất</a></h3>
+                    <h3 class="tc"><a href="{{ route('dang-xuat-thuong-lai') }}" title="">Đăng xuất</a></h3>
                     @elseif(Auth::guard('chuyengia')->check())
-                        <h3 class="tc"><a href="{{ route('dang-xuat-chuyen-gia') }}" title="">Đăng xuất</a></h3>
+                    <h3 class="tc"><a href="{{ route('dang-xuat-chuyen-gia') }}" title="">Đăng xuất</a></h3>
+                    @elseif(Auth::guard('nccvt')->check())
+                    <h3 class="tc"><a href="{{ route('logout-nccvt') }}" title="">Đăng xuất</a></h3>
                     @endif
 
                 </div>
