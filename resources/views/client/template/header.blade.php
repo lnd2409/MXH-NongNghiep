@@ -2,7 +2,19 @@
     <div class="container">
         <div class="header-data">
             <div class="logo">
-                <a href="index.html" title=""><img src="{{asset('client/images/logo.png')}}" alt=""></a>
+                @if (Auth::guard('nongdan')->check())
+                    <a href="{{ route('trang-chu-nong-dan') }}" title="">
+                        <img src="{{asset('client/images/cm-logo.png')}}" style="width: 50px;" alt="">
+                    </a>
+                @elseif(Auth::guard('thuonglai')->check())
+                    <a href="{{ route('trangchu') }}" title="">
+                        <img src="{{asset('client/images/cm-logo.png')}}" style="width: 50px;" alt="">
+                    </a>
+                @elseif(Auth::guard('chuyengia')->check())
+                    <a href="{{ route('trang-chu-chuyen-gia') }}" title="">
+                        <img src="{{asset('client/images/cm-logo.png')}}" style="width: 50px;" alt="">
+                    </a>
+                @endif
             </div>
             <!--logo end-->
             <div class="search-bar">
@@ -25,28 +37,30 @@
                             <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
                             Trang chủ
                         </a>
-<<<<<<< HEAD
+
                         @elseif(Auth::guard('chuyengia')->check())
                             <a href="{{ route('trang-chu-chuyen-gia') }}" title="">
                                 <span><img src="{{asset('client/images/icon1.png')}}" alt=""></span>
                                 Trang chủ
                             </a>
-                        
-=======
-
->>>>>>> nghia.le
                         @endif
 
                     </li>
                     <li>
-                        <a href="{{route('sell.list')}}" title="">
+                        <a href="{{route('sell.list.1')}}" title="">
                             <span><img src="{{asset('client/images/icon2.png')}}" alt=""></span>
                             Nhà cung cấp
                         </a>
-                        <!-- <ul>
-                            <li><a href="companies.html" title="">Bán nông sản</a></li>
-                            <li><a href="company-profile.html" title="">Vật tư nông nghiệp</a></li>
-                        </ul> -->
+                        @if (Auth::guard('nccvt')->check())
+                            <ul>
+                                <li>
+                                    <a href="#">Chi tiết gian hàng</a>
+                                </li>
+                            </ul>
+                        @else
+
+                        @endif
+
                     </li>
                     @if(Auth::guard('nongdan')->check())
                     <li>
@@ -70,7 +84,6 @@
                             Trang cá nhân
                         </a>
                         @elseif(Auth::guard('chuyengia')->check())
-<<<<<<< HEAD
                             <a href="{{ route('ca-nhan-chuyen-gia') }}" title="">
                                 <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
                                 Trang cá nhân
@@ -99,7 +112,6 @@
                                 </a>
                             </li>
                         @endif
-=======
                         <a href="" title="">
                             <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
                             Trang cá nhân
@@ -112,7 +124,6 @@
                             Nhóm
                         </a>
                     </li>
->>>>>>> nghia.le
                 </ul>
             </nav>
             <!--nav end-->
@@ -129,14 +140,12 @@
                         title="">{{ substr(Auth::guard('nongdan')->user()->nd_hoten,-(strpos(strrev(Auth::guard('nongdan')->user()->nd_hoten),' ')),strlen(Auth::guard('nongdan')->user()->nd_hoten))}}</a>
                     <i class="la la-sort-down"></i>
                     @elseif (Auth::guard('thuonglai')->check())
-<<<<<<< HEAD
                         <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_hinhanh)}}" alt="" style="width:30px; height:30px;">
                         <a href="#" title="">{{ substr(Auth::guard('thuonglai')->user()->tl_hoten,-(strpos(strrev(Auth::guard('thuonglai')->user()->tl_hoten),' ')),strlen(Auth::guard('thuonglai')->user()->tl_hoten))}}</a>
                         <i class="la la-sort-down"></i>
                     @elseif (Auth::guard('chuyengia')->check())
                     <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('chuyengia')->user()->cg_hinhanh)}}" alt="" style="width:30px; height:30px;">
                     <a href="#" title="">{{ substr(Auth::guard('chuyengia')->user()->cg_hoten,-(strpos(strrev(Auth::guard('chuyengia')->user()->cg_hoten),' ')),strlen(Auth::guard('chuyengia')->user()->cg_hoten))}}</a>
-=======
                     <img src="{{asset('hinhanh/nguoidung/thuonglai/'.Auth::guard('thuonglai')->user()->tl_background)}}"
                         alt="" style="width:30px; height:30px;">
                     <a href="#"
@@ -151,7 +160,6 @@
                     <img src="" alt="Avata chuyên gia" style="width:30px; height:30px;">
                     <a href="#"
                         title="">{{ substr(Auth::guard('nccvt')->user()->nccvt_ten,-(strpos(strrev(Auth::guard('nccvt')->user()->nccvt_ten),' ')),strlen(Auth::guard('nccvt')->user()->nccvt_ten))}}</a>
->>>>>>> nghia.le
                     <i class="la la-sort-down"></i>
                     @endif
                 </div>

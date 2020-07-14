@@ -29,7 +29,10 @@
 <section class="companies-info">
     <div class="container">
         <div class="company-title">
-            <button class="btn btn-success" onclick="window.location.href='{{route('sell.create')}}'">Đăng bán</button>
+            @if (Auth::guard('nongdan')->check())
+            @else
+                <button class="btn btn-success" onclick="window.location.href='{{route('sell.create')}}'">Đăng bán</button>
+            @endif
         </div>
         <!--company-title end-->
         <div class="companies-list">
@@ -57,9 +60,8 @@
                             </table>
                             <br>
                             <ul>
-                                <li><a href="{{route('sell.show',$item->sp_id)}}" title="" class="follow">Xem gian
-                                <li><a href="{{route('sell.single',$item->sp_id)}}" title="" class="follow">Xem gian
-                                        hàng</a></li>
+                                {{-- <li><a href="{{route('sell.show',$item->sp_id)}}" title="" class="follow">Xem sản phẩm --}}
+                                <li><a href="{{route('sell.single',$item->sp_id)}}" title="" class="follow">Xem sản phẩm</a></li>
                             </ul>
                         </div>
                     </div>

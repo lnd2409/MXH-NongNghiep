@@ -32,14 +32,15 @@
             <div class="signin-popup">
                 <div class="signin-pop">
                     <div class="row">
-                        <div class="col-lg-6 login_bg">
-                            <div class="cmp-info ">
-                                <div class="cm-logo">
-                                    <img src="{{asset('client/images/cm-logo.png')}}" alt="">
-                                    {{-- <h3>Mạng Xã Hội Nông Nghiệp</h3> --}}
+                        <div class="col-lg-6">
+                            <div class="cmp-info">
+                                <div class="cm-logo" style="margin-bottom: 0;">
+                                    <img src="{{asset('client/images/cm-logo.png')}}" alt="" width="260px">
                                 </div>
                                 <!--cm-logo end-->
-                                <img src="{{asset('client/images/cm-main-img.png')}}" alt="">
+                                <p class="text-center" style="text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                                0px 8px 13px rgba(0,0,0,0.1),
+                                0px 18px 23px rgba(0,0,0,0.1); font-size: 35px;">Mạng xã hội nông nghiệp</p>
                             </div>
                             <!--cmp-info end-->
                         </div>
@@ -87,9 +88,14 @@
                                                     <button type="submit" value="submit" >Đăng nhập</button>
                                                     <br>
                                                     <br>
-                                                    <a href="{{ route('login-chuyen-gia') }}" class="text-center">Đăng nhập với chuyên gia</a>
+                                                    <a href="{{ route('login-chuyen-gia') }}" class="text-center" style="text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                                                    0px 8px 13px rgba(0,0,0,0.1),
+                                                    0px 18px 23px rgba(0,0,0,0.1); color: green;">Đăng nhập với chuyên gia</a>
                                                     <br>
-                                                    <a href="{{ route('login-nccvt') }}" class="text-center">Đăng nhập với nhà cung cấp vật tư</a>
+                                                    <br>
+                                                    <a href="{{ route('login-nccvt') }}" class="text-center" style="text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                                                    0px 8px 13px rgba(0,0,0,0.1),
+                                                    0px 18px 23px rgba(0,0,0,0.1); color: green;">Đăng nhập với nhà cung cấp vật tư</a>
                                                 </div>
                                             </div>
                                         </form>
@@ -248,7 +254,6 @@
                     <ul>
 
                     </ul>
-                    <p><img src="{{asset('client/images/copy-icon.png')}}" alt="">Copyright 2018</p>
                 </div>
             </div>
             <!--footy-sec end-->

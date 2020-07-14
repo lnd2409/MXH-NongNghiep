@@ -29,7 +29,10 @@
 <section class="companies-info">
     <div class="container">
         <div class="company-title">
-            <button class="btn btn-success" onclick="window.location.href='{{route('sell.create')}}'">Đăng bán</button>
+            @if (Auth::guard('nongdan')->check())
+            @else
+                <button class="btn btn-success" onclick="window.location.href='{{route('sell.create')}}'">Đăng bán</button>
+            @endif
         </div>
         <!--company-title end-->
         <div class="companies-list">

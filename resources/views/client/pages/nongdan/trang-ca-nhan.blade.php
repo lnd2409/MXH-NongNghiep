@@ -1,7 +1,7 @@
 @extends('client.client')
 @section('content')
 <section class="cover-sec">
-   
+
     <img src=" {{asset('hinhanh/nguoidung/nongdan/'.$data->nd_background)}}" style="height: 400px" alt="">
     <a title="" data-toggle="modal" data-target="#changeBG"><i class="fa fa-camera"></i>Thay đổi hình nền</a>
 </section>
@@ -38,10 +38,10 @@
                                     </ul>
                                 </div>
                                 <!--user_pro_status end-->
-                                
+
                             </div>
                             <!--user_profile end-->
-                            
+
                             <!--suggestions end-->
                         </div>
                         <!--main-left-sidebar end-->
@@ -70,7 +70,7 @@
                             <div class="product-feed-tab current" id="feed-dd">
                                 <div class="posts-section">
                                     @foreach ($baiviet as $item)
-                                        
+
                                         <div class="post-bar">
                                             <div class="post_topbar">
                                                 <div class="usy-dt">
@@ -93,12 +93,12 @@
                                                 </div>
                                             </div>
                                             <div class="epi-sec">
-                                                
-                                                
+
+
                                             </div>
                                             <div class="job_descp">
                                                 <h3>{{ $item->bv_tieude }}</h3>
-                                                
+
                                                 <p>
                                                     {{ $item->bv_noidung }}
                                                 </p>
@@ -168,25 +168,6 @@
     </div>
 </main>
 
-<footer>
-    <div class="footy-sec mn no-margin">
-        <div class="container">
-            <ul>
-                <li><a href="#" title="">Help Center</a></li>
-                <li><a href="#" title="">Privacy Policy</a></li>
-                <li><a href="#" title="">Community Guidelines</a></li>
-                <li><a href="#" title="">Cookies Policy</a></li>
-                <li><a href="#" title="">Career</a></li>
-                <li><a href="#" title="">Forum</a></li>
-                <li><a href="#" title="">Language</a></li>
-                <li><a href="#" title="">Copyright Policy</a></li>
-            </ul>
-            <p><img src="images/copy-icon2.png" alt="">Copyright 2018</p>
-            <img class="fl-rgt" src="images/logo2.png" alt="">
-        </div>
-    </div>
-</footer>
-<!--footer end-->
 
 {{-- hình nền --}}
 <div class="modal fade" id="changeBG" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -208,7 +189,7 @@
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -233,7 +214,7 @@
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -249,7 +230,7 @@
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-        }    
+        }
     function readURL4(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -259,6 +240,6 @@
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-        }    
+        }
 </script>
 @endsection

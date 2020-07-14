@@ -39,8 +39,7 @@ class SellController extends Controller
         //lưu file
         $request->file('avatar')->move(
         'img/Product', //nơi cần lưu
-        $file_name,
-        );
+        $file_name);
         $id=\DB::table('sanpham')->insertGetID(array(
             'sp_hinhdaidien' => 'img/Product/'.$file_name,
             'sp_ten'=>$request->title,
@@ -57,7 +56,7 @@ class SellController extends Controller
             //lưu file
             $item->move(
                 'img/Product', //nơi cần lưu
-                $file_name2,
+                $file_name2
             );
             \DB::table('hinhanh')->insert([
                 'ha_ten'=>$file_name2,
@@ -81,6 +80,7 @@ class SellController extends Controller
         $product=\DB::table('sanpham')->where('sp_id',$id)
         ->join('nccvt','nccvt.nccvt_id','sanpham.nccvt_id')
         ->first();
+        // dd($product)
         $img=\DB::table('hinhanh')->where('sp_id',$product->sp_id)->get();
         // dd($product);
         // dd($img);

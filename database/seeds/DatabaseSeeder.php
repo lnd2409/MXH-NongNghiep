@@ -172,5 +172,15 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('loaisanpham')->insert($loaisanpham);
+
+
+        $donvitinh = [
+            [
+                'dvt_ten' => 'Kilogram',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+
+        ];
     }
 }
