@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Đăng nhập</title>
+    <title>Đăng nhập |</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"  type="image/png"  href="{{asset('hinhanh/ii.png')}}" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -31,10 +32,11 @@
             <div class="signin-popup">
                 <div class="signin-pop">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="cmp-info">
+                        <div class="col-lg-6 login_bg">
+                            <div class="cmp-info ">
                                 <div class="cm-logo">
                                     <img src="{{asset('client/images/cm-logo.png')}}" alt="">
+                                    {{-- <h3>Mạng Xã Hội Nông Nghiệp</h3> --}}
                                 </div>
                                 <!--cm-logo end-->
                                 <img src="{{asset('client/images/cm-main-img.png')}}" alt="">
@@ -86,6 +88,8 @@
                                                     <br>
                                                     <br>
                                                     <a href="{{ route('login-chuyen-gia') }}" class="text-center">Đăng nhập với chuyên gia</a>
+                                                    <br>
+                                                    <a href="{{ route('login-nccvt') }}" class="text-center">Đăng nhập với nhà cung cấp vật tư</a>
                                                 </div>
                                             </div>
                                         </form>
@@ -141,7 +145,7 @@
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="password" name="password" placeholder="Mật khẩu">
@@ -166,7 +170,7 @@
                                                         <input type="text" name="nd_sdt" placeholder="Số điện thoại">
                                                         <i class="la la-user"></i>
                                                     </div>
-                                                </div>  
+                                                </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="text" name="nd_diachi" placeholder="Địa chỉ">
@@ -191,7 +195,7 @@
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="password" name="password" placeholder="Mật khẩu">
@@ -216,7 +220,7 @@
                                                         <input type="text" name="tl_sdt" placeholder="Số điện thoại">
                                                         <i class="la la-user"></i>
                                                     </div>
-                                                </div>  
+                                                </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="text" name="tl_diachi" placeholder="Địa chỉ">
@@ -242,7 +246,7 @@
             <div class="footy-sec">
                 <div class="container">
                     <ul>
-                        
+
                     </ul>
                     <p><img src="{{asset('client/images/copy-icon.png')}}" alt="">Copyright 2018</p>
                 </div>

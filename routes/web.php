@@ -86,7 +86,7 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
     //Cập nhât thông tin thương lái
     Route::get('/cai-dat','NgocDuc\NongdanController@setting')->name('caidat.nongdan');
-    
+
     Route::post('/cai-dat/thong-tin','NgocDuc\NongdanController@changeinfor')->name('caidat.submit.nongdan');
 
     //Thay đổi mật khẩu của thương láy
@@ -94,7 +94,7 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
 
     //check 2 mật khẩu
     Route::post('/cai-dat/doi-mk','NgocDuc\NongdanController@update')->name('caidat.submit.matkhau.nongdan');
-    
+
 
     // Nhóm nông dân
     Route::get('nhom', 'Ngocduc\NhomController@AllGroup')->name('all-group1');
@@ -140,12 +140,19 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
    
 });
 
+// Nhà cung cấp vật tư
 Route::group(['prefix' => 'nccvt'], function () {
-    
+    // hiển thị danh sách nccvt
+    Route::get('/danh-sach-cua-hang', 'SellController@list')->name('sell.list');
+    //chi tiết 1 nccvt
     Route::get('/cua-hang/{id}', 'SellController@index')->name('sell');
+    //tạo sp
     Route::get('/ban-hang/tao', 'SellController@create')->name('sell.create');
     Route::post('/ban-hang/luu', 'SellController@store')->name('sell.submit');
+    // xem chi tiết sản phẩm
     Route::get('/san-pham/{id}', 'SellController@show')->name('sell.show');
+
+    //cài đặt
 });
 Route::get('/ban-hang', 'SellController@index')->name('sell');
 Route::get('/ban-hang/{id}', 'SellController@show')->name('sell.single');
@@ -170,7 +177,7 @@ Route::group(['prefix' => 'thuong-lai', 'middleware' => 'CheckUserThuongLai'], f
 
     //Cập nhât thông tin thương lái
     Route::get('/cai-dat','ThuongLaiController@setting')->name('caidat');
-    
+
     Route::post('/cai-dat/thong-tin','ThuongLaiController@changeinfor')->name('caidat.submit');
 
     //Thay đổi mật khẩu của thương láy

@@ -34,31 +34,29 @@
         <!--company-title end-->
         <div class="companies-list">
             <div class="row">
-                @forelse ($product as $item)
+                @forelse ($nccvt as $item)
 
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="company_profile_info">
                         <div class="company-up-info">
-                            <a href="{{route('sell.show',$item->sp_id)}}">
-                            <a href="{{route('sell.single',$item->sp_id)}}">
-
-                                <img src="{{asset($item->sp_hinhdaidien)}}" alt="">
-                                <h3 class="title">{{substr($item->sp_ten,0,45)}}...</h3>
-                            </a>
+                            <h3 class="title">{{$item->nccvt_diachi}}</h3>
                             <table style="text-align: left;width:100%" class="m-3">
+                                <!-- <tr>
+                                <td colspan="2"><h2>{{substr($item->nccvt_diachi,0,255)}}...</h2></td>
+                              </tr> -->
                                 <tr>
-                                    <td>Giá tiền</td>
-                                    <td> {{number_format($item->sp_gia)}} đ</td>
+                                    <td>Số điện thoại</td>
+                                    <td> {{$item->nccvt_sdt}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Khả năng cung cấp</td>
-                                    <td> {{number_format($item->sp_soluongcungcap)}}</td>
+                                    <td>Địa chỉ</td>
+                                    <td> {{substr($item->nccvt_diachi,0,45)}}...</td>
                                 </tr>
+
                             </table>
                             <br>
                             <ul>
-                                <li><a href="{{route('sell.show',$item->sp_id)}}" title="" class="follow">Xem gian
-                                <li><a href="{{route('sell.single',$item->sp_id)}}" title="" class="follow">Xem gian
+                                <li><a href="{{route('sell',$item->nccvt_id)}}" title="" class="follow">Xem gian
                                         hàng</a></li>
                             </ul>
                         </div>
@@ -71,13 +69,7 @@
             </div>
         </div>
         <!--companies-list end-->
-        <div class="process-comm">
-            <div class="spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-            </div>
-        </div>
+
         <!--process-comm end-->
     </div>
 </section>
