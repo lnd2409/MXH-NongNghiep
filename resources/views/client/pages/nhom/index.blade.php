@@ -13,8 +13,8 @@
                         @if (Auth::guard('chuyengia')->check())
                             <li class="active"><a href="{{ route('group-join') }}" title="">Nhóm quản lý</a></li>
                         @elseif(Auth::guard('nongdan')->check())
-                            <li class="{{ Request::path() == 'nong-dan/nhom' ? 'active' : '' }}"><a href="{{ route('all-group1') }}" title="">Nhóm gợi ý</a></li>
-                            <li class="{{ Request::path() == 'nong-dan/nhom-tham-gia' ? 'active' : '' }}"><a href="{{ route('group-join-1') }}" title="">Nhóm đã tham gia</a></li>
+                            <li class="active"><a href="{{ route('all-group1') }}" title="">Nhóm</a></li>
+                            <li><a href="{{ route('group-join-1') }}" title="">Nhóm đã tham gia</a></li>
                         @endif
                     </ul>
                 </div>

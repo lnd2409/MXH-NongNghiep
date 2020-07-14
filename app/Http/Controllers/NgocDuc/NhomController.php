@@ -23,16 +23,7 @@ class NhomController extends Controller
     {
         if(Auth::guard('nongdan')->check())
         {
-            $loains = DB::table('sanphamnuoitrong')->pluck('lns_id')->toArray();
-            $nhomgoiy = DB::table('chitietchuyengia')
-                        ->whereIn('lns_id',$loains)
-                        ->join('nhom','nhom.n_id','chitietchuyengia.n_id')
-                        ->join('chuyengia','chuyengia.cg_id','chitietchuyengia.cg_id')
-                        // ->leftJoin('loaisanphamnuoitrong','loaisanphamnuoitrong.lns_id','nhom.lns_id')
-                        ->inRandomOrder()->get();
-            return view('client.pages.nhom.index-1',compact(['nhomgoiy']));
-            // dd($nhomgoiy);
-            // dd($loains);
+
         }
         elseif (Auth::guard('thuonglai')->check()) 
         {
