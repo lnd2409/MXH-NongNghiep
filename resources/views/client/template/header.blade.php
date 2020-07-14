@@ -112,18 +112,18 @@
                                 </a>
                             </li>
                         @endif
-                        <a href="" title="">
+                        {{-- <a href="" title="">
                             <span><img src="{{asset('client/images/icon4.png')}}" alt=""></span>
                             Trang cá nhân
                         </a>
-                        @endif
+                        @endif --}}
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('all-group') }}" title="">
                             <span><img src="{{asset('client/images/icon5.png')}}" alt=""></span>
                             Nhóm
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </nav>
             <!--nav end-->
