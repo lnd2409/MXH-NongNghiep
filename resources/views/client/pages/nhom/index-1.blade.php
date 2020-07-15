@@ -3,15 +3,15 @@
 <body>
 
     <div class="wrapper">
-        @include('client.template.header') 
+        @include('client.template.header')
 
 
         <section class="forum-sec">
             <div class="container">
-                
+
                 <div class="forum-links">
                     <ul>
-                        
+
                         @if (Auth::guard('chuyengia')->check())
                             <li class="active"><a href="{{ route('group-join') }}" title="">Nhóm quản lý</a></li>
                         @elseif(Auth::guard('nongdan')->check())
@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="forum-questions">
-                                @foreach ($nhomgoiy as $item)                                    
+                                @foreach ($nhomgoiy as $item)
                                     <div class="usr-question">
                                         <div class="usr_img">
                                             <img src="{{asset('hinhanh/nguoidung/nongdan/')}}" alt="">
@@ -44,11 +44,11 @@
                                             <div>
                                                 Chủ nhóm: <a href="{{ $item->cg_id }}">{{ $item->cg_hoten }}</a>
                                             </div>
-                                            
+
                                             <ul class="quest-tags">
                                                 Ngày tạo: {{ date('d-m-Y', strtotime($item->created_at)) }}
                                             </ul>
-                                            
+
                                             <ul class="react-links pt-3">
                                                 <li><a href="#" title="">Tham gia</a></li>
                                             </ul>
@@ -59,7 +59,7 @@
                                             <img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70">
                                             @endforeach
                                         @endif --}}
-                                    </div>    
+                                    </div>
                                 @endforeach
                             </div>
                             <!--forum-questions end-->

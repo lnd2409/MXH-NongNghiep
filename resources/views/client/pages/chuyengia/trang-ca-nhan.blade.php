@@ -20,26 +20,22 @@
                                 </div>
                                 <!--user-pro-img end-->
                                 <div class="user_pro_status">
-                                    <ul class="flw-hr">
-                                        <li><a href="" title="" class="flww"><i class="la la-book"></i> Nhật ký nông hô</a></li>
-                                        <li><a href="#" title="" class="hre">Hire</a></li>
-                                    </ul>
                                     <ul class="flw-status">
                                         <li>
                                             <span>Bài viết</span>
-                                            <b>ccc</b>
+                                            <b>12</b>
                                         </li>
                                         <li>
-                                            <span>Nhóm tham gia</span>
+                                            <span>Nhóm quản lý</span>
                                             <b>0</b>
                                         </li>
                                     </ul>
                                 </div>
                                 <!--user_pro_status end-->
-                                
+
                             </div>
                             <!--user_profile end-->
-                            
+
                             <!--suggestions end-->
                         </div>
                         <!--main-left-sidebar end-->
@@ -69,58 +65,35 @@
                                 <div class="posts-section">
                                     {{-- {{dd($baiviet)}} --}}
                                     @foreach ($baiviet as $item)
-                                        
+
                                         <div class="post-bar">
                                             <div class="post_topbar">
                                                 <div class="usy-dt">
                                                     <img src="{{asset('hinhanh/nguoidung/chuyengia/'.$data->cg_hinhanh)}}" height="50px" width="50px" alt="">
                                                     <div class="usy-name">
                                                         <h3>{{ $data->cg_hoten }}</h3>
-                                                        <span><img src="images/clock.png" alt="">3 min ago</span>
                                                     </div>
                                                 </div>
                                                 <div class="ed-opts">
                                                     <a href="#" title="" class="ed-opts-open"><i
                                                             class="la la-ellipsis-v"></i></a>
                                                     <ul class="ed-options">
-                                                        <li><a href="#" title="">Edit Post</a></li>
-                                                        <li><a href="#" title="">Unsaved</a></li>
-                                                        <li><a href="#" title="">Unbid</a></li>
-                                                        <li><a href="#" title="">Close</a></li>
-                                                        <li><a href="#" title="">Hide</a></li>
+                                                        <li><a href="#" title="">Sửa</a></li>
+                                                        <li><a href="#" title="">Xóa</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="epi-sec">
-                                                
-                                                
+
+
                                             </div>
                                             <div class="job_descp">
                                                 <h3>{{ $item->bk_tieude }}</h3>
-                                                
+
                                                 <p>
-                                                    {{ $item->bk_noidung }}
+                                                    {!! $item->bk_noidung !!}
                                                 </p>
                                                 <p><a href="#" style="color: greenyellow;">Xem chi tiết</a></p>
-                                                {{-- <ul class="skill-tags">
-                                                    @if(!empty($hinhanh[$item->bv_id]))
-                                                        @foreach ($hinhanh[$item->bv_id] as $item2)
-                                                            <li><img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70"></li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul> --}}
-                                            </div>
-                                            <div class="job-status-bar">
-                                                <ul class="like-com">
-                                                    <li>
-                                                        <a href="#"><i class="la la-heart"></i> Like</a>
-                                                        <img src="images/liked-img.png" alt="">
-                                                    </li>
-                                                    <li><a href="#"><i class="la la-comment"></i> Comment 15</a>
-                                                        <img src="images/com.png" alt="">
-                                                    </li>
-                                                </ul>
-                                                <a><i class="la la-eye"></i>Views 50</a>
                                             </div>
                                         </div>
                                     @endforeach
@@ -135,9 +108,6 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="right-sidebar">
-                            <div class="message-btn">
-                                <a href="#" title=""><i class="fa fa-envelope"></i> Message</a>
-                            </div>
                             <div class="widget widget-portfolio">
                                 <div class="wd-heady">
                                     <h3>Các nhóm đã tham gia</h3>
@@ -207,7 +177,7 @@
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -232,7 +202,7 @@
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -248,7 +218,7 @@
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-        }    
+        }
     function readURL4(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -258,6 +228,6 @@
                 }
                 reader.readAsDataURL(input.files[0]);
             }
-        }    
+        }
 </script>
 @endsection

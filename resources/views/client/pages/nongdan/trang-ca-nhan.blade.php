@@ -146,13 +146,6 @@
                                 <div class="user_pro_status">
                                     <ul class="social_links">
                                         <li><a href="#" title=""><i class="la la-globe"></i> Nhóm 1</a></li>
-                                        <li><a href="#" title=""><i class="la la-globe"></i> Nhóm 2</a></li>
-                                        <li><a href="#" title=""><i class="la la-globe"></i> Nhóm 3</a></li>
-                                        <li><a href="#" title=""><i class="la la-globe"></i> Nhóm 4</a></li>
-                                        <li><a href="#" title=""><i class="la la-globe"></i> Nhóm 5</a></li>
-                                        <li><a href="#" title=""><i class="la la-globe"></i> Nhóm 6</a></li>
-                                        <li><a href="#" title=""><i class="la la-globe"></i> Nhóm 7</a></li>
-                                        <li><a href="#" title=""><i class="la la-globe"></i> Nhóm 8</a></li>
                                     </ul>
                                 </div>
                                 <!--pf-gallery end-->
