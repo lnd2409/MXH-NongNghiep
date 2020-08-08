@@ -25,14 +25,14 @@ class NhomController extends Controller
         {
 
         }
-        elseif (Auth::guard('thuonglai')->check()) 
+        elseif (Auth::guard('thuonglai')->check())
         {
             # code...
-            
+
         }
         elseif (Auth::guard('chuyengia')->check()) {
             # code...
-            
+
         }
         return view('client.pages.nhom.index-1');
     }
@@ -61,7 +61,7 @@ class NhomController extends Controller
         {
             dd("Chưa tham gia nhóm này");
         }
-        
+
 
     }
 
@@ -69,7 +69,7 @@ class NhomController extends Controller
     {
         if (Auth::guard('nongdan')->check()) {
             # code...
-            
+
 
         }elseif (Auth::guard('thuonglai')->check()) {
             # code...

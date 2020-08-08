@@ -29,9 +29,10 @@
 <section class="companies-info">
     <div class="container">
         <div class="company-title">
-            @if (Auth::guard('nongdan')->check())
-            @else
+            @if (Auth::guard('nccvt')->check())
                 <button class="btn btn-success" onclick="window.location.href='{{route('sell.create')}}'">Đăng bán</button>
+            @else
+
             @endif
         </div>
         <!--company-title end-->

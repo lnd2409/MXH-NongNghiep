@@ -20,103 +20,11 @@
                                 <!--user-pro-img end-->
                                 <div class="user_pro_status">
                                     <ul class="flw-hr">
-                                        <li><a href="#" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
-                                        
+                                        <li><a href="{{ route('nhat-ky-nong-ho',[ 'id' => \Auth::guard('nongdan')->user()->nd_id ]) }}" title="" class="flww"><i class="la la-book"></i> Nhật ký nông hô</a></li>
                                         <li style="margin-top:20px;"><a href="{{route('san-pham-nuoi-trong.nongdan')}}" title="" class="hre">Sản phẩm nuôi trồng</a></li>
                                     </ul>
-                                    <ul class="flw-status">
-                                        <li>
-                                            <span>Following</span>
-                                            <b>34</b>
-                                        </li>
-                                        <li>
-                                            <span>Followers</span>
-                                            <b>155</b>
-                                        </li>
-                                    </ul>
                                 </div>
-                                <!--user_pro_status end-->
-                                <ul class="social_links">
-                                    <li><a href="#" title=""><i class="la la-globe"></i> www.example.com</a></li>
-                                    <li><a href="#" title=""><i class="fa fa-facebook-square"></i>
-                                            Http://www.facebook.com/john...</a></li>
-                                    <li><a href="#" title=""><i class="fa fa-twitter"></i>
-                                            Http://www.Twitter.com/john...</a></li>
-                                    <li><a href="#" title=""><i class="fa fa-google-plus-square"></i>
-                                            Http://www.googleplus.com/john...</a></li>
-                                    <li><a href="#" title=""><i class="fa fa-behance-square"></i>
-                                            Http://www.behance.com/john...</a></li>
-                                    <li><a href="#" title=""><i class="fa fa-pinterest"></i>
-                                            Http://www.pinterest.com/john...</a></li>
-                                    <li><a href="#" title=""><i class="fa fa-instagram"></i>
-                                            Http://www.instagram.com/john...</a></li>
-                                    <li><a href="#" title=""><i class="fa fa-youtube"></i>
-                                            Http://www.youtube.com/john...</a></li>
-                                </ul>
                             </div>
-                            <!--user_profile end-->
-                            <div class="suggestions full-width">
-                                <div class="sd-title">
-                                    <h3>People Viewed Profile</h3>
-                                    <i class="la la-ellipsis-v"></i>
-                                </div>
-                                <!--sd-title end-->
-                                <div class="suggestions-list">
-                                    <div class="suggestion-usd">
-                                        <img src="http://via.placeholder.com/35x35" alt="">
-                                        <div class="sgt-text">
-                                            <h4>Jessica William</h4>
-                                            <span>Graphic Designer</span>
-                                        </div>
-                                        <span><i class="la la-plus"></i></span>
-                                    </div>
-                                    <div class="suggestion-usd">
-                                        <img src="http://via.placeholder.com/35x35" alt="">
-                                        <div class="sgt-text">
-                                            <h4>John Doe</h4>
-                                            <span>PHP Developer</span>
-                                        </div>
-                                        <span><i class="la la-plus"></i></span>
-                                    </div>
-                                    <div class="suggestion-usd">
-                                        <img src="http://via.placeholder.com/35x35" alt="">
-                                        <div class="sgt-text">
-                                            <h4>Poonam</h4>
-                                            <span>Wordpress Developer</span>
-                                        </div>
-                                        <span><i class="la la-plus"></i></span>
-                                    </div>
-                                    <div class="suggestion-usd">
-                                        <img src="http://via.placeholder.com/35x35" alt="">
-                                        <div class="sgt-text">
-                                            <h4>Bill Gates</h4>
-                                            <span>C & C++ Developer</span>
-                                        </div>
-                                        <span><i class="la la-plus"></i></span>
-                                    </div>
-                                    <div class="suggestion-usd">
-                                        <img src="http://via.placeholder.com/35x35" alt="">
-                                        <div class="sgt-text">
-                                            <h4>Jessica William</h4>
-                                            <span>Graphic Designer</span>
-                                        </div>
-                                        <span><i class="la la-plus"></i></span>
-                                    </div>
-                                    <div class="suggestion-usd">
-                                        <img src="http://via.placeholder.com/35x35" alt="">
-                                        <div class="sgt-text">
-                                            <h4>John Doe</h4>
-                                            <span>PHP Developer</span>
-                                        </div>
-                                        <span><i class="la la-plus"></i></span>
-                                    </div>
-                                    <div class="view-more">
-                                        <a href="#" title="">View More</a>
-                                    </div>
-                                </div>
-                                <!--suggestions-list end-->
-                            </div>
-                            <!--suggestions end-->
                         </div>
                         <!--main-left-sidebar end-->
                     </div>
@@ -135,7 +43,7 @@
                           </div>
                           {{Session::put('alert-del',null)}}
                         @endif
-                        
+
                         <div class="card">
                             <div class="card-header">
                                 <div class="form-group ml-1 mr-1">
@@ -148,7 +56,7 @@
                             <a href="{{route('hien-thi-them-san-pham-nuoi-trong')}}" class="btn btn-info">Thêm nông sản</a>
                             </h3>
                           </div>
-                          
+
                           <!-- /.card-header -->
                           <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap" id="category_table">
@@ -182,7 +90,7 @@
                                     </tr>
                                 @endforeach
                               </tbody>
-                              
+
                             </table>
                             <nav aria-label="Page navigation example">
                               {{-- {!! $sanpham->links() !!} --}}
@@ -380,7 +288,7 @@
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -404,7 +312,7 @@
             <button type="submit" class="btn btn-success">Lưu</button>
          </form>
         </div>
-       
+
       </div>
     </div>
   </div>

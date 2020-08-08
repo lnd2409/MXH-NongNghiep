@@ -138,6 +138,10 @@ Route::group(['prefix' => 'nong-dan', 'middleware' => 'CheckUserNongDan'], funct
      Route::get('/binh-luan-xoa/{id}','NgocDuc\NongdanController@destroyComment')->name('nongdan.xoa-binhluan');
 
 
+     //Xem bách khoa nông nghiệp
+     Route::get('bach-khoa','BachkhoaController@getPost')->name('bachkhoa-nd');
+     Route::get('chi-tiet-bai-viet/{id}','BachkhoaController@PostDetail')->name('bachkhoa-bv');
+
 });
 
 // Nhà cung cấp vật tư

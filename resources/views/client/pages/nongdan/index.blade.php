@@ -77,7 +77,7 @@ p._hinhanh {
                     <ul>
                         <li class="active"><a href="#" title="">Bài viết quan tâm</a></li>
                         <li><a href="#" title="">Bài viết trong nhóm</a></li>
-                        <li><a href="#" title="">Bách khoa nông nghiệp</a></li>
+                        <li><a href="{{ route('bachkhoa-nd') }}" title="">Bách khoa nông nghiệp</a></li>
                     </ul>
                 </div>
                 <!--forum-links end-->

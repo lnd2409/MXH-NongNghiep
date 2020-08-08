@@ -3,7 +3,7 @@
 <body>
 
     <div class="wrapper">
-        @include('client.template.header') 
+        @include('client.template.header')
 
 
         <section class="forum-sec">
@@ -28,7 +28,7 @@
                         <div class="col-lg-8">
                             <div class="forum-questions">
                                 @foreach ($baivietquantam as $item)
-  
+
                                 <div class="usr-question">
                                     <div class="usr_img">
                                         <img src="{{asset('hinhanh/nguoidung/chuyengia/')}}" alt="">
@@ -39,7 +39,7 @@
                                         <div>
                                             {{ $item->bv_noidung }}
                                         </div>
-                                        
+
                                         <ul class="quest-tags">
                                             @if(!empty($hinhanh[$item->bv_id]))
                                                 @foreach ($hinhanh[$item->bv_id] as $item2)
@@ -47,7 +47,7 @@
                                                 @endforeach
                                             @endif
                                         </ul>
-                                        
+
                                         <ul class="react-links pt-3">
                                             <li><a href="#" title="">Xem chi tiết</a></li>
                                         </ul>
@@ -59,24 +59,10 @@
                                         <img src="{{ asset($item2->habv_duongdan) }}" alt="" width="70" height="70">
                                         @endforeach
                                     @endif --}}
-                                </div>    
-                                
+                                </div>
+
                             @endforeach
                             </div>
-                            
-                            <!--forum-questions end-->
-                            <nav aria-label="Page navigation example" class="full-pagi">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link pvr" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                    <li class="page-item"><a class="page-link pvr" href="#">Next</a></li>
-                                </ul>
-                            </nav>
                         </div>
 
                         {{-- Danh sách nhóm --}}
@@ -113,25 +99,6 @@
             </div>
         </section>
         <!--forum-page end-->
-
-        <footer>
-            <div class="footy-sec mn no-margin">
-                <div class="container">
-                    <ul>
-                        <li><a href="#" title="">Help Center</a></li>
-                        <li><a href="#" title="">Privacy Policy</a></li>
-                        <li><a href="#" title="">Community Guidelines</a></li>
-                        <li><a href="#" title="">Cookies Policy</a></li>
-                        <li><a href="#" title="">Career</a></li>
-                        <li><a href="#" title="">Forum</a></li>
-                        <li><a href="#" title="">Language</a></li>
-                        <li><a href="#" title="">Copyright Policy</a></li>
-                    </ul>
-                    <p><img src="images/copy-icon2.png" alt="">Copyright 2018</p>
-                    <img class="fl-rgt" src="images/logo2.png" alt="">
-                </div>
-            </div>
-        </footer>
 
 
         <!-- Modal -->
@@ -179,7 +146,7 @@
                         <div class="form-group">
                             <label for="">Chủ đề</label>
                             <select class="form-control" name="loainongsan">
-                                @foreach ($linhvuc2 as $item)                                    
+                                @foreach ($linhvuc2 as $item)
                                     <option value="{{ $item->lns_id }}">{{ $item->lns_ten }}</option>
                                 @endforeach
                             </select>

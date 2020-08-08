@@ -180,7 +180,19 @@ class DatabaseSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now
             ],
-
+            [
+                'dvt_ten' => 'Tạ',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'dvt_ten' => 'Tấn',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
         ];
+
+        DB::table('donvitinh')->insert($donvitinh);
+
     }
 }
